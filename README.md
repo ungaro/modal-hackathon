@@ -175,6 +175,13 @@ optional — `path` enables video/thumbnail previews). Three ways to get one:
    `modal run -m egodiversity.modal_app --manifest <file>` fans the
    extraction out on Modal and publishes a new cache the dashboard can serve.
 
+Want to try the upload right now? Grab
+[`egodiversity/cache/demo_mecka_tasks.npz`](egodiversity/cache/demo_mecka_tasks.npz)
+— 449 episodes across 8 different mecka tasks (bottling perfume, assembling
+pens, brushing shoes, carving wood…), extracted on Modal in 46 s. Drop it on
+the dashboard and compare tasks against each other (the "lab" pools are the
+task names).
+
 ## How Modal is used
 
 The workload is bursty, embarrassingly parallel, and interactive — the shape

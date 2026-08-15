@@ -118,7 +118,7 @@ def thumb_chunk(episodes: list[dict]) -> int:
 
 @app.function(image=feature_image, secrets=[r2_secret], volumes={"/data": cache_volume},
               timeout=3600)
-def extract_all(episodes: list[dict]) -> str:
+def extract_all(episodes: list[dict], out_path: str = REMOTE_CACHE_PATH) -> str:
     """Map extract_remote over manifest dicts and write the feature cache to
     the shared volume. Metadata keys mirror the local cache (episode_id,
     task_name, num_frames) plus lab/path for cross-lab analysis."""
@@ -143,12 +143,12 @@ def extract_all(episodes: list[dict]) -> str:
     # Atomic publish: a dashboard container cold-starting while a rescore is
     # writing must never see a half-written npz. np.savez appends .npz itself,
     # so the temp name must already end in .npz.
-    tmp_path = REMOTE_CACHE_PATH.replace(".npz", ".tmp.npz")
+    tmp_path = out_path.replace(".npz", ".tmp.npz")
     np.savez(tmp_path, features=X, metadata=json.dumps(metas))
-    os.replace(tmp_path, REMOTE_CACHE_PATH)
+    os.replace(tmp_path, out_path)
     cache_volume.commit()
-    print(f"wrote {X.shape} to {REMOTE_CACHE_PATH}; {failed} episodes skipped")
-    return REMOTE_CACHE_PATH
+    print(f"wrote {X.shape} to {out_path}; {failed} episodes skipped")
+    return out_path
 
 
 @app.function(image=dashboard_image, volumes={"/data": cache_volume},
@@ -178,10 +178,12 @@ def rescore_remote(episodes: list[dict]) -> str:
 
 
 @app.local_entrypoint()
-def main(manifest: str, labs: str = "", limit: int = 0, seed: int = 0) -> None:
+def main(manifest: str, labs: str = "", limit: int = 0, seed: int = 0,
+         out: str = "") -> None:
     """Score episodes from a manifest JSON (list of dicts with path/lab/task/
     episode_hash/num_frames). --labs filters by lab (comma-separated);
-    --limit caps episodes per lab (0 = no cap), sampled with --seed."""
+    --limit caps episodes per lab (0 = no cap), sampled with --seed;
+    --out overrides the output path on the volume (default /data/features.npz)."""
     import random
 
     episodes = json.load(open(manifest))
@@ -198,7 +200,8 @@ def main(manifest: str, labs: str = "", limit: int = 0, seed: int = 0) -> None:
             for e in rng.sample(lab_eps, min(limit, len(lab_eps)))
         ]
     print(f"extracting features for {len(episodes)} episodes")
-    print(extract_all.remote(episodes))
+    kwargs = {"out_path": out} if out else {}
+    print(extract_all.remote(episodes, **kwargs))
 
 
 @app.local_entrypoint()

@@ -1,0 +1,3145 @@
+[
+ {
+  "episode_hash": "696bccf01894fc36a07d8ff0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bccf01894fc36a07d8ff0.zarr",
+  "num_frames": 2248,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696dc7a63e662f69d0ce2228",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696dc7a63e662f69d0ce2228.zarr",
+  "num_frames": 2008,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bd0d6c70dc8ed8901a200",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bd0d6c70dc8ed8901a200.zarr",
+  "num_frames": 3118,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696b81df0c791affadd836a2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b81df0c791affadd836a2.zarr",
+  "num_frames": 3151,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696baaf2286a12e5ac1a079e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696baaf2286a12e5ac1a079e.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696ba75b556c93e45170dd0c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ba75b556c93e45170dd0c.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696ec777b72e3284f3b37d99",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ec777b72e3284f3b37d99.zarr",
+  "num_frames": 2251,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696b9fa04a936a4d1328a717",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9fa04a936a4d1328a717.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bd2531ae707d8c0922c70",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bd2531ae707d8c0922c70.zarr",
+  "num_frames": 2248,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696da52ede1537c60354da17",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696da52ede1537c60354da17.zarr",
+  "num_frames": 2998,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696e9df17e219e09d7621b3d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696e9df17e219e09d7621b3d.zarr",
+  "num_frames": 3002,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696d9bd382f4c5e6dfcb43ea",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d9bd382f4c5e6dfcb43ea.zarr",
+  "num_frames": 2998,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696f576306690011e851b1a6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696f576306690011e851b1a6.zarr",
+  "num_frames": 2161,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696f4422cbb6351b2a077e21",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696f4422cbb6351b2a077e21.zarr",
+  "num_frames": 3601,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bcc951ae707d8c0922bfc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bcc951ae707d8c0922bfc.zarr",
+  "num_frames": 2998,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bb250715ed751e5e0ffaf",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb250715ed751e5e0ffaf.zarr",
+  "num_frames": 2398,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bd3037a2fd07226c0a1e2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bd3037a2fd07226c0a1e2.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696ba3ffd3cc9dc76c5615ac",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ba3ffd3cc9dc76c5615ac.zarr",
+  "num_frames": 2998,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696d9a287b9f7e17cc5772a9",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d9a287b9f7e17cc5772a9.zarr",
+  "num_frames": 2488,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696d9bb382e1ac2de620acf6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d9bb382e1ac2de620acf6.zarr",
+  "num_frames": 2998,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696dc7a93bf8e39ce3da334c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696dc7a93bf8e39ce3da334c.zarr",
+  "num_frames": 2008,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bd25701fc6bd69561e326",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bd25701fc6bd69561e326.zarr",
+  "num_frames": 2248,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bb59e2c7243cd72c84ffc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb59e2c7243cd72c84ffc.zarr",
+  "num_frames": 3028,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696ba39e915ce3edd096789e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ba39e915ce3edd096789e.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bb918b261b0a7823a1ce0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb918b261b0a7823a1ce0.zarr",
+  "num_frames": 2398,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696ec3d9ec6580da1aea7e47",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ec3d9ec6580da1aea7e47.zarr",
+  "num_frames": 3600,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "693a3715a6c15267818bb4c4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a3715a6c15267818bb4c4.zarr",
+  "num_frames": 2701,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "69b4e5c195b405a6f7105d5e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4e5c195b405a6f7105d5e.zarr",
+  "num_frames": 2099,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696e39b7d942669069bcb33f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696e39b7d942669069bcb33f.zarr",
+  "num_frames": 2998,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bb68aae7ec71f865716c8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb68aae7ec71f865716c8.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696ba39b7e6f94bf341437f8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ba39b7e6f94bf341437f8.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696da591913cbec0b8bf10ab",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696da591913cbec0b8bf10ab.zarr",
+  "num_frames": 2518,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696e326ab5a66458ce86c551",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696e326ab5a66458ce86c551.zarr",
+  "num_frames": 2170,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "693bd99e6c0c98765a426d54",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd99e6c0c98765a426d54.zarr",
+  "num_frames": 2701,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "693bd43574421e5abf157a3f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd43574421e5abf157a3f.zarr",
+  "num_frames": 2701,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696e5214dd0cb8d4e520633d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696e5214dd0cb8d4e520633d.zarr",
+  "num_frames": 2700,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696b8176d1521d7c232fdc0b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b8176d1521d7c232fdc0b.zarr",
+  "num_frames": 2848,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696d9bdac8b3144c937f8bee",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d9bdac8b3144c937f8bee.zarr",
+  "num_frames": 2998,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696ba402d99e01dc631f3ce4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ba402d99e01dc631f3ce4.zarr",
+  "num_frames": 3298,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "693a38b7a2ff1af83b18bdd4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a38b7a2ff1af83b18bdd4.zarr",
+  "num_frames": 1951,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696e3e2f3644d45b8cb8a93d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696e3e2f3644d45b8cb8a93d.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696da3e64e52be266e5c8f79",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696da3e64e52be266e5c8f79.zarr",
+  "num_frames": 3604,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "693a57dfe022c0cd04644edf",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a57dfe022c0cd04644edf.zarr",
+  "num_frames": 3091,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "693bd878c77063fa01dba340",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd878c77063fa01dba340.zarr",
+  "num_frames": 2701,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "69715dea2d7774fa62bac6bc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69715dea2d7774fa62bac6bc.zarr",
+  "num_frames": 3001,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "693ce1e6301d41387648a2f0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693ce1e6301d41387648a2f0.zarr",
+  "num_frames": 3002,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "697213da7e553c7cca8a0490",
+  "path": "s3://rldb/processed_v3/mecka/freeform/697213da7e553c7cca8a0490.zarr",
+  "num_frames": 2701,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696b38a275020a567fd3733e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b38a275020a567fd3733e.zarr",
+  "num_frames": 2248,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696e861ef563b4f8900f2fb3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696e861ef563b4f8900f2fb3.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "6973a101f20000c306ce8ba0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6973a101f20000c306ce8ba0.zarr",
+  "num_frames": 3061,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "693bd368addab626e7dc24aa",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd368addab626e7dc24aa.zarr",
+  "num_frames": 2572,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696baa901894fc36a07d8d8f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696baa901894fc36a07d8d8f.zarr",
+  "num_frames": 2998,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696bcdd71d3959e2e052b207",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bcdd71d3959e2e052b207.zarr",
+  "num_frames": 2998,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696d2f2ec0c2d9149de65ba0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d2f2ec0c2d9149de65ba0.zarr",
+  "num_frames": 3004,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696d9748c2bcb35d51ee1622",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d9748c2bcb35d51ee1622.zarr",
+  "num_frames": 2700,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696baa63d3cc9dc76c56163d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696baa63d3cc9dc76c56163d.zarr",
+  "num_frames": 2698,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696d9c1933f2abbafee7e568",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d9c1933f2abbafee7e568.zarr",
+  "num_frames": 2962,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696dc7a8e752ff1d8264cc4d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696dc7a8e752ff1d8264cc4d.zarr",
+  "num_frames": 2008,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696b3878d87f83facc75f4b5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b3878d87f83facc75f4b5.zarr",
+  "num_frames": 2608,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "696dc7a9d1957ce870cf17a7",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696dc7a9d1957ce870cf17a7.zarr",
+  "num_frames": 2008,
+  "task": "bottling_perfumes",
+  "lab": "bottling_perfumes"
+ },
+ {
+  "episode_hash": "69b4ad7f9adf23002bb0083d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ad7f9adf23002bb0083d.zarr",
+  "num_frames": 2401,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b325b13a18f94fb1234264",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b325b13a18f94fb1234264.zarr",
+  "num_frames": 2099,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4af394a206179cbd000e1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4af394a206179cbd000e1.zarr",
+  "num_frames": 2401,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b1c80e0d745180b5ed2890",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c80e0d745180b5ed2890.zarr",
+  "num_frames": 1075,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b3266ad187c83f040eb6cb",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3266ad187c83f040eb6cb.zarr",
+  "num_frames": 2099,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b494e6f62243c65718e060",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b494e6f62243c65718e060.zarr",
+  "num_frames": 2275,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4b6ee2e074a12e9ef4998",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b6ee2e074a12e9ef4998.zarr",
+  "num_frames": 2399,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4fc258579b939089f49c5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4fc258579b939089f49c5.zarr",
+  "num_frames": 2638,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b324bdaf8e0de820685ae3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b324bdaf8e0de820685ae3.zarr",
+  "num_frames": 2099,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4b7a4dabcf1361edc3bb3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b7a4dabcf1361edc3bb3.zarr",
+  "num_frames": 2399,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b534f215f14cb9c4fb64ad",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b534f215f14cb9c4fb64ad.zarr",
+  "num_frames": 2699,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b48ae59f8e3016601d9b16",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b48ae59f8e3016601d9b16.zarr",
+  "num_frames": 2251,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b508e544509a97d31272c8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b508e544509a97d31272c8.zarr",
+  "num_frames": 2660,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4c2980ea33062b1c27743",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4c2980ea33062b1c27743.zarr",
+  "num_frames": 2545,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "693bd2084abb6def10dd006f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd2084abb6def10dd006f.zarr",
+  "num_frames": 3001,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b1cdfe666aa62abc6104af",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cdfe666aa62abc6104af.zarr",
+  "num_frames": 1825,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b9cc05114b0bb3464036c2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b9cc05114b0bb3464036c2.zarr",
+  "num_frames": 2695,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b327d8a57af2ad6653f460",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b327d8a57af2ad6653f460.zarr",
+  "num_frames": 2095,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b519c8eb7f329ec6720f99",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b519c8eb7f329ec6720f99.zarr",
+  "num_frames": 2695,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b1ca4adde762835c6bd0fb",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1ca4adde762835c6bd0fb.zarr",
+  "num_frames": 1799,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b53b5b17b1b3bbefd3ffb4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b53b5b17b1b3bbefd3ffb4.zarr",
+  "num_frames": 2575,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b32f169c82aa4347978f8c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32f169c82aa4347978f8c.zarr",
+  "num_frames": 2095,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4b3511a2625724ddc9b34",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b3511a2625724ddc9b34.zarr",
+  "num_frames": 2399,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b53abd7c962028610d517f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b53abd7c962028610d517f.zarr",
+  "num_frames": 2699,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "696baf21c70dc8ed89019fc2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696baf21c70dc8ed89019fc2.zarr",
+  "num_frames": 2998,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4f7f141a4401e4c3f549d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4f7f141a4401e4c3f549d.zarr",
+  "num_frames": 2635,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b48e89ca778a9602814373",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b48e89ca778a9602814373.zarr",
+  "num_frames": 2251,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b3679e646a2ece0c386b16",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3679e646a2ece0c386b16.zarr",
+  "num_frames": 2218,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b50cc94a206179cbd004bb",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b50cc94a206179cbd004bb.zarr",
+  "num_frames": 2671,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b541df35cef09fa62e2e30",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b541df35cef09fa62e2e30.zarr",
+  "num_frames": 2549,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4b567ce3174949ada57a2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b567ce3174949ada57a2.zarr",
+  "num_frames": 2459,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b1fd37334b7ef00d6e2e69",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1fd37334b7ef00d6e2e69.zarr",
+  "num_frames": 1909,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b32522552842ceb359c9c6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32522552842ceb359c9c6.zarr",
+  "num_frames": 2099,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b26477454009f45b338806",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b26477454009f45b338806.zarr",
+  "num_frames": 2069,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4936a810b8251cb06d1bc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4936a810b8251cb06d1bc.zarr",
+  "num_frames": 2251,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b3339e8d537e229a25aff0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3339e8d537e229a25aff0.zarr",
+  "num_frames": 2095,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b5173085bdd8b99b29802b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b5173085bdd8b99b29802b.zarr",
+  "num_frames": 2695,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b55f6872c7691edd73ba76",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b55f6872c7691edd73ba76.zarr",
+  "num_frames": 2699,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b33cad789e9a4169e6eb06",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b33cad789e9a4169e6eb06.zarr",
+  "num_frames": 2125,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b538eaba6c35ba5800f335",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b538eaba6c35ba5800f335.zarr",
+  "num_frames": 2485,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b494a31c4b6d215190ed3a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b494a31c4b6d215190ed3a.zarr",
+  "num_frames": 2275,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b32fd3137dee6e8a4f46e5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32fd3137dee6e8a4f46e5.zarr",
+  "num_frames": 2099,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4a8a69a0009aea690fa3e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4a8a69a0009aea690fa3e.zarr",
+  "num_frames": 2399,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b32fdfbec22af9717a0110",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32fdfbec22af9717a0110.zarr",
+  "num_frames": 2099,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b534126144f027ad9423b8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b534126144f027ad9423b8.zarr",
+  "num_frames": 2699,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b5157c9e3c339e3d3e8c80",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b5157c9e3c339e3d3e8c80.zarr",
+  "num_frames": 2545,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b5879085847273dc74dbb8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b5879085847273dc74dbb8.zarr",
+  "num_frames": 2695,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b534bf9f142693da7289ae",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b534bf9f142693da7289ae.zarr",
+  "num_frames": 2695,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b447c9473f617df3e42b3f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b447c9473f617df3e42b3f.zarr",
+  "num_frames": 2251,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b53a80130037c5b4ba5ff7",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b53a80130037c5b4ba5ff7.zarr",
+  "num_frames": 2699,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4ada26b5ffecb54b2f53d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ada26b5ffecb54b2f53d.zarr",
+  "num_frames": 2429,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b1c76ff7767b9c1dcd990b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c76ff7767b9c1dcd990b.zarr",
+  "num_frames": 1078,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b3379ce3ebaf6326d3ab7c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3379ce3ebaf6326d3ab7c.zarr",
+  "num_frames": 2129,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "693bd7ce2abfb04362ceabf3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd7ce2abfb04362ceabf3.zarr",
+  "num_frames": 2702,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b52ec696658ef2ddbd7ab1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b52ec696658ef2ddbd7ab1.zarr",
+  "num_frames": 2699,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b3459bc42333969333d881",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3459bc42333969333d881.zarr",
+  "num_frames": 2159,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4fdab5907c64c2ffa33e5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4fdab5907c64c2ffa33e5.zarr",
+  "num_frames": 2548,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b269f7edbd6e568a929423",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b269f7edbd6e568a929423.zarr",
+  "num_frames": 1799,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b3342dd9fa1aa2110410e6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3342dd9fa1aa2110410e6.zarr",
+  "num_frames": 2101,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b4b17f6a7faf595b5f2445",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b17f6a7faf595b5f2445.zarr",
+  "num_frames": 2395,
+  "task": "assembling_components",
+  "lab": "assembling_components"
+ },
+ {
+  "episode_hash": "69b1cf3ecf0e8b5cd77d9115",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cf3ecf0e8b5cd77d9115.zarr",
+  "num_frames": 1825,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b4fddace95af8cea9a37be",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4fddace95af8cea9a37be.zarr",
+  "num_frames": 2638,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b342583dd7632ba9038bac",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b342583dd7632ba9038bac.zarr",
+  "num_frames": 2128,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b4b67ed0103fb8e4fb4c00",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b67ed0103fb8e4fb4c00.zarr",
+  "num_frames": 2398,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b4884c6f257391be6947df",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4884c6f257391be6947df.zarr",
+  "num_frames": 2248,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b558028cd7957ebe47929f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b558028cd7957ebe47929f.zarr",
+  "num_frames": 2695,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b53af9f429dfde897d9448",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b53af9f429dfde897d9448.zarr",
+  "num_frames": 2695,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b5023e91d6491aa901a58b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b5023e91d6491aa901a58b.zarr",
+  "num_frames": 2665,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b4e069af135b8270eb2468",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4e069af135b8270eb2468.zarr",
+  "num_frames": 2611,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b1f10381e27d6f5fba8b88",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1f10381e27d6f5fba8b88.zarr",
+  "num_frames": 1873,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "696baad8d99e01dc631f3d82",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696baad8d99e01dc631f3d82.zarr",
+  "num_frames": 2998,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b331c0a68d1a70290c571f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b331c0a68d1a70290c571f.zarr",
+  "num_frames": 2099,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b4cd96ca3a06a9f7b0d783",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4cd96ca3a06a9f7b0d783.zarr",
+  "num_frames": 2548,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b494c34dd9410ce4c3c2df",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b494c34dd9410ce4c3c2df.zarr",
+  "num_frames": 2304,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "696baae8800cd1498944fffe",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696baae8800cd1498944fffe.zarr",
+  "num_frames": 2998,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b49f9ae27d2b8e1ab6afe9",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b49f9ae27d2b8e1ab6afe9.zarr",
+  "num_frames": 2338,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b3311f28b1b2b0639e235a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3311f28b1b2b0639e235a.zarr",
+  "num_frames": 2098,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b4ed3de025fc2bec3b0599",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ed3de025fc2bec3b0599.zarr",
+  "num_frames": 2620,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69718c80005ec476de7c0453",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69718c80005ec476de7c0453.zarr",
+  "num_frames": 3182,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b3642431acde346400f584",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3642431acde346400f584.zarr",
+  "num_frames": 2185,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "696d950730d6b6f26a006dd2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d950730d6b6f26a006dd2.zarr",
+  "num_frames": 2698,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b26788794b63246597bfe3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b26788794b63246597bfe3.zarr",
+  "num_frames": 2039,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b32ecd708b11b4956c2914",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32ecd708b11b4956c2914.zarr",
+  "num_frames": 2095,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b27392e44e06781c15070d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b27392e44e06781c15070d.zarr",
+  "num_frames": 1978,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "696baadae4d0988228a6a6df",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696baadae4d0988228a6a6df.zarr",
+  "num_frames": 2878,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b3304fb5d668356f8ff53c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3304fb5d668356f8ff53c.zarr",
+  "num_frames": 2095,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b1cc65d78306a57fe60832",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cc65d78306a57fe60832.zarr",
+  "num_frames": 1795,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "697296a9e6be60e4e410bc8e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/697296a9e6be60e4e410bc8e.zarr",
+  "num_frames": 3302,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b34f354e8da91e00111831",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b34f354e8da91e00111831.zarr",
+  "num_frames": 2158,
+  "task": "carving_wood",
+  "lab": "carving_wood"
+ },
+ {
+  "episode_hash": "69b4a8e989267616a20eabcd",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4a8e989267616a20eabcd.zarr",
+  "num_frames": 2399,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b49d2854de5fc3aac8bb57",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b49d2854de5fc3aac8bb57.zarr",
+  "num_frames": 2329,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1c775fa244109e4970573",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c775fa244109e4970573.zarr",
+  "num_frames": 1799,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b4af97e2d3e9207de457b8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4af97e2d3e9207de457b8.zarr",
+  "num_frames": 2395,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693ccbfdf72fbcde5139c77a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693ccbfdf72fbcde5139c77a.zarr",
+  "num_frames": 2732,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b2675e0d7a870aae92f6f3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b2675e0d7a870aae92f6f3.zarr",
+  "num_frames": 2095,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1c8fce2257ecc216ba128",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c8fce2257ecc216ba128.zarr",
+  "num_frames": 1801,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1c9270ead4ebadea2b5d1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c9270ead4ebadea2b5d1.zarr",
+  "num_frames": 1799,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693a5da9c03d30428c3f1a9c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a5da9c03d30428c3f1a9c.zarr",
+  "num_frames": 2921,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b3247320cfe90d266dcde3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3247320cfe90d266dcde3.zarr",
+  "num_frames": 2095,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693bd52e4abb6def10dd00e7",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd52e4abb6def10dd00e7.zarr",
+  "num_frames": 2701,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b5788d95e0ed6eacdf962e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b5788d95e0ed6eacdf962e.zarr",
+  "num_frames": 2679,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b436f1ce1481ad9038690e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b436f1ce1481ad9038690e.zarr",
+  "num_frames": 2251,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b328c4c368ce0fd209e8b8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b328c4c368ce0fd209e8b8.zarr",
+  "num_frames": 2099,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "696f31cee074cc7861dced09",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696f31cee074cc7861dced09.zarr",
+  "num_frames": 2700,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b272723576ef298a5d5cc9",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b272723576ef298a5d5cc9.zarr",
+  "num_frames": 2095,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1c1b2ff452209ed443884",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c1b2ff452209ed443884.zarr",
+  "num_frames": 1291,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b53efb5fbb70bd57cdd074",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b53efb5fbb70bd57cdd074.zarr",
+  "num_frames": 2699,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1fe799b53fb0868c1242d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1fe799b53fb0868c1242d.zarr",
+  "num_frames": 1945,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b4a9ea75c68475da2a245a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4a9ea75c68475da2a245a.zarr",
+  "num_frames": 2399,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b51e0400d0e98b2aab033f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b51e0400d0e98b2aab033f.zarr",
+  "num_frames": 2698,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b4ceb0f0d863f7b395431b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ceb0f0d863f7b395431b.zarr",
+  "num_frames": 2546,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b539a151dbfa3ebcfcd605",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b539a151dbfa3ebcfcd605.zarr",
+  "num_frames": 2691,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b54707912b515c163d13e1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b54707912b515c163d13e1.zarr",
+  "num_frames": 2641,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b4ed964ff0a19d651b18b8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ed964ff0a19d651b18b8.zarr",
+  "num_frames": 2617,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b49592fc1abe8f43fd52b7",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b49592fc1abe8f43fd52b7.zarr",
+  "num_frames": 2290,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "6970dd6f44efab6b44ab61a5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6970dd6f44efab6b44ab61a5.zarr",
+  "num_frames": 2702,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b556d1880ee28a0531906a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b556d1880ee28a0531906a.zarr",
+  "num_frames": 2614,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693bd204b3fb840e8f81e768",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd204b3fb840e8f81e768.zarr",
+  "num_frames": 3302,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693a3a96899a3f42531caeb4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a3a96899a3f42531caeb4.zarr",
+  "num_frames": 2702,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b33c9804445d961bdef4c7",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b33c9804445d961bdef4c7.zarr",
+  "num_frames": 2129,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b4a20225116d80e5210e28",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4a20225116d80e5210e28.zarr",
+  "num_frames": 2395,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693cd6327448005d9c98c42b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693cd6327448005d9c98c42b.zarr",
+  "num_frames": 3601,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b495efade82b023ae53dfe",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b495efade82b023ae53dfe.zarr",
+  "num_frames": 2249,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1c9e35ea5d736f1f3a246",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c9e35ea5d736f1f3a246.zarr",
+  "num_frames": 1776,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693cd88c105375fee161021d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693cd88c105375fee161021d.zarr",
+  "num_frames": 2701,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "696bb9aa42eca86da25f1e32",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb9aa42eca86da25f1e32.zarr",
+  "num_frames": 3271,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693bd54dab13e1ec36f98da0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd54dab13e1ec36f98da0.zarr",
+  "num_frames": 2701,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b4b70869d10ac4ac82a90b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b70869d10ac4ac82a90b.zarr",
+  "num_frames": 2395,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "696ebaf4620f4235f99e5262",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ebaf4620f4235f99e5262.zarr",
+  "num_frames": 3002,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b4a988adb32e579d38f42e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4a988adb32e579d38f42e.zarr",
+  "num_frames": 2305,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693a34770d06f344ee34707b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a34770d06f344ee34707b.zarr",
+  "num_frames": 3602,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b4bb5bc042529718bf8f3d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4bb5bc042529718bf8f3d.zarr",
+  "num_frames": 2536,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1f0c4b71aabadada9ba02",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1f0c4b71aabadada9ba02.zarr",
+  "num_frames": 1859,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1c5499196ded240d05dc2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c5499196ded240d05dc2.zarr",
+  "num_frames": 1795,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693bd66a51463203c67b0dcd",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd66a51463203c67b0dcd.zarr",
+  "num_frames": 3602,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693cec6101a67f65a5319c97",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693cec6101a67f65a5319c97.zarr",
+  "num_frames": 3001,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b20ec5905463640234de44",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b20ec5905463640234de44.zarr",
+  "num_frames": 1825,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b42716aea2c4fce0c3e631",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b42716aea2c4fce0c3e631.zarr",
+  "num_frames": 2248,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693bd2d7a31cd331a7d3eb67",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd2d7a31cd331a7d3eb67.zarr",
+  "num_frames": 3601,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b324414f0d9c46954d4653",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b324414f0d9c46954d4653.zarr",
+  "num_frames": 2095,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693a31344949f69269a874d9",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a31344949f69269a874d9.zarr",
+  "num_frames": 3002,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693a314d1772bb2c1fefefd5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a314d1772bb2c1fefefd5.zarr",
+  "num_frames": 3002,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693a387fa25675412eb5a2e2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a387fa25675412eb5a2e2.zarr",
+  "num_frames": 2974,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "693ce2ce7b3d9db9cdf0fcfb",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693ce2ce7b3d9db9cdf0fcfb.zarr",
+  "num_frames": 2701,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1cdb8c98d3610b3892e10",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cdb8c98d3610b3892e10.zarr",
+  "num_frames": 1798,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b4bf73a13067e31cf8b097",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4bf73a13067e31cf8b097.zarr",
+  "num_frames": 2549,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69255b3068f367e5d68a9d28",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69255b3068f367e5d68a9d28.zarr",
+  "num_frames": 1981,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "69b1f2072513c12b3eb486f8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1f2072513c12b3eb486f8.zarr",
+  "num_frames": 1718,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "696da0230ca72a6c98344334",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696da0230ca72a6c98344334.zarr",
+  "num_frames": 2400,
+  "task": "assembling_flowers",
+  "lab": "assembling_flowers"
+ },
+ {
+  "episode_hash": "696b9fae53fe50fed713733c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9fae53fe50fed713733c.zarr",
+  "num_frames": 1918,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696d7025d87661ea56b2b43d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d7025d87661ea56b2b43d.zarr",
+  "num_frames": 2098,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b39cf0f7ff0aaf85af89c5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b39cf0f7ff0aaf85af89c5.zarr",
+  "num_frames": 2245,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b7c1e9b8e7b7d20758e64",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b7c1e9b8e7b7d20758e64.zarr",
+  "num_frames": 2248,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b4b40cab4b9846236995b0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b40cab4b9846236995b0.zarr",
+  "num_frames": 2395,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "6971db4f21d5b32c7f63ad1e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6971db4f21d5b32c7f63ad1e.zarr",
+  "num_frames": 2251,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693a3647776457c41667d202",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a3647776457c41667d202.zarr",
+  "num_frames": 2701,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b1c3801fa102f3029137c0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c3801fa102f3029137c0.zarr",
+  "num_frames": 1799,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "697297b65bc05ac3cb654f98",
+  "path": "s3://rldb/processed_v3/mecka/freeform/697297b65bc05ac3cb654f98.zarr",
+  "num_frames": 2701,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693a5d22e5c6b4190a2b0f3c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a5d22e5c6b4190a2b0f3c.zarr",
+  "num_frames": 3601,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b9fb59a643f01c844d285",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9fb59a643f01c844d285.zarr",
+  "num_frames": 2788,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b9d85894c2e015aaa0d27",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9d85894c2e015aaa0d27.zarr",
+  "num_frames": 1798,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b4b34120738b9bf52b0bf9",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b34120738b9bf52b0bf9.zarr",
+  "num_frames": 2485,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693bd9c530cd171d77a85c02",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd9c530cd171d77a85c02.zarr",
+  "num_frames": 3001,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b4b45838448e30251e43c6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b45838448e30251e43c6.zarr",
+  "num_frames": 2455,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693cd930f62ae12c37c41392",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693cd930f62ae12c37c41392.zarr",
+  "num_frames": 3031,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b49d304ee473f8af6c3c85",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b49d304ee473f8af6c3c85.zarr",
+  "num_frames": 2338,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b9fb2ae7ec71f8657150f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9fb2ae7ec71f8657150f.zarr",
+  "num_frames": 3118,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693bd34830cd171d77a85b88",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd34830cd171d77a85b88.zarr",
+  "num_frames": 2237,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "6971e1289dce0200248631c1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6971e1289dce0200248631c1.zarr",
+  "num_frames": 3001,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693bd84c1f5d414ea54c4c97",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd84c1f5d414ea54c4c97.zarr",
+  "num_frames": 3452,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "692bd4266d2aad86164a4b2d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/692bd4266d2aad86164a4b2d.zarr",
+  "num_frames": 3002,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b9e5886f71ea8bc69d073",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9e5886f71ea8bc69d073.zarr",
+  "num_frames": 2098,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b9f96894c2e015aaa0d3b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9f96894c2e015aaa0d3b.zarr",
+  "num_frames": 2068,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693bd7a752ebbd86d1190af7",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd7a752ebbd86d1190af7.zarr",
+  "num_frames": 3002,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696ec25d9ba986538aa45069",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ec25d9ba986538aa45069.zarr",
+  "num_frames": 2401,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b204f74d025d7373fb28ba",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b204f74d025d7373fb28ba.zarr",
+  "num_frames": 1885,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b1c8587cbc77a711d0e161",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c8587cbc77a711d0e161.zarr",
+  "num_frames": 1799,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693bd33f3406b19021404936",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd33f3406b19021404936.zarr",
+  "num_frames": 2446,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b4c593e2259218030e589c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4c593e2259218030e589c.zarr",
+  "num_frames": 2459,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "692b791df91b448031312bd3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/692b791df91b448031312bd3.zarr",
+  "num_frames": 2141,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b4b9782b9d7dec7f4493a1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b9782b9d7dec7f4493a1.zarr",
+  "num_frames": 2512,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b49c5fda9075ccb0c17d6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b49c5fda9075ccb0c17d6.zarr",
+  "num_frames": 2188,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693bd35f20fed429b3db5202",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd35f20fed429b3db5202.zarr",
+  "num_frames": 2551,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b1c3cc036ca06fcc605b6f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c3cc036ca06fcc605b6f.zarr",
+  "num_frames": 1795,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696d6f8b6902ce4cbbd7e6e1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d6f8b6902ce4cbbd7e6e1.zarr",
+  "num_frames": 2098,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b7a162a9a68766920dbb3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b7a162a9a68766920dbb3.zarr",
+  "num_frames": 2278,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696eaa5d4b3bc2a1bad579a0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696eaa5d4b3bc2a1bad579a0.zarr",
+  "num_frames": 3145,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "6972a101c6cd0e83cd9faa82",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6972a101c6cd0e83cd9faa82.zarr",
+  "num_frames": 3001,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "697210e04fa95289b78a24ce",
+  "path": "s3://rldb/processed_v3/mecka/freeform/697210e04fa95289b78a24ce.zarr",
+  "num_frames": 2851,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b1cdf8fb0169196bd689fd",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cdf8fb0169196bd689fd.zarr",
+  "num_frames": 1798,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b1cc23a1fdaaf0acd4a9ca",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cc23a1fdaaf0acd4a9ca.zarr",
+  "num_frames": 1799,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693a3053f8c944f650e387b2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a3053f8c944f650e387b2.zarr",
+  "num_frames": 2402,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "6970d9ccb1c8c64f65977b4e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6970d9ccb1c8c64f65977b4e.zarr",
+  "num_frames": 2621,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b16526efea4a48af846842",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b16526efea4a48af846842.zarr",
+  "num_frames": 1642,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "692b788b8ccaa800b8348032",
+  "path": "s3://rldb/processed_v3/mecka/freeform/692b788b8ccaa800b8348032.zarr",
+  "num_frames": 2252,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b9d873724208fc971e0cc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9d873724208fc971e0cc.zarr",
+  "num_frames": 2098,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b4acb8149bf4393894c5b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b4acb8149bf4393894c5b.zarr",
+  "num_frames": 2248,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69b324062433dcedafd51b22",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b324062433dcedafd51b22.zarr",
+  "num_frames": 2095,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693a3449f67f3604d9a850a8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a3449f67f3604d9a850a8.zarr",
+  "num_frames": 2261,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696d6f92eaaf0411bfe58f80",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d6f92eaaf0411bfe58f80.zarr",
+  "num_frames": 1570,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b9e6ac2544a8f58625131",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9e6ac2544a8f58625131.zarr",
+  "num_frames": 2368,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "692b918f8ee9119403ca40ec",
+  "path": "s3://rldb/processed_v3/mecka/freeform/692b918f8ee9119403ca40ec.zarr",
+  "num_frames": 2851,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696d7025345c8f94c1dd8352",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d7025345c8f94c1dd8352.zarr",
+  "num_frames": 2098,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "69715aec6534c5ed4b8c1775",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69715aec6534c5ed4b8c1775.zarr",
+  "num_frames": 2101,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b9f8e894a8c8702a75b43",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b9f8e894a8c8702a75b43.zarr",
+  "num_frames": 2146,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "6972ca39b7b1624095ab5c24",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6972ca39b7b1624095ab5c24.zarr",
+  "num_frames": 2700,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693bd7e072a51f256a86ecf1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd7e072a51f256a86ecf1.zarr",
+  "num_frames": 2702,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693a387123876ab721866b75",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a387123876ab721866b75.zarr",
+  "num_frames": 3001,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "696b7bbc4efa2e122be5ffa8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696b7bbc4efa2e122be5ffa8.zarr",
+  "num_frames": 2248,
+  "task": "assembling_electrical_plugs",
+  "lab": "assembling_electrical_plugs"
+ },
+ {
+  "episode_hash": "693bd686a7ac0dcf1e7f1aef",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd686a7ac0dcf1e7f1aef.zarr",
+  "num_frames": 3152,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4b68138586bc8a41a5e9f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b68138586bc8a41a5e9f.zarr",
+  "num_frames": 2395,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b3aad0b513cb040e754036",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3aad0b513cb040e754036.zarr",
+  "num_frames": 2245,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b26208738fdd3515a179b4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b26208738fdd3515a179b4.zarr",
+  "num_frames": 2065,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1cd51d6f524abc7a56dbc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cd51d6f524abc7a56dbc.zarr",
+  "num_frames": 1794,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1cb86e089f1f50c30ae29",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cb86e089f1f50c30ae29.zarr",
+  "num_frames": 1795,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b42aee50e213ed974b135e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b42aee50e213ed974b135e.zarr",
+  "num_frames": 2201,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "696ece430f903881d07ff1f4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ece430f903881d07ff1f4.zarr",
+  "num_frames": 2250,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b222b9406276f3ac78ad45",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b222b9406276f3ac78ad45.zarr",
+  "num_frames": 1885,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1d305ab59e885a8a111d4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1d305ab59e885a8a111d4.zarr",
+  "num_frames": 1825,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b2558a361580c6a2c0da9a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b2558a361580c6a2c0da9a.zarr",
+  "num_frames": 1944,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4b36ec7e02bc8d412ad54",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b36ec7e02bc8d412ad54.zarr",
+  "num_frames": 2416,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b183aa5ac87ba64f36dfb1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b183aa5ac87ba64f36dfb1.zarr",
+  "num_frames": 1795,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1c616ba9b7c369f8297a6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c616ba9b7c369f8297a6.zarr",
+  "num_frames": 1795,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1ccaa6ea2d9110a4d5186",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1ccaa6ea2d9110a4d5186.zarr",
+  "num_frames": 1795,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4a3379a0f35ae6bd285c8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4a3379a0f35ae6bd285c8.zarr",
+  "num_frames": 2395,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "693bd67cb854045d38d28e12",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd67cb854045d38d28e12.zarr",
+  "num_frames": 2702,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1cadcbb5ebdcd0d8620d7",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cadcbb5ebdcd0d8620d7.zarr",
+  "num_frames": 1750,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "693bd545a07f0a231bd53635",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd545a07f0a231bd53635.zarr",
+  "num_frames": 2702,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1ce157b1154df67a6e54f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1ce157b1154df67a6e54f.zarr",
+  "num_frames": 1798,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b54602f629796beb984540",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b54602f629796beb984540.zarr",
+  "num_frames": 2485,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b25e439aa7a40fb462f5a2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b25e439aa7a40fb462f5a2.zarr",
+  "num_frames": 2005,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1332bef3558225bd7952d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1332bef3558225bd7952d.zarr",
+  "num_frames": 988,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4aa879891381d91713f6c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4aa879891381d91713f6c.zarr",
+  "num_frames": 2395,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b39edab01f7ef56f93a673",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b39edab01f7ef56f93a673.zarr",
+  "num_frames": 2245,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4bf4c74320179c62b471d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4bf4c74320179c62b471d.zarr",
+  "num_frames": 2545,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b32450b30324b70ff4492d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32450b30324b70ff4492d.zarr",
+  "num_frames": 2095,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b345789335d191ec8b3df5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b345789335d191ec8b3df5.zarr",
+  "num_frames": 2155,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b51aa0e1d17e38b58e06d2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b51aa0e1d17e38b58e06d2.zarr",
+  "num_frames": 2695,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4be369c40481a89baf8ee",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4be369c40481a89baf8ee.zarr",
+  "num_frames": 2545,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1c6a16a6c9ad77d8576d6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c6a16a6c9ad77d8576d6.zarr",
+  "num_frames": 1795,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4b156c3f9ed0a1125a9a1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b156c3f9ed0a1125a9a1.zarr",
+  "num_frames": 2395,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69731775c78c0f52bb289846",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69731775c78c0f52bb289846.zarr",
+  "num_frames": 2850,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b137c7bdc252e66ed98713",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b137c7bdc252e66ed98713.zarr",
+  "num_frames": 1672,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b5018a36c567220062946b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b5018a36c567220062946b.zarr",
+  "num_frames": 2659,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4be964ee473f8af6c3e58",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4be964ee473f8af6c3e58.zarr",
+  "num_frames": 2545,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b3662d885b39e7f264ff01",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3662d885b39e7f264ff01.zarr",
+  "num_frames": 2218,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4dfedd0cc9cadf7a255ee",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4dfedd0cc9cadf7a255ee.zarr",
+  "num_frames": 2608,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b32f28272d2e1d2cd1bae6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32f28272d2e1d2cd1bae6.zarr",
+  "num_frames": 2095,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b49d7a1c5b86cd73e7d7e5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b49d7a1c5b86cd73e7d7e5.zarr",
+  "num_frames": 2335,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4b3ec1717f4b7c48978c0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b3ec1717f4b7c48978c0.zarr",
+  "num_frames": 2425,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b20fd9bcad880dc53384fd",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b20fd9bcad880dc53384fd.zarr",
+  "num_frames": 1945,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b266497a5644aa676abdeb",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b266497a5644aa676abdeb.zarr",
+  "num_frames": 1795,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b539362f2fa993841ebdd2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b539362f2fa993841ebdd2.zarr",
+  "num_frames": 2575,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b52594c8f3797a5f1f6b8e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b52594c8f3797a5f1f6b8e.zarr",
+  "num_frames": 2695,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "693ce2440aef0d7ed205980d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693ce2440aef0d7ed205980d.zarr",
+  "num_frames": 3600,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1cc6d607ab2dbbc249bf7",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1cc6d607ab2dbbc249bf7.zarr",
+  "num_frames": 1795,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b32c0143258956de7decb3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32c0143258956de7decb3.zarr",
+  "num_frames": 2095,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1ce623dfd90ffca02c3d3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1ce623dfd90ffca02c3d3.zarr",
+  "num_frames": 1825,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4b16acc419d655dacdf12",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b16acc419d655dacdf12.zarr",
+  "num_frames": 2395,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1f16ac604799e74ac399e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1f16ac604799e74ac399e.zarr",
+  "num_frames": 1855,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4b1cc3c7fb7b9b067eea3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b1cc3c7fb7b9b067eea3.zarr",
+  "num_frames": 2395,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b3bb36e2259218030e4e72",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3bb36e2259218030e4e72.zarr",
+  "num_frames": 2245,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "693bd68e2abfb04362ceabc8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693bd68e2abfb04362ceabc8.zarr",
+  "num_frames": 2702,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b1d725fca7ad4d8f582bac",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1d725fca7ad4d8f582bac.zarr",
+  "num_frames": 1859,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b532dad309464df7115a8e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b532dad309464df7115a8e.zarr",
+  "num_frames": 2695,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b495eae645d99d0356be0e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b495eae645d99d0356be0e.zarr",
+  "num_frames": 2305,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b494fa06e01260c1ac8f3d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b494fa06e01260c1ac8f3d.zarr",
+  "num_frames": 2275,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "693ce26f2459307862440ca8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693ce26f2459307862440ca8.zarr",
+  "num_frames": 3002,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "69b4ba749cc44bc26f6a1b94",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ba749cc44bc26f6a1b94.zarr",
+  "num_frames": 2314,
+  "task": "assembling_pens",
+  "lab": "assembling_pens"
+ },
+ {
+  "episode_hash": "696bb9367a2fd07226c0a050",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb9367a2fd07226c0a050.zarr",
+  "num_frames": 3418,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b4aecb2463c9433cf2f3f5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4aecb2463c9433cf2f3f5.zarr",
+  "num_frames": 2399,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b57132df63a3e00aac2b6f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b57132df63a3e00aac2b6f.zarr",
+  "num_frames": 2699,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bb2bc12bac97f02859a14",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb2bc12bac97f02859a14.zarr",
+  "num_frames": 3598,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "693cc6c53d6a16b46e61a9d1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693cc6c53d6a16b46e61a9d1.zarr",
+  "num_frames": 2341,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69739571b380d6ad18df57d7",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69739571b380d6ad18df57d7.zarr",
+  "num_frames": 3070,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b4e895ab39f27198e3195d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4e895ab39f27198e3195d.zarr",
+  "num_frames": 2614,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b4975cad8cb8d985c9a12d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4975cad8cb8d985c9a12d.zarr",
+  "num_frames": 2254,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bb3b2d2d7cb0bd150ecfe",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb3b2d2d7cb0bd150ecfe.zarr",
+  "num_frames": 3598,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b4f192c4c5496f9afd48d3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4f192c4c5496f9afd48d3.zarr",
+  "num_frames": 2635,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b49c57a83a7b34affb45f3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b49c57a83a7b34affb45f3.zarr",
+  "num_frames": 2339,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "693a3801db477c0dc483fed6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a3801db477c0dc483fed6.zarr",
+  "num_frames": 3601,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696d33b64f526320afafb74e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d33b64f526320afafb74e.zarr",
+  "num_frames": 2701,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b1c731ec387ac11eb95d1e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c731ec387ac11eb95d1e.zarr",
+  "num_frames": 1795,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b58fd1cee9caf66b110947",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b58fd1cee9caf66b110947.zarr",
+  "num_frames": 2515,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "6971f222b78f473064f5b7d4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6971f222b78f473064f5b7d4.zarr",
+  "num_frames": 3001,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "692bb8c4a589f55a386e3ff2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/692bb8c4a589f55a386e3ff2.zarr",
+  "num_frames": 2101,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bb9de9c8ea4b6e4a1f1fb",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb9de9c8ea4b6e4a1f1fb.zarr",
+  "num_frames": 2998,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bb9f779188f9419302a5c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb9f779188f9419302a5c.zarr",
+  "num_frames": 2998,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b1c454a54d92d7ca5c87b9",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c454a54d92d7ca5c87b9.zarr",
+  "num_frames": 1799,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "693cceabfcf9483c959815e0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693cceabfcf9483c959815e0.zarr",
+  "num_frames": 3601,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b263cb9b9c9569420841cc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b263cb9b9c9569420841cc.zarr",
+  "num_frames": 2095,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696ecf798aead5ac0ee409b1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ecf798aead5ac0ee409b1.zarr",
+  "num_frames": 2701,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "693a38eb8ba6930942f15696",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a38eb8ba6930942f15696.zarr",
+  "num_frames": 2704,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b52935e2d927d8bec0802f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b52935e2d927d8bec0802f.zarr",
+  "num_frames": 2698,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "693a33df7cf7e5b1ea73cfbc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a33df7cf7e5b1ea73cfbc.zarr",
+  "num_frames": 3600,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b4ac71a03afaf54dbcbad4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ac71a03afaf54dbcbad4.zarr",
+  "num_frames": 2399,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696e737737446407d01eb0bf",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696e737737446407d01eb0bf.zarr",
+  "num_frames": 3600,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b4b65e6d78ad6736570ea9",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b65e6d78ad6736570ea9.zarr",
+  "num_frames": 2485,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b49173b07388b77502f8dc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b49173b07388b77502f8dc.zarr",
+  "num_frames": 2254,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696da67dd0d963e7237523f2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696da67dd0d963e7237523f2.zarr",
+  "num_frames": 3000,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b51591b416a351f4c4273e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b51591b416a351f4c4273e.zarr",
+  "num_frames": 2695,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696ecc1e9b200fdeaf2e632c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696ecc1e9b200fdeaf2e632c.zarr",
+  "num_frames": 3001,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bb2b51cafc9f413b5b6bc",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb2b51cafc9f413b5b6bc.zarr",
+  "num_frames": 3508,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b1ca02769ac31ed0d5cba3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1ca02769ac31ed0d5cba3.zarr",
+  "num_frames": 1799,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696da17a77bf62ada9a01afd",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696da17a77bf62ada9a01afd.zarr",
+  "num_frames": 3152,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "693a3a4b16088b98ed39ce82",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a3a4b16088b98ed39ce82.zarr",
+  "num_frames": 3663,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b32c292211beb67754da69",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32c292211beb67754da69.zarr",
+  "num_frames": 2099,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "693a2ead0d06f344ee346f66",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a2ead0d06f344ee346f66.zarr",
+  "num_frames": 2621,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b9e624dbf7c747d90f7348",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b9e624dbf7c747d90f7348.zarr",
+  "num_frames": 1949,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696d9b07a1cd28d6b07bec66",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d9b07a1cd28d6b07bec66.zarr",
+  "num_frames": 2398,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "6971f55d46760c4d2f084e35",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6971f55d46760c4d2f084e35.zarr",
+  "num_frames": 3002,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bb2d9a907c8962e22a82c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb2d9a907c8962e22a82c.zarr",
+  "num_frames": 3598,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "6972c8d2c498e7b848461fde",
+  "path": "s3://rldb/processed_v3/mecka/freeform/6972c8d2c498e7b848461fde.zarr",
+  "num_frames": 2701,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b27d0bc0f1e57099e3b6ab",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b27d0bc0f1e57099e3b6ab.zarr",
+  "num_frames": 1949,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696d96ac91191c601bacc476",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696d96ac91191c601bacc476.zarr",
+  "num_frames": 2998,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696dcfd59d65f7c2b62e813c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696dcfd59d65f7c2b62e813c.zarr",
+  "num_frames": 3598,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "693a5cef6f71cc238727ab97",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a5cef6f71cc238727ab97.zarr",
+  "num_frames": 2701,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bb9dd246cb36ca3757f19",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb9dd246cb36ca3757f19.zarr",
+  "num_frames": 2998,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b4ea2015d40a449a6d8129",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ea2015d40a449a6d8129.zarr",
+  "num_frames": 2618,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b369adfcd17ce96faf25d9",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b369adfcd17ce96faf25d9.zarr",
+  "num_frames": 2168,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696dcfde9d0093f9cc8cdb9e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696dcfde9d0093f9cc8cdb9e.zarr",
+  "num_frames": 3598,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b49cd3ab37121e9e93bfa8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b49cd3ab37121e9e93bfa8.zarr",
+  "num_frames": 2335,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696da406aa83194696dc831a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696da406aa83194696dc831a.zarr",
+  "num_frames": 2428,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b509728a4c8aae9bc769fd",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b509728a4c8aae9bc769fd.zarr",
+  "num_frames": 2659,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bc0461e187f32c5eb5c04",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bc0461e187f32c5eb5c04.zarr",
+  "num_frames": 2578,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "693a436f4b5c4542c3119fb5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/693a436f4b5c4542c3119fb5.zarr",
+  "num_frames": 3451,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696f54fb2fde8076781192f3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696f54fb2fde8076781192f3.zarr",
+  "num_frames": 3106,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bd9958149bf43938953c1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bd9958149bf43938953c1.zarr",
+  "num_frames": 3001,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "696bb2db09bf9f435619ed06",
+  "path": "s3://rldb/processed_v3/mecka/freeform/696bb2db09bf9f435619ed06.zarr",
+  "num_frames": 3598,
+  "task": "arranging_flowers",
+  "lab": "arranging_flowers"
+ },
+ {
+  "episode_hash": "69b573b0f3ef6b95c177e304",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b573b0f3ef6b95c177e304.zarr",
+  "num_frames": 2699,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4fe2532643e552e8855b0",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4fe2532643e552e8855b0.zarr",
+  "num_frames": 2545,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b534169a3e364072f004c2",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b534169a3e364072f004c2.zarr",
+  "num_frames": 2699,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b9caccbb20394db7cb83f4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b9caccbb20394db7cb83f4.zarr",
+  "num_frames": 2695,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4940ebb067226df72d0ea",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4940ebb067226df72d0ea.zarr",
+  "num_frames": 2251,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b241a7f9bf9019ec27e41f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b241a7f9bf9019ec27e41f.zarr",
+  "num_frames": 1926,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b98ea72f58f0ebb008753a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b98ea72f58f0ebb008753a.zarr",
+  "num_frames": 2815,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b560379605a9793b6b95b6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b560379605a9793b6b95b6.zarr",
+  "num_frames": 2699,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4b4522cea4472917453ef",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b4522cea4472917453ef.zarr",
+  "num_frames": 2485,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b3430d911a770c69a48f3b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3430d911a770c69a48f3b.zarr",
+  "num_frames": 2159,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b34ef4add7e388ca36c60a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b34ef4add7e388ca36c60a.zarr",
+  "num_frames": 2155,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b55af85c9a724fbfbc20af",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b55af85c9a724fbfbc20af.zarr",
+  "num_frames": 2695,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4af284f139f5088428a67",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4af284f139f5088428a67.zarr",
+  "num_frames": 2401,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b49ca78c0e050035cc59f4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b49ca78c0e050035cc59f4.zarr",
+  "num_frames": 2335,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b588191dea4182847f781c",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b588191dea4182847f781c.zarr",
+  "num_frames": 2699,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b368d9c68645217fa07e02",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b368d9c68645217fa07e02.zarr",
+  "num_frames": 2248,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4bcad9a0f35ae6bd28776",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4bcad9a0f35ae6bd28776.zarr",
+  "num_frames": 2549,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4a228fd5a9093cd477aeb",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4a228fd5a9093cd477aeb.zarr",
+  "num_frames": 2395,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b226f690800ed928cc8900",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b226f690800ed928cc8900.zarr",
+  "num_frames": 1889,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b249225b56e7311fe82725",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b249225b56e7311fe82725.zarr",
+  "num_frames": 1918,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4af0eb83417cc7109b92f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4af0eb83417cc7109b92f.zarr",
+  "num_frames": 2395,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b1dbc89f5a09ad7c00483b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1dbc89f5a09ad7c00483b.zarr",
+  "num_frames": 1859,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b9c6b10a168c5d1f814632",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b9c6b10a168c5d1f814632.zarr",
+  "num_frames": 2695,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4b138d43107729f7031ef",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b138d43107729f7031ef.zarr",
+  "num_frames": 2399,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b561f753168422516b2950",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b561f753168422516b2950.zarr",
+  "num_frames": 2699,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b495e2bceee9fb4ea30d73",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b495e2bceee9fb4ea30d73.zarr",
+  "num_frames": 2275,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b27270a925bb63fc2f9155",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b27270a925bb63fc2f9155.zarr",
+  "num_frames": 2003,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b205be3049bde05d442e29",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b205be3049bde05d442e29.zarr",
+  "num_frames": 1889,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b541cad43107729f703589",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b541cad43107729f703589.zarr",
+  "num_frames": 2455,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4f4188f419c69e88fb220",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4f4188f419c69e88fb220.zarr",
+  "num_frames": 2639,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b1c67e323cfca1c6d7b49a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c67e323cfca1c6d7b49a.zarr",
+  "num_frames": 1799,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b51a37e2e62141d97ccf5e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b51a37e2e62141d97ccf5e.zarr",
+  "num_frames": 2695,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b1c40f666aa62abc610449",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c40f666aa62abc610449.zarr",
+  "num_frames": 1795,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4b16c2cf306e121aedd8e",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b16c2cf306e121aedd8e.zarr",
+  "num_frames": 2401,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b51caa17219d378d74a988",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b51caa17219d378d74a988.zarr",
+  "num_frames": 2698,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4bbf2c042529718bf8f4d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4bbf2c042529718bf8f4d.zarr",
+  "num_frames": 2395,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b518dc6641c34ca8db19a4",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b518dc6641c34ca8db19a4.zarr",
+  "num_frames": 2695,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b32f89614469a95a00b746",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b32f89614469a95a00b746.zarr",
+  "num_frames": 2099,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b996d820c9cd9395eb7a8a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b996d820c9cd9395eb7a8a.zarr",
+  "num_frames": 2549,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b9ca3e7460200d716463a6",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b9ca3e7460200d716463a6.zarr",
+  "num_frames": 2695,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b51028daf18bc1bcd1554f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b51028daf18bc1bcd1554f.zarr",
+  "num_frames": 2692,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4ad5d09ee8318e185a395",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ad5d09ee8318e185a395.zarr",
+  "num_frames": 2395,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b1c8af45b4a60380cdf7af",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c8af45b4a60380cdf7af.zarr",
+  "num_frames": 1795,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b5123ffc1abe8f43fd56d8",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b5123ffc1abe8f43fd56d8.zarr",
+  "num_frames": 2695,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b58f2d060a6199caac164a",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b58f2d060a6199caac164a.zarr",
+  "num_frames": 2669,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b999b046911c9d0fdcbb4f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b999b046911c9d0fdcbb4f.zarr",
+  "num_frames": 2669,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b1ce5b69ef75112a374f8f",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1ce5b69ef75112a374f8f.zarr",
+  "num_frames": 1829,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b35199cd15daa79db210c1",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b35199cd15daa79db210c1.zarr",
+  "num_frames": 2185,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b20025b06f8568161285db",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b20025b06f8568161285db.zarr",
+  "num_frames": 1919,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b3bbacac9b11a4d5640676",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3bbacac9b11a4d5640676.zarr",
+  "num_frames": 2249,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b22690769525a068cfdee5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b22690769525a068cfdee5.zarr",
+  "num_frames": 1798,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4a11e5c8f166a085c232d",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4a11e5c8f166a085c232d.zarr",
+  "num_frames": 2369,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b3743a6ef4b52990dfd951",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b3743a6ef4b52990dfd951.zarr",
+  "num_frames": 2245,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b495659c40481a89baf665",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b495659c40481a89baf665.zarr",
+  "num_frames": 2275,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4963020714062f4b0b4c5",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4963020714062f4b0b4c5.zarr",
+  "num_frames": 2305,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b1c341b5281cde1ea80965",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b1c341b5281cde1ea80965.zarr",
+  "num_frames": 1795,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4b6c34dd9410ce4c3c52b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4b6c34dd9410ce4c3c52b.zarr",
+  "num_frames": 2385,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b52a14eac64bf65ebcd7d3",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b52a14eac64bf65ebcd7d3.zarr",
+  "num_frames": 2545,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b4ba22b8993611e542422b",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b4ba22b8993611e542422b.zarr",
+  "num_frames": 2548,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ },
+ {
+  "episode_hash": "69b36b0d97fe745bf06022ed",
+  "path": "s3://rldb/processed_v3/mecka/freeform/69b36b0d97fe745bf06022ed.zarr",
+  "num_frames": 2248,
+  "task": "brushing_shoes",
+  "lab": "brushing_shoes"
+ }
+]

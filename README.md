@@ -1,4 +1,4 @@
-# EgoVerse Data Optimization & Evaluation Suite — Track 2: Quantitative Diversity Measurement
+# Ego Trip — EgoVerse Data Optimization & Evaluation Suite, Track 2: Quantitative Diversity Measurement
 
 ![summary slide](slide.png)
 

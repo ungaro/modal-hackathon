@@ -133,7 +133,7 @@ INDEX_STRING = """<!DOCTYPE html>
     <body>
         <div id="egodiv-splash">
             <div class="spinner"></div>
-            <div>egodiversity — loading episode features…</div>
+            <div>Ego Trip — loading episode features…</div>
         </div>
         {%app_entry%}
         <footer>
@@ -616,11 +616,11 @@ def create_app() -> Dash:
         style={"maxWidth": "800px"},
     )
 
-    app = Dash(__name__, title="egodiversity", update_title=None)
+    app = Dash(__name__, title="Ego Trip", update_title=None)
     app.index_string = INDEX_STRING
     app.layout = html.Div(
         [
-            html.H1("egodiversity"),
+            html.H1("Ego Trip"),
             html.P("How many genuinely different behaviors are in a robot "
                    "dataset? This tool turns any subset of EgoVerse episodes "
                    "into a single number — the effective count of distinct "

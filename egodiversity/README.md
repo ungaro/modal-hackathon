@@ -1,4 +1,4 @@
-# egodiversity
+# Ego Trip (`egodiversity` package)
 
 A quantitative, text-free diversity measurement suite for the EgoVerse
 egocentric robotics dataset. It extracts kinematic motion features per episode

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ego Trip — demo presentation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0e1014; color: #eee; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; overflow: hidden; }
+  .slide { display: none; width: 100vw; height: 100vh; padding: 8vh 9vw; flex-direction: column; justify-content: center; }
+  .slide.active { display: flex; }
+  h1 { font-size: 6vw; color: #fff; }
+  h1 .accent, .accent { color: #7c5cff; }
+  h2 { font-size: 3.2vw; color: #fff; margin-bottom: 3vh; }
+  p, li { font-size: 1.7vw; line-height: 1.5; color: #cfd3dc; }
+  ul { padding-left: 2.5vw; }
+  li { margin-bottom: 1.4vh; }
+  .sub { font-size: 1.9vw; color: #9aa0ab; margin-top: 2vh; }
+  .big { font-size: 9vw; font-weight: 700; color: #7c5cff; }
+  .big small { font-size: 1.8vw; color: #cfd3dc; font-weight: 400; }
+  .card { background: #181c24; border-left: 6px solid #7c5cff; border-radius: 8px; padding: 3vh 3vw; margin: 2vh 0; }
+  .num { color: #7c5cff; font-weight: 700; }
+  .nav { position: fixed; bottom: 3vh; right: 3vw; color: #555; font-size: 1vw; }
+  .pipe { display: flex; gap: 1vw; align-items: center; margin: 3vh 0; flex-wrap: wrap; }
+  .step { background: #181c24; border: 1px solid #2a3040; border-radius: 8px; padding: 2vh 1.4vw; font-size: 1.35vw; text-align: center; color: #cfd3dc; }
+  .arrow { color: #7c5cff; font-size: 2vw; }
+  .url { color: #7c5cff; font-size: 1.6vw; }
+  .dim { color: #9aa0ab; font-size: 1.3vw; }
+</style>
+</head>
+<body>
+
+<section class="slide active">
+  <h1><span class="accent">Ego Trip</span></h1>
+  <p class="sub">How many genuinely different behaviors are actually in your robot dataset?</p>
+  <p class="sub" style="font-size:1.4vw; margin-top:4vh">EgoVerse Data Optimization &amp; Evaluation Suite · Track 2</p>
+</section>
+
+<section class="slide">
+  <h2>More data ≠ better data</h2>
+  <ul>
+    <li>Robots learn from egocentric video of humans doing tasks. EgoVerse has <span class="num">hundreds of thousands</span> of episodes.</li>
+    <li>But nobody can answer: <b>how much of it is the same thing over and over?</b></li>
+    <li>Today's answer is LLM judges — <b>slow, expensive, subjective.</b></li>
+    <li>So teams train on everything — or curate by gut feel.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>One number, no LLM judges</h2>
+  <div class="pipe">
+    <div class="step">episode<br>video + poses</div><div class="arrow">→</div>
+    <div class="step">motion trajectories<br>(hands, head)</div><div class="arrow">→</div>
+    <div class="step">one vector per episode<br>(741 numbers)</div><div class="arrow">→</div>
+    <div class="step">similarity matrix</div><div class="arrow">→</div>
+    <div class="step"><b>Vendi score</b><br>effective # distinct behaviors</div>
+  </div>
+  <p>Kinematics only — no video models, no labels, no text.</p>
+  <p class="dim">Validated: duplicates score lower (3.25 vs 4.67) · correct subset ordering (1.64 &lt; 5.11 &lt; 5.19) · stable across 16× bandwidth</p>
+</section>
+
+<section class="slide">
+  <h2>The first audit of EgoVerse</h2>
+  <div class="big">≈14 <small>effective distinct behaviors</small></div>
+  <div class="card">
+    <p>in <b>12,212</b> fold_clothes episodes from 6 labs.</p>
+    <p style="margin-top:1.5vh">After any one lab, other labs add <span class="num">≈0</span> new behaviors. +600 episodes → +5.4 behaviors and flattening.</p>
+    <p style="margin-top:1.5vh"><b>Scale buys coverage, not variety.</b></p>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>Live demo</h2>
+  <p class="url">alp-guneysel--egodiversity-dashboard.modal.run</p>
+  <ul style="margin-top:3vh">
+    <li><b>Compare:</b> "Does 20× data mean 20× diversity?" — watch it answer itself</li>
+    <li><b>Spot check:</b> the score's most-similar vs most-distinct pairs, on real video</li>
+    <li><b>Explore:</b> any episode, video + 3D hand trajectories in sync</li>
+    <li><b>Rescore on Modal:</b> one click → ~100 workers fan out live</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>One build day on Modal</h2>
+  <ul>
+    <li><span class="num">12,542</span> episodes scored in <span class="num">3.7 min</span> — one <code>.map()</code>, one worker per episode, straight from R2</li>
+    <li><span class="num">92</span> containers at peak fan-out, <span class="num">~25k</span> function calls</li>
+    <li>12,542 hover thumbnails pre-generated onto a <b>Volume</b></li>
+    <li>Dashboard deployed as a web endpoint — <span class="num">16</span> deploys, each ~2 s</li>
+    <li>Rescore button <b>spawns a fleet from inside the web app</b></li>
+  </ul>
+  <p class="dim" style="margin-top:2vh">The entire infrastructure is one Python file. No Docker, no YAML, no IAM.</p>
+</section>
+
+<section class="slide">
+  <h2>Why it matters</h2>
+  <ul>
+    <li><b>Curation:</b> keep the k episodes that maximize Vendi — train on less, lose nothing</li>
+    <li><b>Collection planning:</b> the marginal curve says when to stop recording a task</li>
+    <li><b>Bring your own data:</b> drop any features.npz on the dashboard</li>
+  </ul>
+  <p class="sub" style="margin-top:3vh">Honest limit: motion shape, not scene content. Visual embeddings on Modal GPUs are the designed next step.</p>
+</section>
+
+<section class="slide">
+  <h1><span class="accent">Ego Trip</span></h1>
+  <p class="sub">github.com/ungaro/modal-hackathon</p>
+  <p class="sub">alp-guneysel--egodiversity-dashboard.modal.run</p>
+</section>
+
+<div class="nav">← → to navigate · <span id="pos"></span></div>
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let i = 0;
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    document.getElementById('pos').textContent = (i + 1) + ' / ' + slides.length;
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') show(i + 1);
+    if (e.key === 'ArrowLeft') show(i - 1);
+  });
+  show(0);
+</script>
+</body>
+</html>

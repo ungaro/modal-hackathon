@@ -103,9 +103,9 @@
   <ul>
     <li><span class="num">12,542</span> episodes scored in <span class="num">3.7 min</span> — one <code>.map()</code>, one worker per episode, straight from R2</li>
     <li><span class="num">92</span> containers at peak fan-out, <span class="num">~25k</span> function calls</li>
-    <li>12,542 hover thumbnails pre-generated onto a <b>Volume</b></li>
-    <li>Dashboard deployed as a web endpoint — <span class="num">16</span> deploys, each ~2 s</li>
-    <li>Rescore button <b>spawns a fleet from inside the web app</b></li>
+    <li>12,542 hover thumbnails pre-generated onto a <b>Volume</b> in ~8 min</li>
+    <li>Dashboard deployed as a web endpoint — <span class="num">16</span> deploys: ~2 s cached, ~30–45 s with an image rebuild</li>
+    <li>Warm container answers in <span class="num">0.3–0.5 s</span>; rescore button <b>spawns a fleet from inside the web app</b></li>
   </ul>
   <p class="dim" style="margin-top:2vh">The entire infrastructure is one Python file. No Docker, no YAML, no IAM.</p>
 </section>

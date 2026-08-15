@@ -514,6 +514,8 @@ def create_app() -> Dash:
                    "frames. Subset A is whatever you last configured on the "
                    "Compare tab."),
             html.Button("Find proof pairs", id="spot-btn", n_clicks=0),
+            html.Span(" (with a random subset A, every click draws fresh "
+                      "episodes)", style={"fontSize": "12px", "color": "#888"}),
             dcc.Loading(html.Div(id="spot-results", style={"padding": "10px"}),
                         type="circle"),
         ]
@@ -966,17 +968,24 @@ def create_app() -> Dash:
         Input("spot-btn", "n_clicks"),
         State("store-subsets", "data"),
         State("lab-A", "value"), State("strategy-A", "value"),
-        State("n-A", "value"),
+        State("n-A", "value"), State("seed-offset", "data"),
     )
-    def spot_check(n_clicks, data, lab_a, strat_a, n_a):
+    def spot_check(n_clicks, data, lab_a, strat_a, n_a, seed_off):
         if not n_clicks:
             return "Configure subset A on the Compare tab, then press the button."
         X = _DS["X"]; metas = _DS["metas"]
-        idx = list((data or {}).get("a") or [])
+        if strat_a == "random":
+            # The button IS the reshuffle: every click draws a fresh random
+            # subset A (seeded by click count + this page's seed).
+            idx = _select_subset(X, "random", n_a, _DS["pools"][lab_a],
+                                 seed=(seed_off or 0) + int(n_clicks),
+                                 metas=metas)
+        else:
+            idx = list((data or {}).get("a") or [])
         if len(idx) < 2:
-            # Store not populated yet (e.g. the initial greedy compare is
-            # still running) — compute subset A directly from the current
-            # Compare-tab controls instead of failing.
+            # Store not populated yet (e.g. the initial compare is still
+            # running) — compute subset A directly from the Compare-tab
+            # controls instead of failing.
             try:
                 idx = _select_subset(X, strat_a, n_a, _DS["pools"][lab_a],
                                      seed=0, metas=metas)

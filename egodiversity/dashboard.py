@@ -72,6 +72,12 @@ from egodiversity.history import append_history, read_history
 CACHE_PATH = os.environ.get("EGODIV_CACHE", "egodiversity/cache/features.npz")
 PORT = 8051
 
+# Deployment marker: module import happens once per container start, so this
+# identifies the running build. Pages opened before a redeploy detect the
+# mismatch (see build-tick callback) and show a reload banner instead of
+# silently failing callbacks.
+BUILD_ID = str(int(time.time()))
+
 STRATEGY_OPTIONS = [
     {"label": "At random", "value": "random"},
     {"label": "Most diverse possible (greedy)", "value": "greedy max-diversity"},
@@ -732,6 +738,9 @@ def create_app() -> Dash:
             dcc.Store(id="store-subsets"),
             dcc.Store(id="dataset-version", data=0),
             dcc.Store(id="seed-offset", data=fresh_seed),
+            dcc.Store(id="build-id", data=BUILD_ID),
+            dcc.Interval(id="build-tick", interval=10_000),
+            html.Div(id="build-banner"),
             dcc.Tabs(
                 [
                     dcc.Tab(compare_tab, label="Compare", value="tab-compare"),
@@ -750,6 +759,20 @@ def create_app() -> Dash:
         )
 
     app.layout = serve_layout
+
+    # -------------------------------------------------------------- frame
+    @callback(Output("build-banner", "children"),
+              Input("build-tick", "n_intervals"),
+              State("build-id", "data"))
+    def check_build(_n, page_build):
+        if page_build and page_build != BUILD_ID:
+            return html.A(
+                "A new version of Ego Trip was deployed — click to reload.",
+                href="/", style={"display": "block", "background": "#7c5cff",
+                                 "color": "#fff", "padding": "8px",
+                                 "borderRadius": "6px", "textAlign": "center",
+                                 "marginBottom": "8px"})
+        return ""
 
     # ------------------------------------------------------------------ frame
     @app.server.route("/frame/<episode_id>/<int:idx>")

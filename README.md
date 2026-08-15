@@ -98,6 +98,11 @@ sequenceDiagram
     W->>V: atomic publish features.npz
 ```
 
+A rescore fanning out in the Modal console — 92 containers spawned from one
+button click in the dashboard:
+
+![Modal console during a rescore: 92 extract_remote containers running](modal-console.png)
+
 Rough edges we hit, for honesty: `add_local_python_source` must be the last
 image build step (Modal enforces this with an opaque-at-first error);
 unpinned `s3fs`/`aiobotocore`/`botocore` resolution broke R2 reads inside the

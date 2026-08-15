@@ -1,6 +1,7 @@
 # EgoVerse Data Optimization & Evaluation Suite — Track 2: Quantitative Diversity Measurement
 
 **Live dashboard:** https://alp-guneysel--egodiversity-dashboard.modal.run
+**Summary slide:** [`slide.html`](slide.html) (open in a browser)
 
 How diverse is an episode subset, really? This project answers it with a
 number, not an LLM judge: kinematic trajectory features → RBF similarity

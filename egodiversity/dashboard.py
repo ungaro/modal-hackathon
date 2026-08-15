@@ -451,6 +451,7 @@ def create_app() -> Dash:
             dcc.Dropdown(
                 [{"label": k, "value": k} for k in presets],
                 id="preset", placeholder="Pick a ready-made comparison…",
+                maxHeight=420,  # show all curated comparisons, no hidden scrollbar
                 style={"maxWidth": "500px"},
             ),
             html.Div([subset_controls("A", "random", "all"),

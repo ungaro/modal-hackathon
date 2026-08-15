@@ -56,6 +56,26 @@ rl2/eth-dominated clusters are largely "long sessions" (median ~2,500 frames
 vs ~200–480 elsewhere) — duration and speed are part of the feature vector,
 so recording style is one of the axes the score sees.
 
+**Findings that did not exist before today** (EgoVerse is weeks old; none of
+this is in any paper):
+
+- **An "episode" is not the same object across labs.** Median episode length
+  is ~6.5 s at mecka (195 frames) but ~90–115 s at rl2/eth/song/wang
+  (~2,400–3,400 frames) — a 15× difference in what one training example
+  *is*. microagi sits at ~11 s. Anyone mixing these sources for training is
+  mixing short clips with full sessions, whether they know it or not.
+- **Redundancy without duplicates.** Only 5% of episodes have a near-twin
+  (nearest-neighbor distance < 0.25× the median pairwise distance). The
+  dataset isn't padded with copy-paste recordings — it's thousands of
+  *independent* recordings converging on the same small set of motions.
+  Deduplication tools would find almost nothing here; the redundancy is
+  behavioral, and only a behavior-level metric can see it.
+- **Farthest-point sampling doesn't work here.** The standard
+  "pick a diverse subset" heuristic (k-center) scores no better than random
+  under Vendi in this 741-dim feature space (5.10 vs 5.11) — distances
+  concentrate in high dimensions, so the selector has to optimize the
+  diversity metric directly.
+
 ## How it works
 
 ```mermaid

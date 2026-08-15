@@ -27,6 +27,11 @@ If asked "what ARE the 14?": "The score gives a count, not labels — but a
 k-means sketch shows the modes: the top five cover 56% of everything, all
 labs land in the same modes, and two modes are basically 'long recording
 sessions.' Representative episodes per mode are in the README."
+New-findings slide (6): "Three things nobody knew about EgoVerse before
+today: an 'episode' is a 6-second clip at one lab and a 2-minute session at
+another — 15× apart; the redundancy is behavioral, not duplication — only 5%
+of episodes have a near-twin; and the standard diverse-subset heuristic,
+farthest-point sampling, is no better than random in this feature space."
 
 ## 1:45–3:45 — Live demo (slide 5)
 Do these in order; each is one or two clicks:

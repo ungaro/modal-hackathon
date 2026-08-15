@@ -79,6 +79,15 @@
 </section>
 
 <section class="slide">
+  <h2>New findings about EgoVerse <span class="dim">(the dataset is weeks old — none of this exists elsewhere)</span></h2>
+  <ul>
+    <li><b>An "episode" is not the same object across labs:</b> ~6.5 s median at mecka vs ~90–115 s at rl2/eth/song/wang — a 15× difference in what one training example <i>is</i></li>
+    <li><b>Redundancy without duplicates:</b> only 5% of episodes have a near-twin — the dataset isn't copy-pasted, it's thousands of independent recordings of the same few motions</li>
+    <li><b>Farthest-point sampling fails here:</b> the standard diverse-subset heuristic scores no better than random in 741-dim (5.10 vs 5.11)</li>
+  </ul>
+</section>
+
+<section class="slide">
   <h2>Live demo</h2>
   <p class="url">alp-guneysel--egodiversity-dashboard.modal.run</p>
   <ul style="margin-top:3vh">

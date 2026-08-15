@@ -29,6 +29,25 @@ with signature kernels. New here: the first audit of EgoVerse, marginal-diversit
 scoring for collection planning, and a serverless pipeline that makes
 re-auditing a ~4-minute job.
 
+## Explore your dataset
+
+The dashboard isn't EgoVerse-specific — drop any `features.npz` onto the
+upload box in the header and every tab switches to your data instantly
+(scores, curated comparisons, PCA maps, history). The format is deliberately
+simple: an `(n_episodes, n_features)` float array plus one metadata dict per
+episode (`episode_id` required; `lab`, `task_name`, `num_frames`, and `path`
+optional — `path` enables video/thumbnail previews). Three ways to get one:
+
+1. **Any features you already have** — write the npz yourself:
+   `np.savez("my.npz", features=X, metadata=json.dumps(metas))`, then drop it
+   on the dashboard.
+2. **EgoVerse-format zarrs on disk** — `python -m egodiversity.features
+   --data-dir <dir> --out my.npz` builds the file (kinematic features, ~1 min
+   per 100 episodes).
+3. **Episodes on S3/R2 at scale** — a manifest JSON of episode paths, then
+   `modal run -m egodiversity.modal_app --manifest <file>` fans the
+   extraction out on Modal and publishes a new cache the dashboard can serve.
+
 ## How Modal is used
 
 The whole pipeline runs cloud-to-cloud (R2 → Modal → browser); the laptop is

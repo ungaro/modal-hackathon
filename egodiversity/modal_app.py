@@ -148,7 +148,7 @@ def extract_all(episodes: list[dict]) -> str:
 
 
 @app.function(image=dashboard_image, volumes={"/data": cache_volume},
-              secrets=[r2_secret], min_containers=1)
+              secrets=[r2_secret], cpu=1, memory=4096, min_containers=1)
 @modal.wsgi_app()
 def dashboard():
     """Serve the Dash dashboard from Modal, reading the volume cache."""

@@ -9,18 +9,27 @@ Six tabs aimed at a judge with zero context:
   plain-English labels and verdict, curated one-click comparisons, Vendi +
   support metrics, PCA scatter, and per-subset tables. Every update is logged
   to the history JSONL (see egodiversity.history). Random subsets use seed 0
-  for A and seed 1 for B, so "random vs random" compares two real draws.
+  for A and seed 1 for B, so "random vs random" compares two real draws. The
+  "Rescore on Modal" button spawns a remote recompute and polls its status
+  every RESCORE_POLL_MS while the call is in flight.
 - Spot check: picks the most-similar and most-distant episode pair inside
   subset A and shows their contact sheets side by side, so the score can be
   eyeballed against the raw video. Subsets larger than SPOT_CHECK_CAP are
   subsampled deterministically for the pair search.
 - Explore episodes: any single episode's contact sheet, 3-D hand
-  trajectories, and a frame scrubber (play/pause) served from /frame/<id>/<i>.
+  trajectories with a live "current hand position" marker, and a play/pause
+  frame scrubber. One server callback batch-fetches PLAYBACK_FRAMES frames +
+  poses into dcc.Stores; playback itself is fully client-side (no per-frame
+  server round-trips).
 - 3D map: PCA(3) over all episodes, one trace per lab, subsets A/B
   highlighted.
 - History: every comparison ever run, newest first, auto-refreshing.
 - How it works: the four-step pipeline and validation numbers in plain
   English.
+
+A splash preloader (app.index_string) covers the window until the Dash app
+has rendered, and update_title=None keeps the browser tab from flipping to
+"Updating…" during callbacks.
 
 Run: python -m egodiversity.dashboard
 """
@@ -31,13 +40,17 @@ import base64
 import io
 import json
 import os
+import time
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Dash, Input, Output, State, callback, dash_table, dcc, html
+from dash import (
+    Dash, Input, Output, State, callback, clientside_callback, dash_table,
+    dcc, html, no_update,
+)
 from dash.exceptions import PreventUpdate
 from flask import Response
 from PIL import Image, ImageDraw
@@ -65,9 +78,12 @@ STRATEGY_OPTIONS = [
     {"label": "Least diverse possible (greedy)", "value": "greedy min-diversity"},
 ]
 STRATEGY_VALUES = {o["value"] for o in STRATEGY_OPTIONS}
-GREEDY_POOL_CAP = 600   # candidate cap for greedy selectors (interactivity)
-MAX_SUBSET_N = 1000     # Vendi eigendecomposition stays sub-second up to here
-SPOT_CHECK_CAP = 300    # pair search subsample cap for the Spot check tab
+GREEDY_POOL_CAP = 600    # candidate cap for greedy selectors (interactivity)
+MAX_SUBSET_N = 1000      # Vendi eigendecomposition stays sub-second up to here
+SPOT_CHECK_CAP = 300     # pair search subsample cap for the Spot check tab
+PLAYBACK_FRAMES = 60     # frames batch-fetched per episode for the scrubber
+PLAYBACK_TICK_MS = 150   # play/pause interval
+RESCORE_POLL_MS = 5000   # rescore status poll interval
 
 # Curated one-click comparisons: name -> (lab, strategy, n) for A and B.
 # Entries referencing labs absent from the cache are dropped at startup.
@@ -89,6 +105,54 @@ CURATED = {
         "b": ("eth", "random", 60),
     },
 }
+
+# Splash preloader: white overlay + spinner, removed by the inline script as
+# soon as Dash has rendered into #react-entry-point. Structure and
+# placeholders mirror Dash's default index_string.
+INDEX_STRING = """<!DOCTYPE html>
+<html>
+    <head>
+        {%metas%}
+        <title>{%title%}</title>
+        {%favicon%}
+        {%css%}
+        <style>
+            #egodiv-splash {position: fixed; inset: 0; background: #fff;
+                z-index: 9999; display: flex; flex-direction: column;
+                align-items: center; justify-content: center;
+                font-family: sans-serif; color: #555;}
+            #egodiv-splash .spinner {width: 42px; height: 42px;
+                margin-bottom: 16px; border: 4px solid #ddd;
+                border-top-color: #1f77b4; border-radius: 50%;
+                animation: egodiv-spin 0.9s linear infinite;}
+            @keyframes egodiv-spin {to {transform: rotate(360deg);}}
+        </style>
+    </head>
+    <body>
+        <div id="egodiv-splash">
+            <div class="spinner"></div>
+            <div>egodiversity — loading episode features…</div>
+        </div>
+        {%app_entry%}
+        <footer>
+            {%config%}
+            {%scripts%}
+            {%renderer%}
+        </footer>
+        <script>
+            (function () {
+                var poll = setInterval(function () {
+                    var root = document.getElementById("react-entry-point");
+                    if (root && root.children.length > 0) {
+                        var splash = document.getElementById("egodiv-splash");
+                        if (splash) splash.parentNode.removeChild(splash);
+                        clearInterval(poll);
+                    }
+                }, 100);
+            })();
+        </script>
+    </body>
+</html>"""
 
 
 def _select_subset(X: np.ndarray, strategy: str, n: int, pool: list[int],
@@ -166,9 +230,12 @@ def _subset_table(metas: list[dict], idx: list[int]) -> dash_table.DataTable:
     )
 
 
+def _data_uri(blob: bytes) -> str:
+    return "data:image/jpeg;base64," + base64.b64encode(blob).decode()
+
+
 def _img_from_jpeg(blob: bytes, width: str = "48%") -> html.Img:
-    src = "data:image/jpeg;base64," + base64.b64encode(blob).decode()
-    return html.Img(src=src, style={"width": width, "margin": "4px"})
+    return html.Img(src=_data_uri(blob), style={"width": width, "margin": "4px"})
 
 
 def _sheet_panel(meta: dict) -> html.Div:
@@ -197,7 +264,7 @@ def _sheet_panel(meta: dict) -> html.Div:
 
 
 def _placeholder_frame(text: str) -> bytes:
-    """A JPEG placeholder with a message, for the /frame route's failure path."""
+    """A JPEG placeholder with a message, for media failure paths."""
     img = Image.new("RGB", (640, 480), color=(30, 30, 30))
     draw = ImageDraw.Draw(img)
     y = 210
@@ -211,6 +278,11 @@ def _placeholder_frame(text: str) -> bytes:
 
 def _def_str(d: dict) -> str:
     return f"{d.get('lab', '')} · {d.get('strategy', '')} · n={d.get('n', '')}"
+
+
+def _rescore_running_msg(elapsed: int) -> str:
+    return (f"Rescore running… {elapsed}s elapsed (full 12k rescore typically "
+            f"takes ~4 minutes). Watch it live: modal.com/apps")
 
 
 def create_app() -> Dash:
@@ -288,6 +360,8 @@ def create_app() -> Dash:
             ),
             html.Hr(),
             html.Button("Rescore on Modal", id="rescore-btn", n_clicks=0),
+            dcc.Store(id="rescore-call"),
+            dcc.Interval(id="rescore-tick", interval=RESCORE_POLL_MS, disabled=True),
             html.Div(id="rescore-out", style={"padding": "10px", "color": "#555"}),
         ]
     )
@@ -314,19 +388,34 @@ def create_app() -> Dash:
                 id="explore-episode", placeholder="Pick an episode…",
                 style={"maxWidth": "600px"},
             ),
-            html.Div(id="explore-info", style={"padding": "6px", "color": "#555"}),
-            html.Div(id="explore-sheet"),
-            dcc.Graph(id="explore-traj"),
-            html.Hr(),
-            html.Div(
-                [
-                    html.Button("Play", id="play-btn", n_clicks=0),
-                    dcc.Interval(id="scrub-tick", interval=250, disabled=True),
-                    dcc.Slider(0, 1, 1, value=0, id="scrub",
-                               marks={0: "frame 0"}, tooltip={"placement": "bottom"}),
-                    html.Img(id="scrub-img", style={"maxWidth": "640px",
-                                                    "display": "block"}),
-                ]
+            dcc.Store(id="explore-frames"),
+            dcc.Store(id="explore-poses"),
+            dcc.Store(id="frame-idx", data=0),
+            dcc.Loading(
+                html.Div(
+                    [
+                        html.Div(id="explore-info",
+                                 style={"padding": "6px", "color": "#555"}),
+                        html.Div(id="explore-sheet"),
+                        dcc.Graph(id="explore-traj"),
+                        html.Hr(),
+                        html.Div(
+                            [
+                                html.Button("Play", id="play-btn", n_clicks=0),
+                                dcc.Interval(id="play-tick",
+                                             interval=PLAYBACK_TICK_MS,
+                                             disabled=True),
+                                dcc.Slider(0, 1, 1, value=0, id="scrub",
+                                           marks={0: "frame 0"},
+                                           tooltip={"placement": "bottom"}),
+                                html.Img(id="scrub-img",
+                                         style={"maxWidth": "640px",
+                                                "display": "block"}),
+                            ]
+                        ),
+                    ]
+                ),
+                type="circle",
             ),
         ]
     )
@@ -397,7 +486,8 @@ def create_app() -> Dash:
         style={"maxWidth": "800px"},
     )
 
-    app = Dash(__name__, title="egodiversity")
+    app = Dash(__name__, title="egodiversity", update_title=None)
+    app.index_string = INDEX_STRING
     app.layout = html.Div(
         [
             html.H1("egodiversity"),
@@ -429,7 +519,11 @@ def create_app() -> Dash:
     # ------------------------------------------------------------------ frame
     @app.server.route("/frame/<episode_id>/<int:idx>")
     def serve_frame(episode_id: str, idx: int):
-        """One JPEG frame of an episode; a placeholder image on any failure."""
+        """One JPEG frame of an episode; a placeholder image on any failure.
+
+        Kept for deep links; the Explore scrubber no longer uses it (playback
+        is client-side from a batch-fetched store).
+        """
         meta = id_to_meta.get(episode_id)
         blob = None
         if meta is not None:
@@ -507,13 +601,19 @@ def create_app() -> Dash:
             {"a": [int(i) for i in idx_a], "b": [int(i) for i in idx_b]},
         )
 
-    @callback(Output("rescore-out", "children"), Input("rescore-btn", "n_clicks"))
+    @callback(
+        Output("rescore-out", "children"),
+        Output("rescore-call", "data"),
+        Output("rescore-tick", "disabled"),
+        Input("rescore-btn", "n_clicks"),
+    )
     def rescore(n_clicks):
         if not n_clicks:
-            return ""
+            return "", None, True
         if os.environ.get("EGODIV_MODAL") != "1":
-            return ("Modal not configured. Set EGODIV_MODAL=1 (and run `modal setup`) "
-                    "to enable remote feature extraction on Modal/R2.")
+            return (("Modal not configured. Set EGODIV_MODAL=1 (and run "
+                     "`modal setup`) to enable remote feature extraction on "
+                     "Modal/R2."), None, True)
         try:
             from egodiversity.modal_app import rescore_remote
 
@@ -527,9 +627,39 @@ def create_app() -> Dash:
                  or f"s3://rldb/processed_v3/aria/{m['episode_id']}.zarr"}
                 for m in metas
             ]
-            return rescore_remote(episodes)
+            call_id = rescore_remote(episodes)
         except Exception as exc:  # demo hook — surface, don't crash
-            return f"Modal rescore failed: {exc}"
+            return f"Modal rescore failed: {exc}", None, True
+        return (_rescore_running_msg(0),
+                {"call_id": call_id, "t0": time.time()}, False)
+
+    @callback(
+        Output("rescore-out", "children", allow_duplicate=True),
+        Output("rescore-call", "data", allow_duplicate=True),
+        Output("rescore-tick", "disabled", allow_duplicate=True),
+        Input("rescore-tick", "n_intervals"),
+        State("rescore-call", "data"),
+        prevent_initial_call=True,
+    )
+    def poll_rescore(_n, data):
+        if not data or not data.get("call_id"):
+            raise PreventUpdate
+        elapsed = int(time.time() - data.get("t0", time.time()))
+        try:
+            import modal  # lazy: local dashboard works without modal auth
+
+            result = modal.FunctionCall.from_id(data["call_id"]).get(timeout=0)
+        except TimeoutError:
+            # builtin TimeoutError — what FunctionCall.get(timeout=0) raises
+            # while the call is still pending (verified on modal 1.5.4).
+            return _rescore_running_msg(elapsed), no_update, False
+        except Exception as exc:
+            if type(exc).__name__ == "TimeoutError":
+                # modal.exception.TimeoutError on other modal versions
+                return _rescore_running_msg(elapsed), no_update, False
+            return f"Rescore failed: {exc}", None, True
+        return (f"{result} — done in {elapsed}s — scores refresh on the "
+                f"dashboard's next cold start."), None, True
 
     # -------------------------------------------------------------- spot check
     @callback(
@@ -587,26 +717,40 @@ def create_app() -> Dash:
         Output("explore-info", "children"),
         Output("scrub", "max"),
         Output("scrub", "value"),
+        Output("explore-frames", "data"),
+        Output("explore-poses", "data"),
         Input("explore-episode", "value"),
     )
     def explore(episode_id):
         if not episode_id:
             return ("", go.Figure(),
                     "No episode selected — pick one above to load its video "
-                    "and trajectories.", 1, 0)
+                    "and trajectories.", 1, 0, [], {})
         meta = id_to_meta[episode_id]
 
         sheet = _sheet_panel(meta)
 
         fig = go.Figure()
+        poses_lists: dict[str, list] = {}
         traj_note = ""
         try:
             poses = frames.get_poses(meta)
+            poses_lists = {h: poses[h].tolist() for h in ("right", "left")}
             for hand, color in (("right", "#d62728"), ("left", "#1f77b4")):
                 p = poses[hand]
                 fig.add_trace(go.Scatter3d(
                     x=p[:, 0], y=p[:, 1], z=p[:, 2], mode="lines",
                     name=f"{hand} hand", line={"color": color, "width": 4},
+                ))
+            # Current-position markers, moved client-side during playback.
+            # They must be the LAST TWO traces (the clientside callback
+            # rewrites them by position).
+            for hand, color in (("right", "#ff7f0e"), ("left", "#2ca02c")):
+                p = poses[hand]
+                fig.add_trace(go.Scatter3d(
+                    x=[p[0, 0]], y=[p[0, 1]], z=[p[0, 2]], mode="markers",
+                    name=f"{hand} hand (current)",
+                    marker={"size": 6, "color": color},
                 ))
             fig.update_layout(title="Hand trajectories (end-effector xyz)",
                               height=450,
@@ -615,47 +759,105 @@ def create_app() -> Dash:
         except RuntimeError as exc:
             traj_note = f" Trajectories unavailable: {exc}"
 
+        # Batch-fetch PLAYBACK_FRAMES evenly spaced frames for client-side
+        # playback (get_frames is threaded internally).
+        frames_note = ""
         try:
-            n_frames = frames.num_frames(meta)
-        except RuntimeError:
-            n_frames = int(meta.get("num_frames") or 0)
-        n_frames = max(n_frames, 1)
+            total = frames.num_frames(meta)
+            n_fetch = min(PLAYBACK_FRAMES, total)
+            idxs = np.linspace(0, total - 1, n_fetch).astype(int).tolist()
+            uris = [_data_uri(b) for b in frames.get_frames(meta, idxs)]
+        except RuntimeError as exc:
+            total = int(meta.get("num_frames") or 0)
+            frames_note = f" Frames unavailable: {exc}"
+            uris = [_data_uri(_placeholder_frame(
+                f"frames unavailable\n{episode_id}"))]
 
         info = (f"{episode_id} · {meta.get('lab', '') or 'unknown lab'} · "
-                f"{n_frames} frames.{traj_note}")
-        return sheet, fig, info, n_frames - 1, 0
+                f"{total} source frames · {len(uris)} playback frames."
+                f"{traj_note}{frames_note}")
+        return sheet, fig, info, max(len(uris) - 1, 0), 0, uris, poses_lists
 
     @callback(
-        Output("scrub-tick", "disabled"),
+        Output("play-tick", "disabled"),
         Output("play-btn", "children"),
         Input("play-btn", "n_clicks"),
-        State("scrub-tick", "disabled"),
+        State("play-tick", "disabled"),
     )
     def toggle_play(n_clicks, disabled):
         if not n_clicks:
             raise PreventUpdate
         return (not disabled), ("Pause" if disabled else "Play")
 
-    @callback(
-        Output("scrub", "value", allow_duplicate=True),
-        Input("scrub-tick", "n_intervals"),
-        State("scrub", "value"), State("scrub", "max"),
+    # Client-side playback: no server round-trips while playing.
+    clientside_callback(
+        """
+        function(n, idx, frames) {
+            if (!frames || !frames.length) return window.dash_clientside.no_update;
+            var i = (idx == null) ? 0 : idx;
+            return (i + 1) % frames.length;
+        }
+        """,
+        Output("frame-idx", "data"),
+        Input("play-tick", "n_intervals"),
+        State("frame-idx", "data"),
+        State("explore-frames", "data"),
+    )
+
+    clientside_callback(
+        "function(v) { return (v == null) ? 0 : v; }",
+        Output("frame-idx", "data", allow_duplicate=True),
+        Input("scrub", "value"),
         prevent_initial_call=True,
     )
-    def tick(_n, value, maxv):
-        if not maxv:
-            raise PreventUpdate
-        return (value + 1) % (maxv + 1)
 
-    @callback(
+    clientside_callback(
+        """
+        function(idx, frames) {
+            var nu = window.dash_clientside.no_update;
+            if (!frames || !frames.length) return [nu, nu];
+            var i = (idx == null) ? 0 : idx;
+            if (i >= frames.length) i = frames.length - 1;
+            return [frames[i], i];
+        }
+        """,
         Output("scrub-img", "src"),
-        Input("scrub", "value"),
-        State("explore-episode", "value"),
+        Output("scrub", "value", allow_duplicate=True),
+        Input("frame-idx", "data"),
+        State("explore-frames", "data"),
+        prevent_initial_call=True,
     )
-    def scrub_src(idx, episode_id):
-        if not episode_id or idx is None:
-            return ""
-        return f"/frame/{episode_id}/{int(idx)}"
+
+    clientside_callback(
+        """
+        function(idx, poses, frames, fig) {
+            if (!poses || !poses.right || !poses.right.length ||
+                    !fig || !fig.data || fig.data.length < 4) {
+                return window.dash_clientside.no_update;
+            }
+            var nF = (frames && frames.length) ? frames.length : 1;
+            var nP = poses.right.length;
+            var i = (idx == null) ? 0 : idx;
+            var pi = Math.round((nF > 1 ? i / (nF - 1) : 0) * (nP - 1));
+            var pts = [poses.right[pi], poses.left[pi]];
+            var out = Object.assign({}, fig);
+            var data = fig.data.slice();
+            for (var k = 0; k < 2; k++) {
+                var t = Object.assign({}, fig.data[fig.data.length - 2 + k]);
+                t.x = [pts[k][0]]; t.y = [pts[k][1]]; t.z = [pts[k][2]];
+                data[fig.data.length - 2 + k] = t;
+            }
+            out.data = data;
+            return out;
+        }
+        """,
+        Output("explore-traj", "figure", allow_duplicate=True),
+        Input("frame-idx", "data"),
+        State("explore-poses", "data"),
+        State("explore-frames", "data"),
+        State("explore-traj", "figure"),
+        prevent_initial_call=True,
+    )
 
     # -------------------------------------------------------------------- map
     @callback(Output("map-3d", "figure"), Input("store-subsets", "data"))

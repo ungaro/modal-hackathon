@@ -123,7 +123,7 @@ def extract_all(episodes: list[dict]) -> str:
 
 
 @app.function(image=dashboard_image, volumes={"/data": cache_volume},
-              secrets=[r2_secret])
+              secrets=[r2_secret], min_containers=1)
 @modal.wsgi_app()
 def dashboard():
     """Serve the Dash dashboard from Modal, reading the volume cache."""
@@ -139,13 +139,13 @@ def rescore_remote(episodes: list[dict]) -> str:
     """Used by the dashboard's 'Rescore on Modal' button. Spawns the deployed
     extract_all (non-blocking), so it works both locally (EGODIV_MODAL=1, after
     `modal setup`) and inside the deployed dashboard container. Requires the
-    app to be deployed (`modal deploy -m egodiversity.modal_app`)."""
+    app to be deployed (`modal deploy -m egodiversity.modal_app`).
+
+    Returns the spawned call's FunctionCall id ("fc-..."); the dashboard
+    stores it and polls modal.FunctionCall.from_id(call_id).get(timeout=0)
+    for status."""
     fn = modal.Function.from_name("egodiversity", "extract_all")
-    call = fn.spawn(list(episodes))
-    return (f"Rescore started on Modal (call id {call.object_id}). "
-            "Watch the fan-out in the Modal console; the cache on volume "
-            "'egodiversity-cache' is overwritten when it finishes, and the "
-            "dashboard picks it up on its next cold start.")
+    return fn.spawn(list(episodes)).object_id
 
 
 @app.local_entrypoint()

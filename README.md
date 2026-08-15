@@ -121,6 +121,14 @@ button click in the dashboard:
 
 ![Modal console during a rescore: 92 extract_remote containers running](modal-console.png)
 
+What you're looking at: a **rescore** recomputes every episode's
+motion-shape feature vector by reading its zarr from R2. The **fan-out** is
+Modal running that as ~92 parallel containers (the `extract_remote` row:
+17,807 calls, 6.5 cores, 7.8 GiB in flight) instead of one sequential loop —
+which is why 12.5k episodes finish in under 4 minutes. The other two rows are
+the project itself: `dashboard` (this web app, idle between page loads) and
+`extract_all` (the coordinator that hands episode lists to the workers).
+
 Rough edges we hit, for honesty: `add_local_python_source` must be the last
 image build step (Modal enforces this with an opaque-at-first error);
 unpinned `s3fs`/`aiobotocore`/`botocore` resolution broke R2 reads inside the

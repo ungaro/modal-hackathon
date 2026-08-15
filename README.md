@@ -37,10 +37,29 @@ flowchart LR
     E --> F["Vendi score =<br/>effective # distinct behaviors"]
 ```
 
-1. **Kinematic features, no pixels.** Each episode becomes one vector:
-   bimanual end-effector paths, wrist orientation, head motion — resampled and
-   shape-normalized — plus speed/smoothness stats. No video decoding, no
-   annotations.
+1. **Kinematic features, no pixels.** Each episode records the hands' and
+   head's positions over time — e.g. the right hand is a path of N points
+   `p₁…pₙ` in 3-D space (N ≈ 2,700 for a ~90 s clip). We turn that path into
+   a fixed-length description of its **shape**:
+
+   ```
+   resample:   qᵢ = the hand's position at 64 evenly spaced moments
+                    (linear interpolation — a 30 s clip and a 3 min clip
+                    both get exactly 64 "beats")
+   center:     q̂ᵢ = qᵢ − q₁        (shift the path to start at the origin)
+   scale:      vᵢ = q̂ᵢ / s,  s = sqrt(mean ‖q̂ᵢ‖²)   (divide by its own extent)
+   flatten:    v₁…v₆₄ → 192 numbers
+   ```
+
+   Centering makes the description independent of *where* in the room the
+   motion happened; scaling makes it independent of *how big* the workspace
+   was. Two episodes of the same folding motion at different tables land on
+   nearly the same vector; genuinely different motions land far apart. The
+   same recipe runs on the left hand (192 numbers), the wrist orientation
+   (256), and the head path (96); then we append 5 summary stats computed on
+   the *raw* path (path length, duration, mean/std speed, jerk) so absolute
+   scale isn't thrown away. Total: **741 numbers per episode**. No video
+   decoding, no annotations.
 2. **Similarity → one number.** We compare every pair of episodes with an
    **RBF kernel** — a smooth similarity function that returns ~1 when two
    motion vectors are nearly identical and fades toward 0 the farther apart

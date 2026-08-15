@@ -48,7 +48,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from dash import (
-    Dash, Input, Output, State, callback, clientside_callback, dash_table,
+    Dash, Input, Output, State, callback, clientside_callback, ctx, dash_table,
     dcc, html, no_update,
 )
 from dash.exceptions import PreventUpdate
@@ -346,7 +346,21 @@ def create_app() -> Dash:
                         html.Div(id="verdict", style={"fontSize": "20px",
                                                       "fontWeight": "bold",
                                                       "padding": "10px"}),
-                        dcc.Graph(id="pca-scatter"),
+                        html.Div(
+                            [
+                                html.Div(dcc.Graph(id="pca-scatter"),
+                                         style={"width": "70%",
+                                                "display": "inline-block",
+                                                "verticalAlign": "top"}),
+                                html.Div(
+                                    dcc.Loading(html.Div(id="scatter-detail"),
+                                                type="dot", delay_show=300),
+                                    style={"width": "28%",
+                                           "display": "inline-block",
+                                           "verticalAlign": "top",
+                                           "padding": "6px"}),
+                            ]
+                        ),
                         html.Div([html.Div(id="table-A",
                                            style={"width": "45%",
                                                   "display": "inline-block"}),
@@ -424,9 +438,32 @@ def create_app() -> Dash:
         [
             html.P("Every episode as one point (PCA of the motion-shape "
                    "features, 3 components). Close points = similar movement. "
-                   "Subsets A and B from the Compare tab are highlighted."),
-            dcc.Loading(dcc.Graph(id="map-3d", style={"height": "75vh"}),
-                        type="circle"),
+                   "Subsets A and B from the Compare tab are highlighted. "
+                   "Hover a point to preview the episode; click it for the "
+                   "full contact sheet."),
+            html.Div(
+                [
+                    html.Div(
+                        dcc.Loading(dcc.Graph(id="map-3d",
+                                              style={"height": "75vh"}),
+                                    type="circle"),
+                        style={"width": "70%", "display": "inline-block",
+                               "verticalAlign": "top"},
+                    ),
+                    html.Div(
+                        dcc.Loading(
+                            html.Div(id="map-detail",
+                                     children="Hover a point to preview the "
+                                              "episode.",
+                                     style={"color": "#777",
+                                            "padding": "6px"}),
+                            type="dot", delay_show=300,
+                        ),
+                        style={"width": "28%", "display": "inline-block",
+                               "verticalAlign": "top", "padding": "6px"},
+                    ),
+                ]
+            ),
         ]
     )
 
@@ -584,6 +621,7 @@ def create_app() -> Dash:
         fig = px.scatter(
             df, x="PC1", y="PC2", color="subset",
             hover_data=["episode_id", "lab"],
+            custom_data=["episode_id", "lab"],
             category_orders={"subset": ["A", "B", "A∩B", "other"]},
             color_discrete_map={"A": "#d62728", "B": "#1f77b4",
                                 "A∩B": "#9467bd", "other": "#cccccc"},
@@ -875,6 +913,7 @@ def create_app() -> Dash:
                 marker={"size": 2, "opacity": 0.45,
                         "color": palette[c % len(palette)]},
                 text=[f"{ids[i]}<br>{lab}" for i in idx], hoverinfo="text",
+                customdata=[[ids[i], lab] for i in idx],
             ))
         for key, name, color in (("a", "Subset A", "#d62728"),
                                  ("b", "Subset B", "#1f77b4")):
@@ -890,10 +929,84 @@ def create_app() -> Dash:
                 text=[f"{ids[i]}<br>{metas[i].get('lab', '') or 'unknown'}<br>{name}"
                       for i in idx],
                 hoverinfo="text",
+                customdata=[[ids[i], metas[i].get("lab", "") or "unknown"]
+                            for i in idx],
             ))
         fig.update_layout(title="All episodes in motion-shape space (PCA, 3D)",
                           legend={"itemsizing": "constant"})
         return fig
+
+    # -------------------------------------------------------- episode previews
+    def _episode_detail(episode_id: str, with_sheet: bool,
+                        compact: bool) -> html.Div:
+        """Thumbnail + metadata panel for one episode (contact sheet too when
+        with_sheet). RuntimeError (R2 failure) -> friendly placeholder."""
+        meta = id_to_meta.get(episode_id)
+        if meta is None:
+            return html.Div(f"unknown episode: {episode_id}",
+                            style={"color": "#a33"})
+        try:
+            thumb = frames.get_thumbnail(meta)
+            thumb_el: html.Div = html.Img(
+                src=_data_uri(thumb),
+                style={"width": "240px" if compact else "100%"})
+        except RuntimeError as exc:
+            thumb_el = html.Div(
+                f"preview unavailable: {exc}",
+                style={"border": "1px dashed #aaa", "padding": "20px",
+                       "color": "#a33", "fontSize": "13px"})
+        children = [
+            thumb_el,
+            html.Div(episode_id, style={"fontFamily": "monospace",
+                                        "fontSize": "11px",
+                                        "wordBreak": "break-all"}),
+            html.Div(
+                f"{meta.get('lab', '') or 'unknown lab'} · "
+                f"{meta.get('task_name', '') or 'unknown task'} · "
+                f"{meta.get('num_frames', '?')} frames",
+                style={"fontSize": "12px", "color": "#555"}),
+        ]
+        if with_sheet:
+            try:
+                children.append(html.Img(src=_data_uri(frames.contact_sheet(meta)),
+                                         style={"width": "100%",
+                                                "marginTop": "6px"}))
+            except RuntimeError as exc:
+                children.append(html.Div(f"contact sheet unavailable: {exc}",
+                                         style={"color": "#a33",
+                                                "fontSize": "12px"}))
+        return html.Div(children)
+
+    @callback(
+        Output("map-detail", "children"),
+        Input("map-3d", "hoverData"), Input("map-3d", "clickData"),
+    )
+    def map_detail(hover, click):
+        # Most recent event wins; click wins when both fire at once. Unhover
+        # leaves the last preview in place (clear_on_unhover stays False).
+        prop = ctx.triggered[0]["prop_id"].rsplit(".", 1)[-1] if ctx.triggered else ""
+        event = click if (prop == "clickData" and click) else (hover or click)
+        if not event or not event.get("points"):
+            raise PreventUpdate
+        cd = event["points"][0].get("customdata")
+        if not cd:
+            raise PreventUpdate
+        return _episode_detail(cd[0], with_sheet=(prop == "clickData"),
+                               compact=False)
+
+    @callback(
+        Output("scatter-detail", "children"),
+        Input("pca-scatter", "hoverData"), Input("pca-scatter", "clickData"),
+    )
+    def scatter_detail(hover, click):
+        prop = ctx.triggered[0]["prop_id"].rsplit(".", 1)[-1] if ctx.triggered else ""
+        event = click if (prop == "clickData" and click) else (hover or click)
+        if not event or not event.get("points"):
+            raise PreventUpdate
+        cd = event["points"][0].get("customdata")
+        if not cd:
+            raise PreventUpdate
+        return _episode_detail(cd[0], with_sheet=False, compact=True)
 
     # ---------------------------------------------------------------- history
     @callback(Output("history-content", "children"),

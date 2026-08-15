@@ -27,7 +27,7 @@ import modal
 
 app = modal.App("egodiversity")
 
-_PIP_CORE = ["numpy", "scipy", "zarr==3.1.5", "s3fs", "tqdm"]
+_PIP_CORE = ["numpy", "scipy", "zarr==3.1.5", "s3fs", "tqdm", "pillow"]
 
 # NOTE: add_local_python_source must be the LAST build step (Modal requirement),
 # so the two images duplicate the pip_install list instead of chaining.
@@ -90,6 +90,26 @@ def extract_remote(episode: dict) -> bytes:
     buf = io.BytesIO()
     np.save(buf, vec)
     return buf.getvalue()
+
+
+@app.function(image=feature_image, secrets=[r2_secret], volumes={"/data": cache_volume},
+              cpu=1, memory=2048, timeout=3600)
+def thumb_chunk(episodes: list[dict]) -> int:
+    """Generate + cache hover thumbnails (in /data/thumbs via the frames.py
+    cache-dir rules) for a chunk of episodes; one volume commit per chunk."""
+    os.environ.setdefault("EGODIV_CACHE", REMOTE_CACHE_PATH)
+    from egodiversity.frames import get_thumbnail
+
+    ok = 0
+    for ep in episodes:
+        try:
+            get_thumbnail({"episode_id": ep.get("episode_hash", ""),
+                           "path": ep.get("path", "")})
+            ok += 1
+        except Exception as e:  # noqa: BLE001 - per-episode fault isolation
+            print(f"THUMB SKIP {ep.get('episode_hash', '?')}: {type(e).__name__}: {e}")
+    cache_volume.commit()
+    return ok
 
 
 @app.function(image=feature_image, secrets=[r2_secret], volumes={"/data": cache_volume},
@@ -170,3 +190,13 @@ def main(manifest: str, labs: str = "", limit: int = 0, seed: int = 0) -> None:
         ]
     print(f"extracting features for {len(episodes)} episodes")
     print(extract_all.remote(episodes))
+
+
+@app.local_entrypoint()
+def prewarm(manifest: str, chunk: int = 100) -> None:
+    """Pre-generate hover thumbnails on the volume:
+    modal run -m egodiversity.modal_app::prewarm --manifest <json> [--chunk 100]"""
+    episodes = json.load(open(manifest))
+    chunks = [episodes[i:i + chunk] for i in range(0, len(episodes), chunk)]
+    print(f"pre-warming thumbnails for {len(episodes)} episodes in {len(chunks)} chunks")
+    print("thumbnails written:", sum(thumb_chunk.map(chunks)))

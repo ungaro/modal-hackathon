@@ -195,3 +195,61 @@ def contact_sheet(
     cache_dir.mkdir(parents=True, exist_ok=True)
     cache_path.write_bytes(data)
     return data
+
+
+THUMBS_ENV = "EGODIV_THUMBS_DIR"
+
+
+def _thumbs_dir() -> Path:
+    env = os.environ.get(THUMBS_ENV)
+    if env:
+        return Path(env)
+    if os.environ.get("EGODIV_CACHE", "").startswith("/data"):
+        return Path("/data/thumbs")
+    return Path(__file__).parent / "cache" / "thumbs"
+
+
+def get_thumbnail(episode_meta: dict, size: tuple[int, int] = (240, 180)) -> bytes:
+    """A small JPEG of the episode's middle front_1 frame, disk-cached.
+
+    Same local-then-R2 access as the other media helpers; R2 failures raise
+    RuntimeError. Cached under egodiversity/cache/thumbs/ (or EGODIV_THUMBS_DIR
+    / /data/thumbs, mirroring the contact-sheet cache rules).
+    """
+    episode_id = episode_meta["episode_id"]
+    cache_dir = _thumbs_dir()
+    cache_path = cache_dir / f"{episode_id}.jpg"
+    if cache_path.exists():
+        return cache_path.read_bytes()
+
+    total = num_frames(episode_meta)
+    blob = get_frames(episode_meta, [total // 2])[0]
+    img = Image.open(io.BytesIO(blob)).convert("RGB").resize(size)
+    buf = io.BytesIO()
+    img.save(buf, format="JPEG", quality=85)
+    data = buf.getvalue()
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    cache_path.write_bytes(data)
+    return data
+
+
+if __name__ == "__main__":
+    import argparse
+
+    ap = argparse.ArgumentParser(description="egodiversity frame utilities.")
+    ap.add_argument("--prewarm", action="store_true",
+                    help="generate thumbnails for all LOCAL episodes (no R2)")
+    args = ap.parse_args()
+    if args.prewarm:
+        data_dir = Path(os.environ.get("EGODIV_DATA_DIR", "data"))
+        episodes = sorted(
+            p for p in data_dir.iterdir() if p.is_dir() and (p / "zarr.json").exists()
+        )
+        ok = 0
+        for ep in episodes:
+            try:
+                get_thumbnail({"episode_id": ep.name})
+                ok += 1
+            except RuntimeError as exc:
+                print(f"SKIP {ep.name}: {exc}")
+        print(f"prewarmed {ok}/{len(episodes)} thumbnails into {_thumbs_dir()}")

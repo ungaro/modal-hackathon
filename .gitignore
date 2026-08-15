@@ -6,3 +6,4 @@ __pycache__/
 *.pyc
 egodiversity/cache/sheets/
 egodiversity/cache/history.jsonl
+egodiversity/cache/thumbs/

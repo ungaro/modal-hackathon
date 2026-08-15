@@ -517,17 +517,15 @@ def create_app() -> Dash:
         try:
             from egodiversity.modal_app import rescore_remote
 
-            # Map episode ids to manifest dicts (with full s3 paths) when the
-            # manifest is available; otherwise assume the aria prefix.
-            manifest_path = Path(__file__).parent / "cache" / "fold_clothes_episodes.json"
-            by_hash = {}
-            if manifest_path.exists():
-                by_hash = {e["episode_hash"]: e for e in json.loads(manifest_path.read_text())}
+            # Build manifest dicts straight from the loaded cache metadata
+            # (remote-built caches carry path/lab/num_frames); fall back to the
+            # aria prefix for local-only metas.
             episodes = [
-                by_hash.get(eid, {"episode_hash": eid, "lab": "eth", "task": "fold_clothes",
-                                  "num_frames": -1,
-                                  "path": f"s3://rldb/processed_v3/aria/{eid}.zarr"})
-                for eid in ids
+                {"episode_hash": m["episode_id"], "lab": m.get("lab", ""),
+                 "task": m.get("task_name", ""), "num_frames": m.get("num_frames", -1),
+                 "path": m.get("path")
+                 or f"s3://rldb/processed_v3/aria/{m['episode_id']}.zarr"}
+                for m in metas
             ]
             return rescore_remote(episodes)
         except Exception as exc:  # demo hook — surface, don't crash

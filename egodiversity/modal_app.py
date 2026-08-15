@@ -129,16 +129,23 @@ def dashboard():
     """Serve the Dash dashboard from Modal, reading the volume cache."""
     os.environ.setdefault("EGODIV_CACHE", REMOTE_CACHE_PATH)
     os.environ.setdefault("EGODIV_HISTORY", "/data/history.jsonl")
+    os.environ.setdefault("EGODIV_MODAL", "1")  # enable the rescore button
     from egodiversity.dashboard import create_app
 
     return create_app().server
 
 
 def rescore_remote(episodes: list[dict]) -> str:
-    """Local-side helper used by the dashboard's 'Rescore on Modal' button."""
-    with app.run():
-        path = extract_all.remote(list(episodes))
-    return f"Modal recompute finished, cache written to {path} on volume 'egodiversity-cache'."
+    """Used by the dashboard's 'Rescore on Modal' button. Spawns the deployed
+    extract_all (non-blocking), so it works both locally (EGODIV_MODAL=1, after
+    `modal setup`) and inside the deployed dashboard container. Requires the
+    app to be deployed (`modal deploy -m egodiversity.modal_app`)."""
+    fn = modal.Function.from_name("egodiversity", "extract_all")
+    call = fn.spawn(list(episodes))
+    return (f"Rescore started on Modal (call id {call.object_id}). "
+            "Watch the fan-out in the Modal console; the cache on volume "
+            "'egodiversity-cache' is overwritten when it finishes, and the "
+            "dashboard picks it up on its next cold start.")
 
 
 @app.local_entrypoint()

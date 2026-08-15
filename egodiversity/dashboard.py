@@ -16,11 +16,10 @@ Six tabs aimed at a judge with zero context:
   subset A and shows their contact sheets side by side, so the score can be
   eyeballed against the raw video. Subsets larger than SPOT_CHECK_CAP are
   subsampled deterministically for the pair search.
-- Explore episodes: any single episode's contact sheet, 3-D hand
-  trajectories with a live "current hand position" marker, and a play/pause
-  frame scrubber. One server callback batch-fetches PLAYBACK_FRAMES frames +
-  poses into dcc.Stores; playback itself is fully client-side (no per-frame
-  server round-trips).
+- Explore episodes: any single episode's contact sheet, preview video
+  (presigned R2 MP4, native controls) with the 3-D hand trajectories synced
+  to the video clock, and a 60-frame strip with clientside scrubber as
+  fallback for episodes without a derivable preview URL.
 - 3D map: PCA(3) over all episodes, one trace per lab, subsets A/B
   highlighted.
 - History: every comparison ever run, newest first, auto-refreshing.
@@ -81,8 +80,9 @@ STRATEGY_VALUES = {o["value"] for o in STRATEGY_OPTIONS}
 GREEDY_POOL_CAP = 600    # candidate cap for greedy selectors (interactivity)
 MAX_SUBSET_N = 1000      # Vendi eigendecomposition stays sub-second up to here
 SPOT_CHECK_CAP = 300     # pair search subsample cap for the Spot check tab
-PLAYBACK_FRAMES = 60     # frames batch-fetched per episode for the scrubber
-PLAYBACK_TICK_MS = 150   # play/pause interval
+PLAYBACK_FRAMES = 60     # frames batch-fetched per episode for the fallback strip
+PLAYBACK_TICK_MS = 150   # frame-strip play/pause interval (fallback path)
+VIDEO_TICK_MS = 250      # video -> trajectory marker sync interval
 RESCORE_POLL_MS = 5000   # rescore status poll interval
 
 # Curated one-click comparisons: name -> (lab, strategy, n) for A and B.
@@ -263,6 +263,23 @@ def _sheet_panel(meta: dict) -> html.Div:
     )
 
 
+def _video_el(meta: dict, preload: str = "metadata",
+              video_id: str | None = None) -> html.Video | None:
+    """html.Video for the episode's preview MP4, or None when no URL is
+    derivable (or signing failed — videos are best-effort extras)."""
+    try:
+        url = frames.get_video_url(meta)
+    except RuntimeError:
+        return None
+    if not url:
+        return None
+    kwargs: dict = {"src": url, "controls": True, "preload": preload,
+                    "style": {"width": "100%"}}
+    if video_id:
+        kwargs["id"] = video_id
+    return html.Video(**kwargs)
+
+
 def _placeholder_frame(text: str) -> bytes:
     """A JPEG placeholder with a message, for media failure paths."""
     img = Image.new("RGB", (640, 480), color=(30, 30, 30))
@@ -405,16 +422,22 @@ def create_app() -> Dash:
             dcc.Store(id="explore-frames"),
             dcc.Store(id="explore-poses"),
             dcc.Store(id="frame-idx", data=0),
+            dcc.Interval(id="video-tick", interval=VIDEO_TICK_MS, disabled=True),
             dcc.Loading(
                 html.Div(
                     [
                         html.Div(id="explore-info",
+                                 children="No episode selected — pick one "
+                                          "above to load its video and "
+                                          "trajectories.",
                                  style={"padding": "6px", "color": "#555"}),
+                        html.Div(id="explore-video",
+                                 style={"maxWidth": "640px", "padding": "6px 0"}),
                         html.Div(id="explore-sheet"),
                         dcc.Graph(id="explore-traj"),
-                        html.Hr(),
                         html.Div(
                             [
+                                html.Hr(),
                                 html.Button("Play", id="play-btn", n_clicks=0),
                                 dcc.Interval(id="play-tick",
                                              interval=PLAYBACK_TICK_MS,
@@ -425,7 +448,9 @@ def create_app() -> Dash:
                                 html.Img(id="scrub-img",
                                          style={"maxWidth": "640px",
                                                 "display": "block"}),
-                            ]
+                            ],
+                            id="frame-fallback",
+                            style={"display": "none"},
                         ),
                     ]
                 ),
@@ -728,13 +753,24 @@ def create_app() -> Dash:
         k, l = (int(t) for t in np.unravel_index(np.argmax(D), D.shape))
 
         def pair_block(word: str, p: int, q: int, dist: float) -> html.Div:
+            def cell(m: dict) -> html.Div:
+                parts: list = [_sheet_panel(m)]
+                vid = _video_el(m, preload="none")  # 4 videos: no auto-download
+                if vid is not None:
+                    vid.style = {"width": "48%", "margin": "4px"}
+                    parts.append(html.Div(
+                        [vid, html.Div("preview video",
+                                       style={"fontSize": "11px",
+                                              "color": "#777"})]))
+                return html.Div(parts, style={"display": "inline-block",
+                                              "verticalAlign": "top",
+                                              "width": "50%"})
             return html.Div(
                 [
                     html.H4(f"Our score calls these {word} — check for yourself:"),
                     html.Div(f"standardized feature distance: {dist:.2f}",
                              style={"color": "#777"}),
-                    html.Div([_sheet_panel(metas[idx[p]]),
-                              _sheet_panel(metas[idx[q]])]),
+                    html.Div([cell(metas[idx[p]]), cell(metas[idx[q]])]),
                 ],
                 style={"padding": "10px 0"},
             )
@@ -757,13 +793,20 @@ def create_app() -> Dash:
         Output("scrub", "value"),
         Output("explore-frames", "data"),
         Output("explore-poses", "data"),
+        Output("explore-video", "children"),
+        Output("frame-fallback", "style"),
+        Output("video-tick", "disabled"),
+        Output("play-tick", "disabled", allow_duplicate=True),
         Input("explore-episode", "value"),
+        prevent_initial_call=True,
     )
     def explore(episode_id):
+        hidden = {"display": "none"}
+        shown = {"display": "block"}
         if not episode_id:
             return ("", go.Figure(),
                     "No episode selected — pick one above to load its video "
-                    "and trajectories.", 1, 0, [], {})
+                    "and trajectories.", 1, 0, [], {}, "", hidden, True, True)
         meta = id_to_meta[episode_id]
 
         sheet = _sheet_panel(meta)
@@ -780,9 +823,10 @@ def create_app() -> Dash:
                     x=p[:, 0], y=p[:, 1], z=p[:, 2], mode="lines",
                     name=f"{hand} hand", line={"color": color, "width": 4},
                 ))
-            # Current-position markers, moved client-side during playback.
-            # They must be the LAST TWO traces (the clientside callback
-            # rewrites them by position).
+            # Current-position markers, moved client-side during playback
+            # (synced to the video, or to the frame strip in fallback mode).
+            # They must be the LAST TWO traces (the clientside callbacks
+            # rewrite them by position).
             for hand, color in (("right", "#ff7f0e"), ("left", "#2ca02c")):
                 p = poses[hand]
                 fig.add_trace(go.Scatter3d(
@@ -795,26 +839,41 @@ def create_app() -> Dash:
                               scene={"xaxis_title": "x", "yaxis_title": "y",
                                      "zaxis_title": "z"})
         except RuntimeError as exc:
-            traj_note = f" Trajectories unavailable: {exc}"
+            traj_note = f"Trajectories unavailable: {exc}"
 
-        # Batch-fetch PLAYBACK_FRAMES evenly spaced frames for client-side
-        # playback (get_frames is threaded internally).
-        frames_note = ""
-        try:
-            total = frames.num_frames(meta)
-            n_fetch = min(PLAYBACK_FRAMES, total)
-            idxs = np.linspace(0, total - 1, n_fetch).astype(int).tolist()
-            uris = [_data_uri(b) for b in frames.get_frames(meta, idxs)]
-        except RuntimeError as exc:
-            total = int(meta.get("num_frames") or 0)
-            frames_note = f" Frames unavailable: {exc}"
-            uris = [_data_uri(_placeholder_frame(
-                f"frames unavailable\n{episode_id}"))]
+        # Primary playback: the preview MP4 (native controls). The 60-frame
+        # strip is fetched only as a fallback when no video URL is derivable.
+        video_el = _video_el(meta, preload="metadata",
+                             video_id="explore-video-player")
+        video_note = "" if video_el is not None else "no preview video; showing frames"
 
-        info = (f"{episode_id} · {meta.get('lab', '') or 'unknown lab'} · "
-                f"{total} source frames · {len(uris)} playback frames."
-                f"{traj_note}{frames_note}")
-        return sheet, fig, info, max(len(uris) - 1, 0), 0, uris, poses_lists
+        uris: list[str] = []
+        total = int(meta.get("num_frames") or 0)
+        if video_el is None:
+            try:
+                total = frames.num_frames(meta)
+                n_fetch = min(PLAYBACK_FRAMES, total)
+                idxs = np.linspace(0, total - 1, n_fetch).astype(int).tolist()
+                uris = [_data_uri(b) for b in frames.get_frames(meta, idxs)]
+            except RuntimeError as exc:
+                video_note += f" Frames unavailable: {exc}"
+                uris = [_data_uri(_placeholder_frame(
+                    f"frames unavailable\n{episode_id}"))]
+
+        info_bits = [f"{episode_id} · {meta.get('lab', '') or 'unknown lab'} · "
+                     f"{total} source frames"]
+        if uris:
+            info_bits.append(f"{len(uris)} playback frames")
+        if traj_note:
+            info_bits.append(traj_note)
+        if video_note:
+            info_bits.append(video_note)
+        info = " · ".join(info_bits)
+        return (sheet, fig, info, max(len(uris) - 1, 0), 0, uris, poses_lists,
+                video_el if video_el is not None else "",
+                hidden if video_el is not None else shown,
+                video_el is None,       # video-tick runs only when a video shows
+                video_el is not None)   # frame ticker only in fallback mode
 
     @callback(
         Output("play-tick", "disabled"),
@@ -893,6 +952,42 @@ def create_app() -> Dash:
         Input("frame-idx", "data"),
         State("explore-poses", "data"),
         State("explore-frames", "data"),
+        State("explore-traj", "figure"),
+        prevent_initial_call=True,
+    )
+
+    # Video -> trajectory sync: poll the <video> element's clock and move the
+    # two current-position marker traces. No server round-trips.
+    clientside_callback(
+        """
+        function(n, poses, fig) {
+            if (!poses || !poses.right || !poses.right.length ||
+                    !fig || !fig.data || fig.data.length < 4) {
+                return window.dash_clientside.no_update;
+            }
+            var v = document.getElementById("explore-video-player");
+            if (!v || !isFinite(v.duration) || v.duration <= 0) {
+                return window.dash_clientside.no_update;
+            }
+            var nP = poses.right.length;
+            var pi = Math.round(v.currentTime / v.duration * (nP - 1));
+            if (pi < 0) pi = 0;
+            if (pi >= nP) pi = nP - 1;
+            var pts = [poses.right[pi], poses.left[pi]];
+            var out = Object.assign({}, fig);
+            var data = fig.data.slice();
+            for (var k = 0; k < 2; k++) {
+                var t = Object.assign({}, fig.data[fig.data.length - 2 + k]);
+                t.x = [pts[k][0]]; t.y = [pts[k][1]]; t.z = [pts[k][2]];
+                data[fig.data.length - 2 + k] = t;
+            }
+            out.data = data;
+            return out;
+        }
+        """,
+        Output("explore-traj", "figure", allow_duplicate=True),
+        Input("video-tick", "n_intervals"),
+        State("explore-poses", "data"),
         State("explore-traj", "figure"),
         prevent_initial_call=True,
     )

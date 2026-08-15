@@ -27,7 +27,7 @@ import modal
 
 app = modal.App("egodiversity")
 
-_PIP_CORE = ["numpy", "scipy", "zarr==3.1.5", "s3fs", "tqdm", "pillow"]
+_PIP_CORE = ["numpy", "scipy", "zarr==3.1.5", "s3fs", "tqdm", "pillow", "boto3"]
 
 # NOTE: add_local_python_source must be the LAST build step (Modal requirement),
 # so the two images duplicate the pip_install list instead of chaining.

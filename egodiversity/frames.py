@@ -198,8 +198,6 @@ def contact_sheet(
 
 
 THUMBS_ENV = "EGODIV_THUMBS_DIR"
-
-
 def _thumbs_dir() -> Path:
     env = os.environ.get(THUMBS_ENV)
     if env:
@@ -231,6 +229,52 @@ def get_thumbnail(episode_meta: dict, size: tuple[int, int] = (240, 180)) -> byt
     cache_dir.mkdir(parents=True, exist_ok=True)
     cache_path.write_bytes(data)
     return data
+
+
+def get_video_url(episode_meta: dict, expires_in: int = 3600) -> str | None:
+    """Presigned GET URL for the episode's preview MP4 on R2, or None.
+
+    The preview sits at the episode's zarr key with .zarr swapped for .mp4.
+    Metas without "path" (the small local cache) fall back to the aria
+    prefix. Returns None when no key can be derived; credential/signing
+    failures raise RuntimeError like the rest of the module. Signing is
+    purely local — no network call is made here.
+    """
+    path = episode_meta.get("path")
+    if not path:
+        episode_id = episode_meta.get("episode_id")
+        if not episode_id:
+            return None
+        path = f"s3://rldb/processed_v3/aria/{episode_id}.zarr"
+    if not path.startswith("s3://"):
+        return None
+    bucket, _, prefix = path.removeprefix("s3://").partition("/")
+    if not bucket or not prefix.endswith(".zarr"):
+        return None
+    key = prefix[: -len(".zarr")] + ".mp4"
+
+    try:
+        import boto3
+
+        creds = _r2_env()
+        client = boto3.client(
+            "s3",
+            endpoint_url=creds["AWS_ENDPOINT_URL_S3"],
+            aws_access_key_id=creds["R2_ACCESS_KEY_ID"],
+            aws_secret_access_key=creds["R2_SECRET_ACCESS_KEY"],
+            region_name="auto",
+        )
+        return client.generate_presigned_url(
+            "get_object",
+            Params={"Bucket": bucket, "Key": key},
+            ExpiresIn=expires_in,
+        )
+    except RuntimeError:
+        raise
+    except Exception as exc:
+        raise RuntimeError(
+            f"failed to sign video URL for {episode_meta.get('episode_id')}: {exc}"
+        ) from exc
 
 
 if __name__ == "__main__":

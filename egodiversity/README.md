@@ -103,6 +103,30 @@ project's delta is not the metric:
 - **A validation harness.** The score is instrument-tested (dupes, ordering,
   bandwidth stability, saturation) before any dataset claim is made.
 
+## Bring your own data
+
+The dashboard can score any dataset, not just the shipped EgoVerse cache. Drop
+a `.npz` on the upload box in the header (or point `EGODIV_CACHE` at it). The
+format:
+
+- `features`: float array, shape `(n_episodes, n_features)`, `n >= 4`.
+- `metadata`: JSON-encoded list with one dict per row. `episode_id` is
+  required; `lab`, `task_name`, `num_frames`, and `path` (s3 URI, enables
+  video/thumbnail/contact-sheet previews) are optional and default to empty.
+
+If your episodes are EgoVerse-format zarr stores on local disk, build the file
+with:
+
+```bash
+python -m egodiversity.features --data-dir <dir> --out my.npz
+```
+
+If they live on S3/R2, use the Modal manifest path (`modal run -m
+egodiversity.modal_app --manifest ...`; see below). Uploads are capped at
+150 MB decoded; media tabs degrade to friendly placeholders for episodes
+without a `path`. Note: the server is single-process and last-upload-wins —
+an upload replaces the dataset for every connected viewer.
+
 ## Modal
 
 `egodiversity/modal_app.py` recomputes features remotely from R2 using the

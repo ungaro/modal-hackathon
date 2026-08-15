@@ -84,6 +84,7 @@ PLAYBACK_FRAMES = 60     # frames batch-fetched per episode for the fallback str
 PLAYBACK_TICK_MS = 150   # frame-strip play/pause interval (fallback path)
 VIDEO_TICK_MS = 250      # video -> trajectory marker sync interval
 RESCORE_POLL_MS = 5000   # rescore status poll interval
+MAX_UPLOAD_BYTES = 150 * 1024 * 1024  # decoded upload cap
 
 # Curated one-click comparisons: name -> (lab, strategy, n) for A and B.
 # Entries referencing labs absent from the cache are dropped at startup.
@@ -153,6 +154,79 @@ INDEX_STRING = """<!DOCTYPE html>
         </script>
     </body>
 </html>"""
+
+
+# ---------------------------------------------------------------------------
+# Active dataset holder. Callbacks read the CURRENT dataset from here instead
+# of closing over the startup cache, so an upload can swap it at runtime.
+# NOTE: the dashboard is single-process and last-upload-wins — there is no
+# per-session isolation; an upload changes the dataset for every viewer.
+_DS: dict = {}
+
+
+def _set_dataset(X: np.ndarray, metas: list[dict], label: str) -> None:
+    """Make (X, metas) the active dataset: recompute pools, curated presets,
+    and the PCA(3) coordinates, and atomically swap the holder."""
+    n = len(X)
+    ids = [m["episode_id"] for m in metas]
+    pools: dict[str, list[int]] = {"all": list(range(n))}
+    for lab in sorted({m.get("lab", "") for m in metas} - {""}):
+        pools[lab] = [i for i, m in enumerate(metas) if m.get("lab") == lab]
+    presets = {
+        name: p for name, p in CURATED.items()
+        if p["a"][0] in pools and p["b"][0] in pools
+    }
+    # Deterministic 3-D PCA; the first two components serve the 2-D scatter.
+    Z = PCA(n_components=3, svd_solver="randomized", random_state=0).fit_transform(X)
+    _DS.clear()
+    _DS.update(
+        X=X, metas=metas, ids=ids,
+        id_to_meta={m["episode_id"]: m for m in metas},
+        pools=pools, presets=presets, Z=Z,
+        slider_max=min(n, MAX_SUBSET_N), label=label,
+    )
+
+
+def _parse_upload(contents: str) -> tuple[np.ndarray, list[dict]]:
+    """Decode + validate a dcc.Upload npz payload. Raises ValueError with a
+    user-readable message on any contract violation."""
+    try:
+        _, b64 = contents.split(",", 1)
+        raw = base64.b64decode(b64)
+    except Exception:
+        raise ValueError("could not decode the upload (expected a base64 data URI)")
+    if len(raw) > MAX_UPLOAD_BYTES:
+        raise ValueError(
+            f"file too large ({len(raw) / 1e6:.0f} MB decoded; limit is 150 MB)")
+    try:
+        z = np.load(io.BytesIO(raw), allow_pickle=False)
+        X = np.asarray(z["features"], dtype=np.float64)
+    except Exception:
+        raise ValueError("not a valid .npz containing a 'features' array")
+    if X.ndim != 2:
+        raise ValueError(f"'features' must be a 2-D matrix, got shape {X.shape}")
+    n = len(X)
+    if n < 4:
+        raise ValueError(f"need at least 4 episodes to score diversity, got {n}")
+    try:
+        metas = json.loads(str(z["metadata"]))
+    except Exception:
+        raise ValueError("missing or invalid 'metadata' entry "
+                         "(expected a JSON-encoded list of dicts)")
+    if not isinstance(metas, list) or len(metas) != n:
+        got = len(metas) if isinstance(metas, list) else type(metas).__name__
+        raise ValueError(f"metadata length ({got}) does not match features rows ({n})")
+    clean = []
+    for i, m in enumerate(metas):
+        if not isinstance(m, dict) or not m.get("episode_id"):
+            raise ValueError(f"metadata row {i} is missing a non-empty 'episode_id'")
+        m = dict(m)
+        m["episode_id"] = str(m["episode_id"])
+        m.setdefault("lab", "")
+        m.setdefault("task_name", "")
+        m.setdefault("num_frames", "")
+        clean.append(m)
+    return X, clean
 
 
 def _select_subset(X: np.ndarray, strategy: str, n: int, pool: list[int],
@@ -304,29 +378,12 @@ def _rescore_running_msg(elapsed: int) -> str:
 
 def create_app() -> Dash:
     X, metas = load_cache(CACHE_PATH)
-    ids = [m["episode_id"] for m in metas]
-    id_to_meta = {m["episode_id"]: m for m in metas}
-    labs = sorted({m.get("lab", "") for m in metas} - {""})
+    _set_dataset(X, metas, label="default")
     n_ep = len(X)
-
-    # lab -> pool of indices ("all" = everything)
-    pools: dict[str, list[int]] = {"all": list(range(n_ep))}
-    for lab in labs:
-        pools[lab] = [i for i, m in enumerate(metas) if m.get("lab") == lab]
+    labs = sorted({m.get("lab", "") for m in metas} - {""})
     lab_options = ["all"] + labs
-
-    # Curated presets whose labs exist in this cache.
-    presets = {
-        name: p for name, p in CURATED.items()
-        if p["a"][0] in pools and p["b"][0] in pools
-    }
-
-    # Deterministic 3-D PCA over all episodes, computed once at startup; the
-    # first two components also serve the 2-D Compare scatter.
-    pca = PCA(n_components=3, svd_solver="randomized", random_state=0)
-    Z = pca.fit_transform(X)
-
-    slider_max = min(n_ep, MAX_SUBSET_N)
+    presets = _DS["presets"]
+    slider_max = _DS["slider_max"]
 
     def subset_controls(tag: str, default_strategy: str, default_lab: str) -> html.Div:
         return html.Div(
@@ -544,6 +601,16 @@ def create_app() -> Dash:
                    "way look identical to this score. Visual embeddings "
                    "(learned from the video frames themselves) are the designed "
                    "extension and plug into the same kernel + Vendi machinery."),
+            html.H3("Bring your own data"),
+            html.P("Drop any .npz on the upload box above to score your own "
+                   "dataset. Format: a 'features' array (n episodes × d "
+                   "dimensions) plus 'metadata', a JSON list with one dict per "
+                   "row — 'episode_id' required, 'lab' / 'task_name' / "
+                   "'num_frames' / 'path' (s3 URI for video + frames) optional. "
+                   "From EgoVerse-format zarrs, build it with: python -m "
+                   "egodiversity.features --data-dir <dir> --out my.npz. "
+                   "Uploads are capped at 150 MB and replace the dataset for "
+                   "every viewer (the server is shared)."),
         ],
         style={"maxWidth": "800px"},
     )
@@ -560,8 +627,23 @@ def create_app() -> Dash:
                    "variety than another, and check the answer with your own "
                    "eyes."),
             html.Div(f"{n_ep:,} episodes · {X.shape[1]} features per episode "
-                     f"· cache: {CACHE_PATH}", style={"color": "#777"}),
+                     f"· cache: {CACHE_PATH}", id="dataset-stats",
+                     style={"color": "#777"}),
+            dcc.Upload(
+                id="upload-npz",
+                children=html.Div(
+                    ["Drop your own ", html.B("features.npz"),
+                     " here to explore your dataset (or click to pick) — see "
+                     "the How it works tab for the format"],
+                ),
+                style={"border": "1px dashed #aaa", "borderRadius": "6px",
+                       "padding": "10px", "margin": "10px 0", "color": "#777",
+                       "fontSize": "13px", "cursor": "pointer"},
+            ),
+            html.Div(id="upload-status", style={"fontSize": "13px",
+                                                "padding": "2px 0"}),
             dcc.Store(id="store-subsets"),
+            dcc.Store(id="dataset-version", data=0),
             dcc.Tabs(
                 [
                     dcc.Tab(compare_tab, label="Compare", value="tab-compare"),
@@ -586,7 +668,7 @@ def create_app() -> Dash:
         Kept for deep links; the Explore scrubber no longer uses it (playback
         is client-side from a batch-fetched store).
         """
-        meta = id_to_meta.get(episode_id)
+        meta = _DS["id_to_meta"].get(episode_id)
         blob = None
         if meta is not None:
             try:
@@ -597,6 +679,55 @@ def create_app() -> Dash:
             blob = _placeholder_frame(f"frame unavailable\n{episode_id} #{idx}")
         return Response(blob, mimetype="image/jpeg")
 
+    # ----------------------------------------------------------------- upload
+    @callback(
+        Output("dataset-version", "data"),
+        Output("upload-status", "children"),
+        Output("dataset-stats", "children"),
+        Output("lab-A", "options"), Output("lab-B", "options"),
+        Output("lab-A", "value"), Output("lab-B", "value"),
+        Output("n-A", "max"), Output("n-B", "max"),
+        Output("n-A", "marks"), Output("n-B", "marks"),
+        Output("n-A", "value"), Output("n-B", "value"),
+        Output("explore-episode", "options"),
+        Output("explore-episode", "value"),
+        Output("preset", "options"),
+        Input("upload-npz", "contents"),
+        State("dataset-version", "data"),
+    )
+    def upload_dataset(contents, version):
+        if not contents:
+            raise PreventUpdate
+        try:
+            X_new, metas_new = _parse_upload(contents)
+        except ValueError as exc:
+            return ((no_update, html.Span(f"Upload rejected: {exc}",
+                                         style={"color": "#a33"}))
+                    + (no_update,) * 14)
+        _set_dataset(X_new, metas_new, label="custom-upload")
+        n_new = len(metas_new)
+        smax = _DS["slider_max"]
+        labs_new = sorted({m.get("lab", "") for m in metas_new} - {""})
+        lab_opts = ["all"] + labs_new
+        marks = {2: "2", smax: str(smax)}
+        ep_opts = [
+            {"label": f"{m['episode_id']} · {m.get('lab', '') or 'unknown lab'}",
+             "value": m["episode_id"]} for m in metas_new
+        ]
+        return (
+            (version or 0) + 1,
+            html.Span(f"Custom dataset loaded: {n_new:,} episodes × "
+                      f"{X_new.shape[1]} features. Note: the server is shared — "
+                      f"every viewer now sees this dataset.",
+                      style={"color": "#282"}),
+            (f"{n_new:,} episodes · {X_new.shape[1]} features per episode · "
+             f"custom upload"),
+            lab_opts, lab_opts, "all", "all",
+            smax, smax, marks, marks, min(15, smax), min(15, smax),
+            ep_opts, None,
+            [{"label": k, "value": k} for k in _DS["presets"]],
+        )
+
     # ---------------------------------------------------------------- compare
     @callback(
         Output("lab-A", "value"), Output("strategy-A", "value"), Output("n-A", "value"),
@@ -605,6 +736,7 @@ def create_app() -> Dash:
         Input("preset", "value"),
     )
     def apply_preset(name):
+        presets = _DS["presets"]
         if not name or name not in presets:
             raise PreventUpdate
         p = presets[name]
@@ -619,8 +751,12 @@ def create_app() -> Dash:
         Output("store-subsets", "data"),
         Input("lab-A", "value"), Input("strategy-A", "value"), Input("n-A", "value"),
         Input("lab-B", "value"), Input("strategy-B", "value"), Input("n-B", "value"),
+        Input("dataset-version", "data"),
     )
-    def update(lab_a, strat_a, n_a, lab_b, strat_b, n_b):
+    def update(lab_a, strat_a, n_a, lab_b, strat_b, n_b, _version):
+        # Read the CURRENT dataset — an upload may have swapped it.
+        X = _DS["X"]; metas = _DS["metas"]; pools = _DS["pools"]
+        Z = _DS["Z"]; ids = _DS["ids"]; n_ep = len(ids)
         idx_a = _select_subset(X, strat_a, n_a, pools[lab_a], seed=0)
         idx_b = _select_subset(X, strat_b, n_b, pools[lab_b], seed=1)
         v_a, v_b = vendi_score(X[idx_a]), vendi_score(X[idx_b])
@@ -629,7 +765,7 @@ def create_app() -> Dash:
         try:
             append_history({"lab": lab_a, "strategy": strat_a, "n": len(idx_a)},
                            {"lab": lab_b, "strategy": strat_b, "n": len(idx_b)},
-                           v_a, v_b, verdict)
+                           v_a, v_b, verdict, dataset=_DS["label"])
         except Exception:
             pass  # logging must never break the UI
 
@@ -688,7 +824,7 @@ def create_app() -> Dash:
                  "task": m.get("task_name", ""), "num_frames": m.get("num_frames", -1),
                  "path": m.get("path")
                  or f"s3://rldb/processed_v3/aria/{m['episode_id']}.zarr"}
-                for m in metas
+                for m in _DS["metas"]
             ]
             call_id = rescore_remote(episodes)
         except Exception as exc:  # demo hook — surface, don't crash
@@ -733,6 +869,7 @@ def create_app() -> Dash:
     def spot_check(n_clicks, data):
         if not n_clicks:
             return "Configure subset A on the Compare tab, then press the button."
+        X = _DS["X"]; metas = _DS["metas"]
         idx = list((data or {}).get("a") or [])
         if len(idx) < 2:
             return "Subset A has fewer than 2 episodes — nothing to compare."
@@ -807,7 +944,7 @@ def create_app() -> Dash:
             return ("", go.Figure(),
                     "No episode selected — pick one above to load its video "
                     "and trajectories.", 1, 0, [], {}, "", hidden, True, True)
-        meta = id_to_meta[episode_id]
+        meta = _DS["id_to_meta"][episode_id]
 
         sheet = _sheet_panel(meta)
 
@@ -995,6 +1132,7 @@ def create_app() -> Dash:
     # -------------------------------------------------------------------- map
     @callback(Output("map-3d", "figure"), Input("store-subsets", "data"))
     def update_map(data):
+        metas = _DS["metas"]; Z = _DS["Z"]; ids = _DS["ids"]
         fig = go.Figure()
         by_lab: dict[str, list[int]] = {}
         for i, m in enumerate(metas):
@@ -1012,7 +1150,7 @@ def create_app() -> Dash:
             ))
         for key, name, color in (("a", "Subset A", "#d62728"),
                                  ("b", "Subset B", "#1f77b4")):
-            idx = (data or {}).get(key) or []
+            idx = [i for i in ((data or {}).get(key) or []) if i < len(ids)]
             if not idx:
                 continue
             idx = np.array(idx)
@@ -1036,7 +1174,7 @@ def create_app() -> Dash:
                         compact: bool) -> html.Div:
         """Thumbnail + metadata panel for one episode (contact sheet too when
         with_sheet). RuntimeError (R2 failure) -> friendly placeholder."""
-        meta = id_to_meta.get(episode_id)
+        meta = _DS["id_to_meta"].get(episode_id)
         if meta is None:
             return html.Div(f"unknown episode: {episode_id}",
                             style={"color": "#a33"})
@@ -1116,6 +1254,7 @@ def create_app() -> Dash:
         rows = [
             {
                 "time (utc)": e.get("ts", "").replace("T", " ").replace("+00:00", "Z"),
+                "dataset": e.get("dataset", "default"),
                 "subset A": _def_str(e.get("a", {})),
                 "subset B": _def_str(e.get("b", {})),
                 "vendi A": e.get("vendi_a", ""),

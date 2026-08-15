@@ -74,17 +74,19 @@ def _commit_volume() -> None:
 
 def append_history(
     a: dict, b: dict, vendi_a: float, vendi_b: float, verdict: str,
-    path: Path | None = None,
+    path: Path | None = None, dataset: str = "default",
 ) -> bool:
     """Append one comparison record. Returns True if written, False if debounced.
 
     a/b are subset definitions, e.g. {"lab": "mecka", "strategy": "random",
-    "n": 200}.
+    "n": 200}. `dataset` labels which dataset was scored ("default" or
+    "custom-upload").
     """
     path = path or history_path()
     now = datetime.now(timezone.utc)
     entry = {
         "ts": now.isoformat(timespec="seconds"),
+        "dataset": dataset,
         "a": {"lab": a.get("lab", ""), "strategy": a.get("strategy", ""), "n": a.get("n", 0)},
         "b": {"lab": b.get("lab", ""), "strategy": b.get("strategy", ""), "n": b.get("n", 0)},
         "vendi_a": round(float(vendi_a), 3),

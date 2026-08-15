@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import io
 import os
+import re
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -242,8 +243,12 @@ def get_video_url(episode_meta: dict, expires_in: int = 3600) -> str | None:
     """
     path = episode_meta.get("path")
     if not path:
-        episode_id = episode_meta.get("episode_id")
-        if not episode_id:
+        # Fallback for the small local eth cache (metas without "path").
+        # Only derive for timestamp-style aria ids (2025-11-11-...) — custom
+        # uploaded datasets with arbitrary ids must not get a bogus URL that
+        # signs fine but 404s.
+        episode_id = episode_meta.get("episode_id", "")
+        if not re.match(r"^\d{4}-\d{2}-\d{2}-", episode_id):
             return None
         path = f"s3://rldb/processed_v3/aria/{episode_id}.zarr"
     if not path.startswith("s3://"):

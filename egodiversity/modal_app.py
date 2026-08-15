@@ -27,7 +27,11 @@ import modal
 
 app = modal.App("egodiversity")
 
-_PIP_CORE = ["numpy", "scipy", "zarr==3.1.5", "s3fs", "tqdm", "pillow", "boto3"]
+# Versions pinned to the known-good local set: s3fs/aiobotocore/botocore must
+# move together or s3fs breaks with Session.__init__() endpoint_url errors.
+_PIP_CORE = ["numpy", "scipy", "zarr==3.1.5", "tqdm", "pillow",
+             "s3fs==2026.7.0", "fsspec==2026.7.0",
+             "aiobotocore==3.9.0", "botocore==1.43.56", "boto3==1.43.56"]
 
 # NOTE: add_local_python_source must be the LAST build step (Modal requirement),
 # so the two images duplicate the pip_install list instead of chaining.

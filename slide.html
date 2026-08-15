@@ -7,33 +7,33 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #1a1d23; display: flex; align-items: center; justify-content: center;
          min-height: 100vh; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; }
-  .slide { width: 1280px; height: 720px; background: #fff; padding: 44px 56px;
+  .slide { width: 1280px; height: 720px; background: #fff; padding: 40px 56px;
            display: flex; flex-direction: column; }
-  h1 { font-size: 34px; color: #111; }
+  h1 { font-size: 33px; color: #111; }
   h1 .accent { color: #7c5cff; }
   .tagline { font-size: 15px; color: #666; margin-top: 4px; }
-  .cols { display: flex; gap: 36px; margin-top: 26px; flex: 1; }
+  .cols { display: flex; gap: 36px; margin-top: 22px; flex: 1; }
   .col { flex: 1; }
-  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 1px; color: #7c5cff;
-       margin-bottom: 8px; }
-  p, li { font-size: 14.5px; color: #222; line-height: 1.45; }
+  h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #7c5cff;
+       margin-bottom: 7px; }
+  p, li { font-size: 14px; color: #222; line-height: 1.42; }
   ul { padding-left: 18px; }
-  li { margin-bottom: 5px; }
-  .block { margin-bottom: 20px; }
-  .big { font-size: 44px; font-weight: 700; color: #111; }
+  li { margin-bottom: 4px; }
+  .block { margin-bottom: 16px; }
+  .big { font-size: 40px; font-weight: 700; color: #111; }
   .big small { font-size: 15px; font-weight: 400; color: #555; }
   .finding { background: #f4f2ff; border-left: 4px solid #7c5cff; padding: 12px 16px;
              border-radius: 4px; }
   .footer { display: flex; justify-content: space-between; align-items: baseline;
-            border-top: 1px solid #ddd; padding-top: 12px; margin-top: 10px; }
-  .footer a { color: #7c5cff; text-decoration: none; font-size: 14px; }
-  .footer span { font-size: 13px; color: #888; }
-  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+            border-top: 1px solid #ddd; padding-top: 10px; margin-top: 8px; }
+  .footer a { color: #7c5cff; text-decoration: none; font-size: 13.5px; }
+  .footer span { font-size: 12.5px; color: #888; }
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12.5px; }
 </style>
 </head>
 <body>
 <div class="slide">
-  <h1><span class="accent">egodiversity</span> — measuring dataset diversity without LLM judges</h1>
+  <h1><span class="accent">egodiversity</span> — a diversity audit of EgoVerse, without LLM judges</h1>
   <div class="tagline">EgoVerse Data Optimization &amp; Evaluation Suite · Track 2: Quantitative Diversity Measurement</div>
 
   <div class="cols">
@@ -42,51 +42,61 @@
         <h2>Method</h2>
         <p>Each episode → one vector from <b>kinematics only</b>: bimanual end-effector paths,
         wrist orientation, head motion (resampled, shape-normalized) + speed/smoothness stats.
-        No text, no labels, no video decoding.</p>
-        <p style="margin-top:6px">Similarity = RBF kernel (median heuristic) →
-        <b>Vendi score</b>: effective number of distinct behaviors in any subset.</p>
+        No text, no labels, no video decoding. RBF kernel → <b>Vendi score</b>: the effective
+        number of distinct behaviors in any subset.</p>
       </div>
       <div class="block">
-        <h2>Validation (it behaves as a diversity score should)</h2>
+        <h2>Validated instrument, not just a number</h2>
         <ul>
           <li>Near-duplicates score lower: <b>3.25 vs 4.67</b></li>
-          <li>Orders subsets correctly: min &lt; random &lt; max → <b>1.64 &lt; 5.11 &lt; 5.19</b></li>
-          <li>Ranking stable across 16× kernel bandwidth range</li>
-          <li>Saturates as redundant episodes are added</li>
+          <li>Orders subsets: min &lt; random &lt; max → <b>1.64 &lt; 5.11 &lt; 5.19</b></li>
+          <li>Ranking stable across 16× kernel bandwidth</li>
+          <li><b>Proof tab:</b> the most-similar / most-distinct episode pairs rendered as real
+              frames — check the score with your own eyes</li>
         </ul>
       </div>
       <div class="block">
         <h2>Built on Modal</h2>
-        <p><b>12,542 episodes scored in 3.7 min</b>: one <code>.map()</code> over serverless
-        workers reading zarrs straight from R2 (bit-identical to local), results on a Modal
-        Volume, dashboard deployed as a Modal web endpoint. The entire infrastructure is
-        one Python file — no Docker, no YAML, no IAM.</p>
+        <p><b>12,542 episodes scored in 3.7 min</b>: one <code>.map()</code> over serverless workers
+        reading zarrs straight from R2 (bit-identical to local), results on a Modal Volume,
+        dashboard deployed as a web endpoint. The entire infrastructure is one Python file —
+        no Docker, no YAML, no IAM.</p>
+      </div>
+      <div class="block">
+        <h2>Related work &amp; our delta</h2>
+        <p>Metric: Vendi score (Friedman &amp; Dieng '23); FAKTUAL ('26) applies it to robot
+        datasets via signature kernels. New here: the <b>first audit of EgoVerse</b>,
+        <b>marginal-diversity scoring</b> for collection planning, and a serverless pipeline
+        that makes re-auditing a 4-minute job.</p>
       </div>
     </div>
 
     <div class="col">
       <div class="block finding">
-        <h2>Finding</h2>
+        <h2>Findings</h2>
         <div class="big">≈14 <small>effective distinct behaviors</small></div>
-        <p>in <b>12,212</b> <code>fold_clothes</code> episodes across 6 labs — heavy redundancy.</p>
-        <p style="margin-top:6px">Per-episode diversity is nearly identical across labs
-        (Vendi 5.3–5.9 at n=21): <b>scale buys coverage, not variety.</b>
-        The score doubles as a curation signal — keep the k episodes that maximize Vendi.</p>
+        <p>in <b>12,212</b> <code>fold_clothes</code> episodes across 6 labs.</p>
+        <p style="margin-top:6px"><b>Marginal analysis:</b> after any one lab's sample, the other
+        labs add ≈0 new behaviors (ΔVendi −0.3…+0.8) — every source captures the same motions.
+        Adding 600 more episodes to a 200-episode base: +5.4 effective behaviors and flattening.
+        <b>Scale buys coverage, not variety.</b></p>
       </div>
       <div class="block">
         <h2>Deliverables</h2>
         <ul>
-          <li>Scalar score that ranks any two subsets + validation report (4 experiments)</li>
-          <li>Interactive dashboard: per-lab pools, greedy max/min-diversity selection,
-              PCA scatter, live comparison</li>
+          <li>Score + validation report + marginal-value curve (curation signal:
+              keep the k episodes that maximize Vendi)</li>
+          <li>Live dashboard: compare subsets, spot-check with real video frames,
+              explore episodes, 3D map, comparison history</li>
           <li>Reusable scoring service: SQL manifest → Modal fan-out → feature cache</li>
         </ul>
       </div>
       <div class="block">
         <h2>Honest limits</h2>
-        <p>Kinematics capture motion shape, not scene content; identical motions over
-        different objects score as similar. Visual embeddings on Modal GPUs are the
-        designed extension (same pipeline, one more feature block).</p>
+        <p>Kinematics capture motion shape, not scene content; identical motions over different
+        objects score as similar. Vendi re-standardizes per subset, so marginal deltas can dip
+        slightly negative (read "≈0 new behavior"). Visual embeddings on Modal GPUs are the
+        designed extension.</p>
       </div>
     </div>
   </div>

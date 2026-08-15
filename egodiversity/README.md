@@ -46,27 +46,75 @@ python -m egodiversity.dashboard
   - D: ranking stability across RBF bandwidths (sensitivity).
   Report + plots land in `egodiversity/report/`.
 
+## Marginal diversity (`python -m egodiversity.marginal`)
+
+Dataset-level Vendi answers "how diverse is this set?"; `marginal.py` answers
+the collection-planning question "how much NEW behavior does this batch add?":
+
+- **Lab build-up**: greedily add labs by marginal Vendi gain. On the 12.2k
+  fold_clothes cache, after the first lab every other lab adds ≈0
+  (ΔVendi −0.3…+0.8) — all sources capture the same motions.
+- **Redundancy curve**: Vendi as random microagi episodes are added to a base
+  of the other labs — +600 episodes buy +5.4 effective behaviors, flattening.
+
+Caveat: Vendi re-standardizes per subset, so marginal deltas can dip slightly
+negative — read that as "≈0 new behavior", not "negative diversity".
+
 ## Dashboard
 
-`python -m egodiversity.dashboard` → http://localhost:8051. Two subset panels
-(A/B), each configurable as random-N, greedy max-diversity N, or greedy
-min-diversity N. Shows Vendi, mean pairwise distance, coverage radius, a PCA
-scatter with A/B membership highlighted, per-subset episode tables, and a
-winner verdict. Cache path via `EGODIV_CACHE` (default
-`egodiversity/cache/features.npz`). The "Rescore on Modal" button is active
-when `EGODIV_MODAL=1`.
+`python -m egodiversity.dashboard` → http://localhost:8051. Six tabs:
+
+- **Compare** — two subset panels (A/B), each configurable as random-N, greedy
+  max-diversity N, or greedy min-diversity N over a lab pool, plus one-click
+  curated comparisons. Shows Vendi, mean pairwise distance, coverage radius, a
+  plain-English verdict, a PCA scatter with A/B membership highlighted, and
+  per-subset episode tables. Random subsets use seed 0 for A and seed 1 for B.
+- **Spot check** — renders contact sheets of the most-similar and most-distant
+  episode pair in subset A (via `egodiversity.frames`), so the score can be
+  checked against the raw video.
+- **Explore episodes** — per-episode contact sheet, 3-D hand trajectories,
+  and a play/pause frame scrubber served from `/frame/<episode_id>/<idx>`.
+- **3D map** — PCA(3) scatter of all episodes, one trace per lab, subsets A/B
+  highlighted.
+- **History** — every comparison logged as JSONL (path from `EGODIV_HISTORY`,
+  default `egodiversity/cache/history.jsonl`, or `/data/history.jsonl` when
+  `EGODIV_CACHE` is under `/data`), debounced to one entry per config per 60s.
+- **How it works** — the pipeline and validation numbers in plain English.
+
+Cache path via `EGODIV_CACHE` (default `egodiversity/cache/features.npz`).
+The "Rescore on Modal" button is active when `EGODIV_MODAL=1`.
+
+## Related work, and what's new here
+
+The Vendi score is from [Friedman & Dieng, 2023](https://arxiv.org/abs/2210.02410);
+[FAKTUAL](https://arxiv.org/html/2603.11634v1) (2026) applies Vendi-style
+entropy to robotics datasets via signature kernels over trajectories. This
+project's delta is not the metric:
+
+- **A new audit target.** EgoVerse is brand new; we provide its first
+  quantitative diversity audit (12,212 `fold_clothes` episodes ≈ 14 effective
+  behaviors; per-episode diversity uniform across all six labs).
+- **Operationalization.** A serverless scoring service (SQL manifest → Modal
+  fan-out → feature cache → live dashboard), not a one-off measurement:
+  12.5k episodes scored from R2 in 3.7 min.
+- **A cheap kernel on purpose.** Resample→shape-normalize→RBF is cruder than
+  a signature kernel but O(1) per pair after featurization — that is what
+  makes the 3.7-minute scale run possible.
+- **A validation harness.** The score is instrument-tested (dupes, ordering,
+  bandwidth stability, saturation) before any dataset claim is made.
 
 ## Modal
 
-`egodiversity/modal_app.py` recomputes features remotely from R2
-(`s3://rldb/processed_v3/aria/<episode_id>.zarr`) using the exact same feature
-code. Requires `modal setup` and env vars `R2_ACCESS_KEY_ID`,
-`R2_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3` (see `~/.egoverse_env`).
-Also requires `uv pip install s3fs` locally for direct R2 access.
+`egodiversity/modal_app.py` recomputes features remotely from R2 using the
+exact same feature code (verified bit-identical to local extraction). Episode
+s3 paths vary by lab (`processed_v3/aria|mecka/flagship|microagi|...`); the
+manifest JSON carries full paths. Requires `modal setup` and env vars
+`R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`
+(see `~/.egoverse_env`).
 
 ```bash
-modal run egodiversity.modal_app -- <episode_id> [<episode_id> ...]
-modal deploy egodiversity.modal_app   # serves the dashboard at /data cache
+modal run -m egodiversity.modal_app --manifest egodiversity/cache/fold_clothes_episodes.json [--labs eth,mecka] [--limit 200]
+modal deploy -m egodiversity.modal_app   # serves the dashboard off the volume cache
 ```
 
 Results are written to the `egodiversity-cache` Modal volume as

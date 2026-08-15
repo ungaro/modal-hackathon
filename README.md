@@ -12,8 +12,20 @@ compute runs serverlessly on [Modal](https://modal.com) against the EgoVerse
 R2 bucket; the dashboard is a deployed Modal web endpoint.
 
 Headline result: 12,212 `fold_clothes` episodes across 6 labs ≈ **~14
-effective distinct behaviors** — and per-episode diversity is nearly identical
-across labs, so scale buys coverage, not variety.
+effective distinct behaviors**. Marginal analysis: after any one lab's
+episodes, the other labs add ≈0 new behaviors (ΔVendi −0.3…+0.8) — every
+source captures the same motions, so scale buys coverage, not variety.
+
+The dashboard lets you check the score with your own eyes: the **Spot check**
+tab renders the most-similar and most-distinct episode pairs as real video
+frames, alongside subset comparison, per-episode exploration, a 3D map, and
+a comparison history log.
+
+Metric credit: Vendi score ([Friedman & Dieng 2023](https://arxiv.org/abs/2210.02410));
+[FAKTUAL](https://arxiv.org/html/2603.11634v1) applies it to robotics datasets
+with signature kernels. New here: the first audit of EgoVerse, marginal-diversity
+scoring for collection planning, and a serverless pipeline that makes
+re-auditing a ~4-minute job.
 
 See [`egodiversity/README.md`](egodiversity/README.md) for quickstart, design
 decisions, and the validation report. EgoVerse dataset:

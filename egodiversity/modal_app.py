@@ -38,7 +38,7 @@ feature_image = (
 )
 dashboard_image = (
     modal.Image.debian_slim()
-    .pip_install(*_PIP_CORE, "dash", "plotly", "scikit-learn", "pandas")
+    .pip_install(*_PIP_CORE, "dash", "plotly", "scikit-learn", "pandas", "pillow")
     .add_local_python_source("egodiversity")
 )
 
@@ -128,6 +128,7 @@ def extract_all(episodes: list[dict]) -> str:
 def dashboard():
     """Serve the Dash dashboard from Modal, reading the volume cache."""
     os.environ.setdefault("EGODIV_CACHE", REMOTE_CACHE_PATH)
+    os.environ.setdefault("EGODIV_HISTORY", "/data/history.jsonl")
     from egodiversity.dashboard import create_app
 
     return create_app().server

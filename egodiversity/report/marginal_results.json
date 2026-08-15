@@ -1,0 +1,170 @@
+{
+ "lab_buildup": [
+  {
+   "lab": "microagi",
+   "n_episodes": 150,
+   "vendi": 10.91,
+   "marginal_gain": 9.91
+  },
+  {
+   "lab": "eth",
+   "n_episodes": 226,
+   "vendi": 10.63,
+   "marginal_gain": -0.29
+  },
+  {
+   "lab": "rl2",
+   "n_episodes": 376,
+   "vendi": 11.43,
+   "marginal_gain": 0.8
+  },
+  {
+   "lab": "wang",
+   "n_episodes": 416,
+   "vendi": 11.74,
+   "marginal_gain": 0.31
+  },
+  {
+   "lab": "song",
+   "n_episodes": 437,
+   "vendi": 11.93,
+   "marginal_gain": 0.19
+  },
+  {
+   "lab": "mecka",
+   "n_episodes": 587,
+   "vendi": 10.85,
+   "marginal_gain": -1.08
+  }
+ ],
+ "redundancy_curve": {
+  "target_lab": "microagi",
+  "points": [
+   {
+    "added": 0,
+    "n_total": 200,
+    "vendi": 7.87
+   },
+   {
+    "added": 25,
+    "n_total": 225,
+    "vendi": 7.8
+   },
+   {
+    "added": 50,
+    "n_total": 250,
+    "vendi": 8.29
+   },
+   {
+    "added": 75,
+    "n_total": 275,
+    "vendi": 8.9
+   },
+   {
+    "added": 100,
+    "n_total": 300,
+    "vendi": 9.41
+   },
+   {
+    "added": 125,
+    "n_total": 325,
+    "vendi": 9.87
+   },
+   {
+    "added": 150,
+    "n_total": 350,
+    "vendi": 10.23
+   },
+   {
+    "added": 175,
+    "n_total": 375,
+    "vendi": 10.54
+   },
+   {
+    "added": 200,
+    "n_total": 400,
+    "vendi": 10.81
+   },
+   {
+    "added": 225,
+    "n_total": 425,
+    "vendi": 11.06
+   },
+   {
+    "added": 250,
+    "n_total": 450,
+    "vendi": 11.24
+   },
+   {
+    "added": 275,
+    "n_total": 475,
+    "vendi": 11.5
+   },
+   {
+    "added": 300,
+    "n_total": 500,
+    "vendi": 11.75
+   },
+   {
+    "added": 325,
+    "n_total": 525,
+    "vendi": 11.84
+   },
+   {
+    "added": 350,
+    "n_total": 550,
+    "vendi": 12.0
+   },
+   {
+    "added": 375,
+    "n_total": 575,
+    "vendi": 12.23
+   },
+   {
+    "added": 400,
+    "n_total": 600,
+    "vendi": 12.4
+   },
+   {
+    "added": 425,
+    "n_total": 625,
+    "vendi": 12.53
+   },
+   {
+    "added": 450,
+    "n_total": 650,
+    "vendi": 12.62
+   },
+   {
+    "added": 475,
+    "n_total": 675,
+    "vendi": 12.72
+   },
+   {
+    "added": 500,
+    "n_total": 700,
+    "vendi": 12.83
+   },
+   {
+    "added": 525,
+    "n_total": 725,
+    "vendi": 12.93
+   },
+   {
+    "added": 550,
+    "n_total": 750,
+    "vendi": 13.07
+   },
+   {
+    "added": 575,
+    "n_total": 775,
+    "vendi": 13.16
+   },
+   {
+    "added": 600,
+    "n_total": 800,
+    "vendi": 13.24
+   }
+  ]
+ }
+}

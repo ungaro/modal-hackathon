@@ -4,3 +4,5 @@ data/
 egodiversity/cache/features_full.npz
 __pycache__/
 *.pyc
+egodiversity/cache/sheets/
+egodiversity/cache/history.jsonl

@@ -4,30 +4,73 @@
 
 **Live dashboard:** https://alp-guneysel--egodiversity-dashboard.modal.run
 
-How diverse is an episode subset, really? This project answers it with a
-number, not an LLM judge: kinematic trajectory features → RBF similarity
-kernel → **Vendi score** (effective number of distinct behaviors). All
-compute runs serverlessly on [Modal](https://modal.com) against the EgoVerse
-R2 bucket; the dashboard is a deployed Modal web endpoint.
+## TL;DR
 
-Headline result: 12,212 `fold_clothes` episodes across 6 labs ≈ **~14
-effective distinct behaviors**. Marginal analysis: after any one lab's
-episodes, the other labs add ≈0 new behaviors (ΔVendi −0.3…+0.8) — every
-source captures the same motions, so scale buys coverage, not variety.
+Robot teams are collecting huge egocentric-video datasets of humans doing
+tasks — but more data is not better data, and today nobody can say how much of
+a dataset is genuinely new without expensive, subjective LLM judges. **Ego
+Trip answers "how many different behaviors are actually in this dataset?" with
+one number**, computed from motion trajectories alone (no text, no labels, no
+video models), and a live dashboard where you can check the number against the
+real videos with your own eyes. Auditing 12,542 episodes takes about 4
+minutes, cloud-to-cloud, on Modal.
 
-The dashboard lets you check the score with your own eyes: hover any point on
-the 3D map or compare scatter to see the episode's actual video frame, play
-the full preview video with hand trajectories synced to the video clock, or
-open the **Spot check** tab to see the most-similar and most-distinct episode
-pairs as contact sheets + inline videos. Plus curated one-click comparisons,
-a comparison history log, and a drop zone to **upload your own dataset** (any
-`features.npz` — see the package README for the format).
+**Findings from the first quantitative audit of EgoVerse:**
 
-Metric credit: Vendi score ([Friedman & Dieng 2023](https://arxiv.org/abs/2210.02410));
+- 12,212 `fold_clothes` episodes across 6 labs ≈ **~14 effective distinct
+  behaviors** — heavy redundancy.
+- After any one lab's episodes, every other lab adds **≈0 new behaviors**
+  (ΔVendi −0.3…+0.8) — every source captures the same motions. Scale buys
+  coverage, not variety.
+- Adding 600 more episodes to a 200-episode base buys +5.4 effective
+  behaviors and flattening — the marginal-value curve tells you when to stop
+  collecting.
+
+## How it works
+
+1. **Kinematic features, no pixels.** Each episode becomes one vector:
+   bimanual end-effector paths, wrist orientation, head motion — resampled and
+   shape-normalized — plus speed/smoothness stats. No video decoding, no
+   annotations.
+2. **Similarity → one number.** An RBF kernel over the feature vectors, then
+   the **Vendi score**: the effective number of distinct behaviors in any
+   subset (k identical episodes score ~1; k mutually dissimilar score ~k).
+3. **A validated instrument, not just a number.** The score passes four
+   behavioral tests before any dataset claim is made: near-duplicate subsets
+   score lower (3.25 vs 4.67), subset ordering is correct
+   (greedy-min 1.64 < random 5.11 < greedy-max 5.19), rankings are stable
+   across a 16× kernel-bandwidth range, and the score saturates as redundant
+   episodes are added. Full report:
+   [`egodiversity/report/validation_report.md`](egodiversity/report/validation_report.md).
+
+**Related work, honestly:** the metric is the Vendi score
+([Friedman & Dieng 2023](https://arxiv.org/abs/2210.02410));
 [FAKTUAL](https://arxiv.org/html/2603.11634v1) applies it to robotics datasets
-with signature kernels. New here: the first audit of EgoVerse, marginal-diversity
-scoring for collection planning, and a serverless pipeline that makes
-re-auditing a ~4-minute job.
+with signature kernels. New here: the first audit of EgoVerse,
+marginal-diversity scoring for collection planning, and a serverless pipeline
+that makes re-auditing a ~4-minute job.
+
+**Limits:** kinematics capture motion shape, not scene content — identical
+motions over different objects score as similar. Adding visual embeddings
+(Modal GPUs, one more feature block) is the designed extension.
+
+## The dashboard
+
+One deployed page, six tabs:
+
+- **Compare** — pick two subsets (by lab, strategy, size — or a curated
+  one-click comparison like "Does 20× data mean 20× diversity?") and get the
+  Vendi scores plus a plain-English verdict. Hover any point in the PCA
+  scatter to see that episode's actual video frame.
+- **Spot check** — the proof tab: the most-similar and most-distinct episode
+  pairs in your subset, rendered as contact sheets + inline videos, so the
+  score can be checked against reality.
+- **Explore episodes** — full preview video with 3D hand trajectories whose
+  markers track the video clock.
+- **3D map** — all 12,212 episodes as a WebGL point cloud, colored by lab,
+  hover for video thumbnails.
+- **History** — every comparison is logged, so audits are reviewable.
+- **How it works** — the method in plain English.
 
 ## Explore your dataset
 
@@ -50,8 +93,9 @@ optional — `path` enables video/thumbnail previews). Three ways to get one:
 
 ## How Modal is used
 
-The whole pipeline runs cloud-to-cloud (R2 → Modal → browser); the laptop is
-only a dev environment. Everything below is one file:
+The workload is bursty, embarrassingly parallel, and interactive — the shape
+Modal is built around. The whole pipeline runs cloud-to-cloud (R2 → Modal →
+browser); the laptop is only a dev environment. Everything below is one file:
 [`egodiversity/modal_app.py`](egodiversity/modal_app.py).
 
 ```mermaid
@@ -135,6 +179,8 @@ unpinned `s3fs`/`aiobotocore`/`botocore` resolution broke R2 reads inside the
 dashboard image until we pinned the set; and Volume writes are not atomic by
 default (hence the tmp+rename publish).
 
-See [`egodiversity/README.md`](egodiversity/README.md) for quickstart, design
-decisions, and the validation report. EgoVerse dataset:
-https://github.com/GaTech-RL2/EgoVerse/
+## Links
+
+- Package README — quickstart, design decisions, validation details:
+  [`egodiversity/README.md`](egodiversity/README.md)
+- EgoVerse dataset: https://github.com/GaTech-RL2/EgoVerse/

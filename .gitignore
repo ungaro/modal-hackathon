@@ -1,0 +1,6 @@
+.DS_Store
+EgoVerse/
+data/
+egodiversity/cache/features_full.npz
+__pycache__/
+*.pyc

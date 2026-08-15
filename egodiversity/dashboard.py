@@ -414,37 +414,33 @@ def create_app() -> Dash:
             ),
             html.Div([subset_controls("A", "random", "all"),
                       subset_controls("B", "random", "all")]),
+            html.Div(id="scores-row"),
+            html.Div(id="verdict", style={"fontSize": "20px",
+                                          "fontWeight": "bold",
+                                          "padding": "10px"}),
+            # NOTE: the graph and the hover-detail panel get SEPARATE Loading
+            # wrappers. dcc.Loading spins when any descendant is the target of
+            # a running callback, so wrapping both together makes every hover
+            # flash the whole compare section.
+            html.Div(
+                [
+                    html.Div(
+                        dcc.Loading(dcc.Graph(id="pca-scatter"), type="circle"),
+                        style={"width": "70%", "display": "inline-block",
+                               "verticalAlign": "top"}),
+                    html.Div(
+                        dcc.Loading(html.Div(id="scatter-detail"),
+                                    type="dot", delay_show=300),
+                        style={"width": "28%", "display": "inline-block",
+                               "verticalAlign": "top", "padding": "6px"}),
+                ]
+            ),
             dcc.Loading(
-                html.Div(
-                    [
-                        html.Div(id="scores-row"),
-                        html.Div(id="verdict", style={"fontSize": "20px",
-                                                      "fontWeight": "bold",
-                                                      "padding": "10px"}),
-                        html.Div(
-                            [
-                                html.Div(dcc.Graph(id="pca-scatter"),
-                                         style={"width": "70%",
-                                                "display": "inline-block",
-                                                "verticalAlign": "top"}),
-                                html.Div(
-                                    dcc.Loading(html.Div(id="scatter-detail"),
-                                                type="dot", delay_show=300),
-                                    style={"width": "28%",
-                                           "display": "inline-block",
-                                           "verticalAlign": "top",
-                                           "padding": "6px"}),
-                            ]
-                        ),
-                        html.Div([html.Div(id="table-A",
-                                           style={"width": "45%",
-                                                  "display": "inline-block"}),
-                                  html.Div(id="table-B",
-                                           style={"width": "45%",
-                                                  "display": "inline-block",
-                                                  "float": "right"})]),
-                    ]
-                ),
+                html.Div([html.Div(id="table-A",
+                                   style={"width": "45%", "display": "inline-block"}),
+                          html.Div(id="table-B",
+                                   style={"width": "45%", "display": "inline-block",
+                                          "float": "right"})]),
                 type="circle",
             ),
             html.Hr(),
@@ -804,6 +800,8 @@ def create_app() -> Dash:
             title="PCA of all episodes (subset membership highlighted)",
         )
         fig.update_traces(marker={"size": 9, "opacity": 0.85})
+        # Keep the user's zoom/pan across callback updates.
+        fig.update_layout(uirevision="compare")
 
         return (
             html.Div([_scores_block(f"Subset {name_a}", X, idx_a),

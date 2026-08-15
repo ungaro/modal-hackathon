@@ -76,6 +76,9 @@ STRATEGY_OPTIONS = [
     {"label": "At random", "value": "random"},
     {"label": "Most diverse possible (greedy)", "value": "greedy max-diversity"},
     {"label": "Least diverse possible (greedy)", "value": "greedy min-diversity"},
+    {"label": "Longest episodes (by frame count)", "value": "longest"},
+    {"label": "Shortest episodes (by frame count)", "value": "shortest"},
+    {"label": "Balanced across labs", "value": "balanced"},
 ]
 STRATEGY_VALUES = {o["value"] for o in STRATEGY_OPTIONS}
 GREEDY_POOL_CAP = 600    # candidate cap for greedy selectors (interactivity)
@@ -105,6 +108,18 @@ CURATED = {
     "Big lab vs small lab (microagi vs eth, 60 each)": {
         "a": ("microagi", "random", 60),
         "b": ("eth", "random", 60),
+    },
+    "Longest vs shortest episodes (100 each)": {
+        "a": ("all", "longest", 100),
+        "b": ("all", "shortest", 100),
+    },
+    "Balanced across labs vs random (120 each)": {
+        "a": ("all", "balanced", 120),
+        "b": ("all", "random", 120),
+    },
+    "Does 20x data mean 20x diversity? (microagi 500 vs 25)": {
+        "a": ("microagi", "random", 500),
+        "b": ("microagi", "random", 25),
     },
 }
 
@@ -231,13 +246,39 @@ def _parse_upload(contents: str) -> tuple[np.ndarray, list[dict]]:
 
 
 def _select_subset(X: np.ndarray, strategy: str, n: int, pool: list[int],
-                   seed: int = 0) -> list[int]:
-    """Select n episode indices (into X) from pool using strategy."""
+                   seed: int = 0, metas: list[dict] | None = None) -> list[int]:
+    """Select n episode indices (into X) from pool using strategy.
+
+    longest/shortest rank by num_frames metadata; balanced splits n as evenly
+    as possible across the labs present in the pool (random within each lab).
+    """
     rng = np.random.default_rng(seed)
     pool = list(pool)
     n = min(n, len(pool))
     if strategy == "random":
         return sorted(rng.choice(pool, size=n, replace=False).tolist())
+    if strategy in ("longest", "shortest") and metas is not None:
+        lengths = np.array([metas[i].get("num_frames") or 0 for i in pool])
+        order = np.argsort(lengths)  # ascending
+        take = order[:n] if strategy == "shortest" else order[::-1][:n]
+        return sorted(pool[int(t)] for t in take)
+    if strategy == "balanced" and metas is not None:
+        by_lab: dict[str, list[int]] = {}
+        for i in pool:
+            by_lab.setdefault(metas[i].get("lab", "") or "unknown", []).append(i)
+        labs = sorted(by_lab)
+        per_lab = max(1, n // len(labs))
+        chosen: list[int] = []
+        for lab in labs:
+            k = min(per_lab, len(by_lab[lab]))
+            chosen += rng.choice(by_lab[lab], size=k, replace=False).tolist()
+        # Fill any shortfall (small labs) from the remaining pool at random.
+        if len(chosen) < n:
+            rest = [i for i in pool if i not in set(chosen)]
+            extra = min(n - len(chosen), len(rest))
+            if extra:
+                chosen += rng.choice(rest, size=extra, replace=False).tolist()
+        return sorted(chosen[:n])
     # Greedy selectors: cap the candidate pool for interactivity.
     if len(pool) > GREEDY_POOL_CAP:
         pool = sorted(rng.choice(pool, size=GREEDY_POOL_CAP, replace=False).tolist())
@@ -788,8 +829,8 @@ def create_app() -> Dash:
         # Read the CURRENT dataset — an upload may have swapped it.
         X = _DS["X"]; metas = _DS["metas"]; pools = _DS["pools"]
         Z = _DS["Z"]; ids = _DS["ids"]; n_ep = len(ids)
-        idx_a = _select_subset(X, strat_a, n_a, pools[lab_a], seed=0)
-        idx_b = _select_subset(X, strat_b, n_b, pools[lab_b], seed=1)
+        idx_a = _select_subset(X, strat_a, n_a, pools[lab_a], seed=0, metas=metas)
+        idx_b = _select_subset(X, strat_b, n_b, pools[lab_b], seed=1, metas=metas)
         v_a, v_b = vendi_score(X[idx_a]), vendi_score(X[idx_b])
         verdict = _plain_verdict(metas, idx_a, idx_b, v_a, v_b)
 
@@ -911,7 +952,8 @@ def create_app() -> Dash:
             # still running) — compute subset A directly from the current
             # Compare-tab controls instead of failing.
             try:
-                idx = _select_subset(X, strat_a, n_a, _DS["pools"][lab_a], seed=0)
+                idx = _select_subset(X, strat_a, n_a, _DS["pools"][lab_a],
+                                     seed=0, metas=metas)
             except Exception:
                 idx = []
         if len(idx) < 2:

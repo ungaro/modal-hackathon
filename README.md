@@ -1,5 +1,7 @@
 # EgoVerse Data Optimization & Evaluation Suite — Track 2: Quantitative Diversity Measurement
 
+![summary slide](slide.png)
+
 **Live dashboard:** https://alp-guneysel--egodiversity-dashboard.modal.run
 **Summary slide:** [`slide.html`](slide.html) (open in a browser)
 

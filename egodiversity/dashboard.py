@@ -725,6 +725,10 @@ def create_app() -> Dash:
             ),
             html.Div(id="upload-status", style={"fontSize": "13px",
                                                 "padding": "2px 0"}),
+            html.Button("← Back to the EgoVerse dataset", id="reset-dataset",
+                        n_clicks=0,
+                        style={"fontSize": "12px", "color": "#555",
+                               "marginBottom": "8px"}),
             dcc.Store(id="store-subsets"),
             dcc.Store(id="dataset-version", data=0),
             dcc.Store(id="seed-offset", data=fresh_seed),
@@ -811,6 +815,50 @@ def create_app() -> Dash:
              f"custom upload"),
             lab_opts, lab_opts, "all", "all",
             smax, smax, marks, marks, min(15, smax), min(15, smax),
+            ep_opts, None,
+            [{"label": k, "value": k} for k in _DS["presets"]],
+        )
+
+    @callback(
+        Output("dataset-version", "data", allow_duplicate=True),
+        Output("upload-status", "children", allow_duplicate=True),
+        Output("dataset-stats", "children", allow_duplicate=True),
+        Output("lab-A", "options", allow_duplicate=True),
+        Output("lab-B", "options", allow_duplicate=True),
+        Output("lab-A", "value", allow_duplicate=True),
+        Output("lab-B", "value", allow_duplicate=True),
+        Output("n-A", "max", allow_duplicate=True),
+        Output("n-B", "max", allow_duplicate=True),
+        Output("n-A", "marks", allow_duplicate=True),
+        Output("n-B", "marks", allow_duplicate=True),
+        Output("n-A", "value", allow_duplicate=True),
+        Output("n-B", "value", allow_duplicate=True),
+        Output("explore-episode", "options", allow_duplicate=True),
+        Output("explore-episode", "value", allow_duplicate=True),
+        Output("preset", "options", allow_duplicate=True),
+        Input("reset-dataset", "n_clicks"),
+        State("dataset-version", "data"),
+        prevent_initial_call=True,
+    )
+    def reset_dataset(n_clicks, version):
+        """Restore the startup cache (X/metas are the create_app closure —
+        untouched by uploads)."""
+        if not n_clicks:
+            raise PreventUpdate
+        _set_dataset(X, metas, label="default")
+        smax = _DS["slider_max"]
+        marks = {2: "2", smax: str(smax)}
+        ep_opts = [
+            {"label": f"{m['episode_id']} · {m.get('lab', '') or 'unknown lab'}",
+             "value": m["episode_id"]} for m in metas
+        ]
+        return (
+            (version or 0) + 1,
+            html.Span("Back on the EgoVerse fold_clothes dataset.",
+                      style={"color": "#282"}),
+            f"{len(X):,} episodes · {X.shape[1]} features per episode · cache: {CACHE_PATH}",
+            lab_options, lab_options, "all", "all",
+            smax, smax, marks, marks, 15, 15,
             ep_opts, None,
             [{"label": k, "value": k} for k in _DS["presets"]],
         )

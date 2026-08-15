@@ -1,7 +1,8 @@
 """Dash dashboard v2 for the egodiversity suite.
 
-Port 8051 (8050 is taken). Feature cache path from env EGODIV_CACHE
-(default: egodiversity/cache/features.npz).
+Port 8051 locally (8050 is used by the EgoVerse episode viewer in local dev);
+on Modal the port is managed by the platform. Feature cache path from env
+EGODIV_CACHE (default: egodiversity/cache/features.npz).
 
 Six tabs aimed at a judge with zero context:
 

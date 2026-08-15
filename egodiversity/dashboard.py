@@ -489,10 +489,24 @@ def create_app() -> Dash:
                                           "above to load its video and "
                                           "trajectories.",
                                  style={"padding": "6px", "color": "#555"}),
-                        html.Div(id="explore-video",
-                                 style={"maxWidth": "640px", "padding": "6px 0"}),
+                        # Video and trajectory side by side so the moving hand
+                        # markers can be watched in sync with the video.
+                        html.Div(
+                            [
+                                html.Div(id="explore-video",
+                                         style={"width": "48%",
+                                                "display": "inline-block",
+                                                "verticalAlign": "top",
+                                                "padding": "6px"}),
+                                html.Div(dcc.Graph(id="explore-traj",
+                                                   style={"height": "380px"}),
+                                         style={"width": "48%",
+                                                "display": "inline-block",
+                                                "verticalAlign": "top",
+                                                "padding": "6px"}),
+                            ]
+                        ),
                         html.Div(id="explore-sheet"),
-                        dcc.Graph(id="explore-traj"),
                         html.Div(
                             [
                                 html.Hr(),

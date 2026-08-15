@@ -62,27 +62,39 @@ negative — read that as "≈0 new behavior", not "negative diversity".
 
 ## Dashboard
 
-`python -m egodiversity.dashboard` → http://localhost:8051. Six tabs:
+`python -m egodiversity.dashboard` → http://localhost:8051 (deployed:
+https://alp-guneysel--egodiversity-dashboard.modal.run). Six tabs:
 
 - **Compare** — two subset panels (A/B), each configurable as random-N, greedy
   max-diversity N, or greedy min-diversity N over a lab pool, plus one-click
   curated comparisons. Shows Vendi, mean pairwise distance, coverage radius, a
   plain-English verdict, a PCA scatter with A/B membership highlighted, and
-  per-subset episode tables. Random subsets use seed 0 for A and seed 1 for B.
-- **Spot check** — renders contact sheets of the most-similar and most-distant
-  episode pair in subset A (via `egodiversity.frames`), so the score can be
-  checked against the raw video.
-- **Explore episodes** — per-episode contact sheet, 3-D hand trajectories,
-  and a play/pause frame scrubber served from `/frame/<episode_id>/<idx>`.
-- **3D map** — PCA(3) scatter of all episodes, one trace per lab, subsets A/B
-  highlighted.
+  per-subset episode tables. Hovering a scatter point shows the episode's
+  actual video frame + metadata in a side panel. Random subsets use seed 0
+  for A and seed 1 for B.
+- **Spot check** — renders contact sheets AND inline preview videos of the
+  most-similar and most-distant episode pair in subset A (via
+  `egodiversity.frames`), so the score can be checked against the raw video.
+- **Explore episodes** — native HTML5 preview video streamed from R2 via
+  presigned URLs (`frames.get_video_url`), a 3-D hand-trajectory plot whose
+  current-position markers track the video clock client-side, plus a contact
+  sheet. Episodes without previews fall back to a 60-frame strip with a
+  play/scrub slider (client-side, no per-frame server calls).
+- **3D map** — PCA(3) WebGL scatter of all episodes, one trace per lab,
+  subsets A/B highlighted; hover shows the episode's video frame thumbnail,
+  click adds the full contact sheet.
 - **History** — every comparison logged as JSONL (path from `EGODIV_HISTORY`,
   default `egodiversity/cache/history.jsonl`, or `/data/history.jsonl` when
-  `EGODIV_CACHE` is under `/data`), debounced to one entry per config per 60s.
+  `EGODIV_CACHE` is under `/data`), debounced to one entry per config per 60s,
+  tagged with the dataset label (`default` / `custom-upload`).
 - **How it works** — the pipeline and validation numbers in plain English.
 
 Cache path via `EGODIV_CACHE` (default `egodiversity/cache/features.npz`).
-The "Rescore on Modal" button is active when `EGODIV_MODAL=1`.
+The "Rescore on Modal" button (active when `EGODIV_MODAL=1`, always on the
+deployed instance) spawns the extraction job and polls it live, showing
+elapsed time until the new cache is published (atomically) on the volume.
+Thumbnails and contact sheets are disk-cached (`egodiversity/cache/thumbs|sheets`,
+or `/data/...` on the volume when deployed), so repeat views are instant.
 
 ## Related work, and what's new here
 
@@ -138,8 +150,12 @@ manifest JSON carries full paths. Requires `modal setup` and env vars
 
 ```bash
 modal run -m egodiversity.modal_app --manifest egodiversity/cache/fold_clothes_episodes.json [--labs eth,mecka] [--limit 200]
+modal run -m "egodiversity.modal_app::prewarm" --manifest egodiversity/cache/fold_clothes_episodes.json  # hover thumbnails
 modal deploy -m egodiversity.modal_app   # serves the dashboard off the volume cache
 ```
 
 Results are written to the `egodiversity-cache` Modal volume as
-`/data/features.npz`.
+`/data/features.npz` (published atomically — tmp file + rename — so a
+dashboard cold start mid-rescore never reads a partial cache). The deployed
+dashboard keeps one container warm (`min_containers=1`) and shows a splash
+screen while the app initializes.

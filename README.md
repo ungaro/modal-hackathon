@@ -16,10 +16,13 @@ effective distinct behaviors**. Marginal analysis: after any one lab's
 episodes, the other labs add ≈0 new behaviors (ΔVendi −0.3…+0.8) — every
 source captures the same motions, so scale buys coverage, not variety.
 
-The dashboard lets you check the score with your own eyes: the **Spot check**
-tab renders the most-similar and most-distinct episode pairs as real video
-frames, alongside subset comparison, per-episode exploration, a 3D map, and
-a comparison history log.
+The dashboard lets you check the score with your own eyes: hover any point on
+the 3D map or compare scatter to see the episode's actual video frame, play
+the full preview video with hand trajectories synced to the video clock, or
+open the **Spot check** tab to see the most-similar and most-distinct episode
+pairs as contact sheets + inline videos. Plus curated one-click comparisons,
+a comparison history log, and a drop zone to **upload your own dataset** (any
+`features.npz` — see the package README for the format).
 
 Metric credit: Vendi score ([Friedman & Dieng 2023](https://arxiv.org/abs/2210.02410));
 [FAKTUAL](https://arxiv.org/html/2603.11634v1) applies it to robotics datasets

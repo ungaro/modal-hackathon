@@ -61,11 +61,12 @@ flowchart LR
    scale isn't thrown away. Total: **741 numbers per episode**. No video
    decoding, no annotations.
 2. **Similarity → one number.** We compare every pair of episodes with an
-   **RBF kernel** — a smooth similarity function that returns ~1 when two
+   **[RBF kernel](https://en.wikipedia.org/wiki/Radial_basis_function_kernel)** — a smooth
+   similarity function that returns ~1 when two
    motion vectors are nearly identical and fades toward 0 the farther apart
    they are (one bandwidth knob sets how quickly "similar" decays to
    "different"; we set it from the data's own median distance, and show that
-   rankings don't depend on the choice). The **Vendi score** then reads the
+   rankings don't depend on the choice). The **[Vendi score](https://github.com/vertaix/vendi-score)** then reads the
    shape of that similarity web: the effective number of distinct behaviors
    in any subset (k identical episodes score ~1; k mutually dissimilar score ~k).
 3. **A validated instrument, not just a number.** The score passes four

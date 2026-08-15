@@ -59,13 +59,23 @@
 </section>
 
 <section class="slide">
-  <h2>The first audit of EgoVerse</h2>
+  <h2>The first audit of EgoVerse <span class="dim">(fold_clothes task — the pilot; any task re-runs in ~4 min)</span></h2>
   <div class="big">≈14 <small>effective distinct behaviors</small></div>
   <div class="card">
     <p>in <b>12,212</b> fold_clothes episodes from 6 labs.</p>
     <p style="margin-top:1.5vh">After any one lab, other labs add <span class="num">≈0</span> new behaviors. +600 episodes → +5.4 behaviors and flattening.</p>
     <p style="margin-top:1.5vh"><b>Scale buys coverage, not variety.</b></p>
   </div>
+</section>
+
+<section class="slide">
+  <h2>What are the ~14 modes? <span class="dim">(k-means sketch, k=14 — Vendi gives a count, not labels)</span></h2>
+  <ul>
+    <li>The top 5 modes alone cover <span class="num">56%</span> of all episodes</li>
+    <li><b>Every lab's episodes land in the same top modes</b> — cross-lab redundancy, made visible</li>
+    <li>Two modes are mostly "long sessions" (rl2/eth, ~2,500 frames vs ~200–480) — recording style is an axis the score sees</li>
+    <li>Each mode's representative episode is in the README — paste it into Explore and watch it</li>
+  </ul>
 </section>
 
 <section class="slide">

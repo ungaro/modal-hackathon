@@ -17,11 +17,16 @@ vector. Then one similarity matrix, and the Vendi score reads it as 'the
 effective number of distinct behaviors.' And it's a validated instrument —
 duplicates score lower, ordering is correct, bandwidth doesn't matter."
 
-## 1:15–1:45 — Finding (slide 4)
-"We ran the first audit of EgoVerse: 12,212 fold_clothes episodes across six
-labs contain about FOURTEEN effective distinct behaviors. After any one lab,
-every other lab adds essentially zero new behaviors. Scale buys coverage,
-not variety."
+## 1:15–1:45 — Finding (slides 4–5)
+"We audited the fold_clothes task — the pilot, chosen because every lab
+contributes to it; any other task re-runs in about four minutes. 12,212
+episodes across six labs contain about FOURTEEN effective distinct
+behaviors. After any one lab, every other lab adds essentially zero new
+behaviors. Scale buys coverage, not variety."
+If asked "what ARE the 14?": "The score gives a count, not labels — but a
+k-means sketch shows the modes: the top five cover 56% of everything, all
+labs land in the same modes, and two modes are basically 'long recording
+sessions.' Representative episodes per mode are in the README."
 
 ## 1:45–3:45 — Live demo (slide 5)
 Do these in order; each is one or two clicks:

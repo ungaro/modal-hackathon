@@ -15,7 +15,9 @@ video models), and a live dashboard where you can check the number against the
 real videos with your own eyes. Auditing 12,542 episodes takes about 4
 minutes, cloud-to-cloud, on Modal.
 
-**Findings from the first quantitative audit of EgoVerse:**
+**Findings from the first quantitative audit of EgoVerse's `fold_clothes`
+task** (the pipeline re-runs on any other task in ~4 minutes; fold_clothes is
+the pilot, chosen because every lab contributes episodes to it):
 
 - 12,212 `fold_clothes` episodes across 6 labs ≈ **~14 effective distinct
   behaviors** — heavy redundancy.
@@ -25,6 +27,34 @@ minutes, cloud-to-cloud, on Modal.
 - Adding 600 more episodes to a 200-episode base buys +5.4 effective
   behaviors and flattening — the marginal-value curve tells you when to stop
   collecting.
+
+**What are those ~14 behaviors?** The Vendi score gives a count, not labels —
+but a post-hoc k-means sketch (k=14, standardized features) shows the modes.
+Every row's representative episode can be pasted into the dashboard's
+Explore tab to watch it:
+
+| share of 12,212 episodes | dominant labs | median frames | representative episode |
+|---|---|---|---|
+| 15.5% | microagi | 346 | `2026-04-30-19-15-19-015184` |
+| 12.3% | microagi | 216 | `2026-06-09-08-49-18-849166` |
+| 11.7% | microagi | 310 | `2026-05-30-08-10-37-716336` |
+| 8.5% | microagi | 351 | `2026-06-19-06-00-44-592508` |
+| 7.9% | microagi | 421 | `2026-06-03-08-27-21-617531` |
+| 6.2% | mecka | 195 | `692eb64eba0400c7068a002d` |
+| 5.8% | microagi | 463 | `2026-05-22-14-27-17-156158` |
+| 5.7% | microagi | 462 | `2026-05-04-20-47-54-980070` |
+| 5.1% | mecka | 192 | `692ea90de2322e3b092b5f09` |
+| 4.9% | microagi | 480 | `2026-06-03-14-53-54-489127` |
+| 4.9% | microagi | 366 | `2026-06-19-06-37-01-150801` |
+| 4.8% | microagi/mecka | 323 | `2026-06-01-09-35-37-967967` |
+| 4.0% | rl2/eth | 2650 | `2025-10-15-20-26-47-000000` |
+| 2.7% | rl2 | 2514 | `2025-11-23-19-42-53-057000` |
+
+Two honest observations from the table: every lab's episodes land in the
+*same* top modes (the cross-lab redundancy, made visible), and the two
+rl2/eth-dominated clusters are largely "long sessions" (median ~2,500 frames
+vs ~200–480 elsewhere) — duration and speed are part of the feature vector,
+so recording style is one of the axes the score sees.
 
 ## How it works
 

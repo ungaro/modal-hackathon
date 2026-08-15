@@ -28,13 +28,27 @@ minutes, cloud-to-cloud, on Modal.
 
 ## How it works
 
+```mermaid
+flowchart LR
+    A["episode video + poses"] --> B["motion trajectories<br/>(hands, head)"]
+    B --> C["one fixed-length vector<br/>per episode (741 numbers)"]
+    C --> D["similarity matrix<br/>(episode x episode)"]
+    D --> E["eigenvalue spectrum"]
+    E --> F["Vendi score =<br/>effective # distinct behaviors"]
+```
+
 1. **Kinematic features, no pixels.** Each episode becomes one vector:
    bimanual end-effector paths, wrist orientation, head motion — resampled and
    shape-normalized — plus speed/smoothness stats. No video decoding, no
    annotations.
-2. **Similarity → one number.** An RBF kernel over the feature vectors, then
-   the **Vendi score**: the effective number of distinct behaviors in any
-   subset (k identical episodes score ~1; k mutually dissimilar score ~k).
+2. **Similarity → one number.** We compare every pair of episodes with an
+   **RBF kernel** — a smooth similarity function that returns ~1 when two
+   motion vectors are nearly identical and fades toward 0 the farther apart
+   they are (one bandwidth knob sets how quickly "similar" decays to
+   "different"; we set it from the data's own median distance, and show that
+   rankings don't depend on the choice). The **Vendi score** then reads the
+   shape of that similarity web: the effective number of distinct behaviors
+   in any subset (k identical episodes score ~1; k mutually dissimilar score ~k).
 3. **A validated instrument, not just a number.** The score passes four
    behavioral tests before any dataset claim is made: near-duplicate subsets
    score lower (3.25 vs 4.67), subset ordering is correct

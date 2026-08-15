@@ -275,6 +275,9 @@ screenshot above, and the volume itself):
 
 - **16 deployments**, each tied to a git commit — iterate-to-prod in ~2 s per
   redeploy
+- **Container image builds**: ~30–45 s from scratch after a dependency change
+  (full pip resolve + install of the dashboard/worker image), ~1.5–2 s when
+  layers are cached — measured across 16 deploys today
 - **~25,000 `extract_remote` calls** (two full 12,542-episode scoring passes
   plus smoke tests)
 - **92 containers running concurrently** at peak fan-out

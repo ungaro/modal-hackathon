@@ -94,9 +94,9 @@ CURATED = {
         "a": ("all", "random", 200),
         "b": ("all", "random", 200),
     },
-    "Most vs least diverse 100 (greedy max vs min)": {
-        "a": ("all", "greedy max-diversity", 100),
-        "b": ("all", "greedy min-diversity", 100),
+    "Most vs least diverse 50 (greedy max vs min)": {
+        "a": ("all", "greedy max-diversity", 50),
+        "b": ("all", "greedy min-diversity", 50),
     },
     "mecka vs microagi (200 random each)": {
         "a": ("mecka", "random", 200),
@@ -243,7 +243,7 @@ def _select_subset(X: np.ndarray, strategy: str, n: int, pool: list[int],
         pool = sorted(rng.choice(pool, size=GREEDY_POOL_CAP, replace=False).tolist())
     sub = X[pool]
     if strategy == "greedy max-diversity":
-        chosen = greedy_max_diversity(sub, n)
+        chosen = greedy_max_diversity(sub, n, max_candidates_per_step=150)
     else:
         chosen = greedy_min_diversity(sub, n)
     return sorted(pool[i] for i in chosen)
@@ -412,8 +412,8 @@ def create_app() -> Dash:
                 id="preset", placeholder="Pick a ready-made comparison…",
                 style={"maxWidth": "500px"},
             ),
-            html.Div([subset_controls("A", "greedy max-diversity", "all"),
-                      subset_controls("B", "greedy min-diversity", "all")]),
+            html.Div([subset_controls("A", "random", "all"),
+                      subset_controls("B", "random", "all")]),
             dcc.Loading(
                 html.Div(
                     [
@@ -866,14 +866,25 @@ def create_app() -> Dash:
         Output("spot-results", "children"),
         Input("spot-btn", "n_clicks"),
         State("store-subsets", "data"),
+        State("lab-A", "value"), State("strategy-A", "value"),
+        State("n-A", "value"),
     )
-    def spot_check(n_clicks, data):
+    def spot_check(n_clicks, data, lab_a, strat_a, n_a):
         if not n_clicks:
             return "Configure subset A on the Compare tab, then press the button."
         X = _DS["X"]; metas = _DS["metas"]
         idx = list((data or {}).get("a") or [])
         if len(idx) < 2:
-            return "Subset A has fewer than 2 episodes — nothing to compare."
+            # Store not populated yet (e.g. the initial greedy compare is
+            # still running) — compute subset A directly from the current
+            # Compare-tab controls instead of failing.
+            try:
+                idx = _select_subset(X, strat_a, n_a, _DS["pools"][lab_a], seed=0)
+            except Exception:
+                idx = []
+        if len(idx) < 2:
+            return ("Subset A is not ready yet — let the Compare tab finish "
+                    "loading, then try again.")
 
         note = ""
         if len(idx) > SPOT_CHECK_CAP:

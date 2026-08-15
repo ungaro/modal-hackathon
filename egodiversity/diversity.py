@@ -70,8 +70,10 @@ def _pairwise_dist(X: np.ndarray) -> np.ndarray:
     return squareform(pdist(_standardize(X), metric="euclidean"))
 
 
-def greedy_max_diversity(X: np.ndarray, k: int) -> list[int]:
-    """Farthest-point (k-center style) greedy: maximally spread subset.
+def greedy_max_diversity(X: np.ndarray, k: int,
+                         max_candidates_per_step: int | None = None,
+                         seed: int = 0) -> list[int]:
+    """Greedy max-Vendi subset.
 
     Seeds with the most distant pair, then repeatedly adds the candidate that
     most increases the subset's Vendi score.
@@ -81,6 +83,11 @@ def greedy_max_diversity(X: np.ndarray, k: int) -> list[int]:
     concentrate, so farthest-point subsets score no better than random ones;
     direct greedy optimization of the metric is both simpler to defend and
     empirically stronger (see validate.py, Experiment C).
+
+    max_candidates_per_step (default None = exact) bounds how many remaining
+    candidates are evaluated per step (random subsample, fixed seed). The
+    dashboard uses this for interactive latency on large pools; validation
+    always uses the exact path.
     """
     X = np.asarray(X, dtype=np.float64)
     n = len(X)
@@ -91,8 +98,12 @@ def greedy_max_diversity(X: np.ndarray, k: int) -> list[int]:
     D = _pairwise_dist(X)
     i, j = np.unravel_index(np.argmax(D), D.shape)
     selected = [int(i), int(j)]
+    rng = np.random.default_rng(seed)
     while len(selected) < k:
-        remaining = (c for c in range(n) if c not in selected)
+        remaining = [c for c in range(n) if c not in selected]
+        if max_candidates_per_step and len(remaining) > max_candidates_per_step:
+            remaining = rng.choice(remaining, size=max_candidates_per_step,
+                                   replace=False).tolist()
         nxt = max(remaining, key=lambda c: vendi_score(X[selected + [c]]))
         selected.append(nxt)
     return selected

@@ -445,6 +445,16 @@ def create_app() -> Dash:
             ),
             html.Hr(),
             html.Button("Rescore on Modal", id="rescore-btn", n_clicks=0),
+            html.Div(
+                "Recomputes every episode's motion features in the cloud: one "
+                "serverless worker per episode reads its zarr straight from "
+                "R2, fanning out to ~100 parallel containers (12.5k episodes "
+                "≈ 4 min), then atomically republishes the cache this "
+                "dashboard reads. Status updates below while it runs; new "
+                "scores load on the next page refresh.",
+                style={"fontSize": "12px", "color": "#888", "maxWidth": "640px",
+                       "padding": "4px 0"},
+            ),
             dcc.Store(id="rescore-call"),
             dcc.Interval(id="rescore-tick", interval=RESCORE_POLL_MS, disabled=True),
             html.Div(id="rescore-out", style={"padding": "10px", "color": "#555"}),
@@ -644,12 +654,22 @@ def create_app() -> Dash:
                 id="upload-npz",
                 children=html.Div(
                     ["Drop your own ", html.B("features.npz"),
-                     " here to explore your dataset (or click to pick) — see "
-                     "the How it works tab for the format"],
+                     " here to explore your dataset (or click to pick)"],
                 ),
                 style={"border": "1px dashed #aaa", "borderRadius": "6px",
                        "padding": "10px", "margin": "10px 0", "color": "#777",
                        "fontSize": "13px", "cursor": "pointer"},
+            ),
+            html.Div(
+                "Any dataset works: the file is just an (n_episodes × "
+                "n_features) matrix plus one metadata dict per episode "
+                "(episode_id required; lab/task/path optional). Every tab "
+                "switches to your data instantly — scores, comparisons, PCA "
+                "maps. Build one from EgoVerse-format zarrs with python -m "
+                "egodiversity.features --data-dir <dir> --out my.npz (see How "
+                "it works).",
+                style={"fontSize": "12px", "color": "#888", "maxWidth": "640px",
+                       "marginTop": "-6px"},
             ),
             html.Div(id="upload-status", style={"fontSize": "13px",
                                                 "padding": "2px 0"}),

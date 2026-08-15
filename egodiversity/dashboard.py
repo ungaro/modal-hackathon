@@ -456,6 +456,10 @@ def create_app() -> Dash:
             ),
             html.Div([subset_controls("A", "random", "all"),
                       subset_controls("B", "random", "all")]),
+            html.Button("↻ Reshuffle random subsets", id="reshuffle-btn",
+                        n_clicks=0,
+                        style={"margin": "0 10px 6px", "fontSize": "13px"}),
+            dcc.Store(id="seed-offset", data=0),
             html.Div(id="scores-row"),
             html.Div(id="verdict", style={"fontSize": "20px",
                                           "fontWeight": "bold",
@@ -802,6 +806,14 @@ def create_app() -> Dash:
         )
 
     # ---------------------------------------------------------------- compare
+    @callback(Output("seed-offset", "data"),
+              Input("reshuffle-btn", "n_clicks"),
+              State("seed-offset", "data"))
+    def reshuffle(n_clicks, off):
+        if not n_clicks:
+            raise PreventUpdate
+        return (off or 0) + 1
+
     @callback(
         Output("lab-A", "value"), Output("strategy-A", "value"), Output("n-A", "value"),
         Output("lab-B", "value"), Output("strategy-B", "value"), Output("n-B", "value"),
@@ -824,14 +836,19 @@ def create_app() -> Dash:
         Output("store-subsets", "data"),
         Input("lab-A", "value"), Input("strategy-A", "value"), Input("n-A", "value"),
         Input("lab-B", "value"), Input("strategy-B", "value"), Input("n-B", "value"),
-        Input("dataset-version", "data"),
+        Input("dataset-version", "data"), Input("seed-offset", "data"),
     )
-    def update(lab_a, strat_a, n_a, lab_b, strat_b, n_b, _version):
+    def update(lab_a, strat_a, n_a, lab_b, strat_b, n_b, _version, seed_off):
         # Read the CURRENT dataset — an upload may have swapped it.
         X = _DS["X"]; metas = _DS["metas"]; pools = _DS["pools"]
         Z = _DS["Z"]; ids = _DS["ids"]; n_ep = len(ids)
-        idx_a = _select_subset(X, strat_a, n_a, pools[lab_a], seed=0, metas=metas)
-        idx_b = _select_subset(X, strat_b, n_b, pools[lab_b], seed=1, metas=metas)
+        # Deterministic by default (offset 0 → seeds 0/1); the reshuffle
+        # button bumps the offset for a fresh random draw.
+        off = seed_off or 0
+        idx_a = _select_subset(X, strat_a, n_a, pools[lab_a], seed=2 * off,
+                               metas=metas)
+        idx_b = _select_subset(X, strat_b, n_b, pools[lab_b], seed=2 * off + 1,
+                               metas=metas)
         v_a, v_b = vendi_score(X[idx_a]), vendi_score(X[idx_b])
         verdict = _plain_verdict(metas, idx_a, idx_b, v_a, v_b)
 

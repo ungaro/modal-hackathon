@@ -136,7 +136,12 @@ def extract_all(episodes: list[dict]) -> str:
     if not vecs:
         raise RuntimeError(f"all {len(episodes)} episodes failed extraction")
     X = np.stack(vecs)
-    np.savez(REMOTE_CACHE_PATH, features=X, metadata=json.dumps(metas))
+    # Atomic publish: a dashboard container cold-starting while a rescore is
+    # writing must never see a half-written npz. np.savez appends .npz itself,
+    # so the temp name must already end in .npz.
+    tmp_path = REMOTE_CACHE_PATH.replace(".npz", ".tmp.npz")
+    np.savez(tmp_path, features=X, metadata=json.dumps(metas))
+    os.replace(tmp_path, REMOTE_CACHE_PATH)
     cache_volume.commit()
     print(f"wrote {X.shape} to {REMOTE_CACHE_PATH}; {failed} episodes skipped")
     return REMOTE_CACHE_PATH

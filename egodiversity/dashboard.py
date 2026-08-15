@@ -459,7 +459,6 @@ def create_app() -> Dash:
             html.Button("↻ Reshuffle random subsets", id="reshuffle-btn",
                         n_clicks=0,
                         style={"margin": "0 10px 6px", "fontSize": "13px"}),
-            dcc.Store(id="seed-offset", data=0),
             html.Div(id="scores-row"),
             html.Div(id="verdict", style={"fontSize": "20px",
                                           "fontWeight": "bold",
@@ -684,9 +683,14 @@ def create_app() -> Dash:
 
     app = Dash(__name__, title="Ego Trip", update_title=None)
     app.index_string = INDEX_STRING
-    app.layout = html.Div(
-        [
-            html.H1("Ego Trip"),
+    def serve_layout() -> html.Div:
+        # Layout as a function => built per page load. Each visitor gets a
+        # fresh random seed, so the default random subsets differ on every
+        # visit; the reshuffle button increments from there.
+        fresh_seed = int(np.random.default_rng().integers(1, 10**9))
+        return html.Div(
+            [
+                html.H1("Ego Trip"),
             html.P("How many genuinely different behaviors are in a robot "
                    "dataset? This tool turns any subset of EgoVerse episodes "
                    "into a single number — the effective count of distinct "
@@ -721,6 +725,7 @@ def create_app() -> Dash:
                                                 "padding": "2px 0"}),
             dcc.Store(id="store-subsets"),
             dcc.Store(id="dataset-version", data=0),
+            dcc.Store(id="seed-offset", data=fresh_seed),
             dcc.Tabs(
                 [
                     dcc.Tab(compare_tab, label="Compare", value="tab-compare"),
@@ -734,8 +739,11 @@ def create_app() -> Dash:
                 value="tab-compare",
             ),
         ],
-        style={"maxWidth": "1100px", "margin": "auto", "fontFamily": "sans-serif"},
-    )
+            style={"maxWidth": "1100px", "margin": "auto",
+                   "fontFamily": "sans-serif"},
+        )
+
+    app.layout = serve_layout
 
     # ------------------------------------------------------------------ frame
     @app.server.route("/frame/<episode_id>/<int:idx>")
